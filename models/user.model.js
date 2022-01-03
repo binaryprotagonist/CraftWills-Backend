@@ -2,12 +2,9 @@ const { number, string } = require("joi");
 const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
 
-  first_name: {
-    type: String,
-  },
-
-  last_name: {
-    type: String,
+  fullName : {
+    type : String,
+    required : true
   },
   email: {
     type: String,
@@ -27,15 +24,26 @@ const UserSchema = new mongoose.Schema({
     required : true
 
   },
-  fullname : {
+  gender : {
     type : String,
     required : true
-
-},
-confirmpassword : {
-  type : String,
-  required: true
-}
+  },
+  floorNumber : {
+    type : String,
+    required : true
+  },
+  unitNumber : {
+    type : String,
+    required : true
+  },
+  streetName :{
+    type : String,
+    required : true
+  },
+  postalCode : {
+    type : Number,
+    required : true
+  }
 });
 
 const User = mongoose.model("UserData", UserSchema);
