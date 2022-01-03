@@ -29,8 +29,8 @@ exports.createUser = async (req) => {
     streetName : req.body.streetName,
     postalCode : req.body.postalCode
 
-
-  };
+   };
+   
   const storedUser = await usersDataAccess.storeUser(data);
   return {
     error: false,
