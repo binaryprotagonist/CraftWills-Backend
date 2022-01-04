@@ -246,8 +246,9 @@ exports.resetPassword = async (req, res) => {
     toUpdate: {
       password: password,
     },
-  }};
-  const updatePass = await usersDataAccess .updateUser(updateData);
+  }
+  const updatePass = await usersDataAccess.updateUser(updateData);
+
   return {
     error: false,
     sucess: true,
@@ -255,7 +256,7 @@ exports.resetPassword = async (req, res) => {
     data: updatePass,
   };
 };
-
+};
 // exports.reminderTime = async (req, res) => {
 //   const { dailyReminder, subject, text, timezone, reminderTime } = req.body;
 //   if (!dailyReminder || !subject || !text || !timezone || !reminderTime) {
