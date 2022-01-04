@@ -202,8 +202,8 @@ exports.forgotPassword = async (req, res) => {
   const otpSend = {
     from: "a.singh@braininventory.com",
     to: userData.email,
-    subject: "Sending email using node.js",
-    text: `http://localhost:3001/Resetpassword/${userData._id}`,
+    subject: "Your Password Reset Link",
+    text: `https://craftwillllls.herokuapp.com/Resetpassword/${userData._id}`,
   };
   myFunction(otpSend);
 return {
