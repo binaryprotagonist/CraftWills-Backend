@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
     required : true
   },
   id_number : {
-    type : Number,
+    type : String,
     required : true
 
   },
