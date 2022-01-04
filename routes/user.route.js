@@ -55,10 +55,10 @@ router.put("/forgotPassword", async (req, res) => {
 //   return res.send(result);
 // });
 
-// router.put("/resetPassword", async (req, res) => {
-//   const result = await userController.resetPassword(req);
-//   return res.send(result);
-// });
+router.put("/resetPassword", async (req, res) => {
+  const result = await userController.resetPassword(req);
+  return res.send(result);
+});
 
 // router.put("/reminder", authenticateToken, async (req, res) => {
 //   const result = await userController.reminderTime(req);
