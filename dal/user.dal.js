@@ -7,8 +7,16 @@ const findUser = async (data) => {
 };
 
 const storeUser = async (userToStore) => {
+  try{
   const storedUser = await User.create(userToStore);
   return storedUser;
+  }
+  catch(error){
+    res.json({
+      message : "some error occured",
+      err : error
+    })
+  }
 };
 
 const findUserByUsername = async (username) => {

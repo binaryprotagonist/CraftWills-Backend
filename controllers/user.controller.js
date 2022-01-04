@@ -30,7 +30,7 @@ exports.createUser = async (req) => {
     postalCode : req.body.postalCode
 
    };
-   
+
   const storedUser = await usersDataAccess.storeUser(data);
   return {
     error: false,
@@ -38,8 +38,7 @@ exports.createUser = async (req) => {
     message: "user created successfully",
     data: storedUser,
   };
-};
-
+}
 // exports.createUserByLink = async (req) => {
 //   const { email, password, first_name, last_name } = req.body;
 //   if (!password || !email || !first_name || !last_name) {
