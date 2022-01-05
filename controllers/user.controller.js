@@ -120,9 +120,18 @@ exports.updateUser = async (req, res) => {
   const updateData = {
     _id,
     toUpdate: {
+      fullName : req.body.fullName,
+      email: req.body.email,
+      id_type : req.body.id_type,
+      id_number : req.body.id_number,
+      gender : req.body.gender,
+      floorNumber : req.body.floorNumber,
+      unitNumber : req.body.unitNumber,
+      streetName : req.body.streetName,
+      postalCode : req.body.postalCode,
       id_country : req.body.id_country,
-      dateOfBirth : req.body.dateOfBirth,
-      Citizenship : req.body.Citizenship
+      dob : req.body.dob,
+      citizenship : req.body.citizenship
     },
   };
 const update = await usersDataAccess.updateUser(updateData);
@@ -196,6 +205,15 @@ exports.uploadImage = async (req, res) => {
 //   };
 // };
 
+exports.getUser = async (req, res) => {
+  const users = await usersDataAccess.findUser(req.token_data._id);
+  return {
+    error: false,
+    sucess: true,
+    message: "Get all users Sucessfully",
+    data: users,
+  };
+};
 // exports.getId = async (req, res) => {
 //   res.send(req.params._id);
 // };
@@ -331,4 +349,5 @@ exports.resetPassword = async (req, res) => {
 //     return new ExpressError(500, err.message);
 //   }
 // };
+
 
