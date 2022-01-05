@@ -1,4 +1,4 @@
-const { number, string } = require("joi");
+// const { number, string } = require("joi");
 const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
 
@@ -50,7 +50,7 @@ const UserSchema = new mongoose.Schema({
   },
   dateOfBirth : {
     type : String,
-    required : true
+  
   },
   Citizenship : {
     type : String,
