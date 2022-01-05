@@ -214,7 +214,7 @@ exports.forgotPassword = async (req, res) => {
     from: "a.singh@braininventory.com",
     to: userData.email,
     subject: "Your Password Reset Link",
-    text: `http://localhost:4200//${userData._id}`,
+    text: `http://localhost:4200/resetpassword/${userData._id}`,
   };
   myFunction(otpSend);
 return {
