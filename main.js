@@ -23,7 +23,7 @@
 // module.exports = app
 
 //////////////////////////
-
+require("dotenv").config();
 require("./mongo");
 const express = require("express");
 const userRouters = require("./routes/user.route");

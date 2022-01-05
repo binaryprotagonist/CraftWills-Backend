@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 // const momen = require("moment-timezone");
-// require("dotenv").config();
+require("dotenv").config();
 // const ExpressError = require("../Errorgenerator/errorGenerator");
 const { generateAccessToken } = require("../JsonWebToken/jwt");
 const usersDataAccess= require("../dal/user.dal")
@@ -210,7 +210,7 @@ exports.getUser = async (req, res) => {
   return {
     error: false,
     sucess: true,
-    message: "Get all users Sucessfully",
+    message: "User Found Successfully",
     data: users,
   };
 };
@@ -230,7 +230,7 @@ exports.forgotPassword = async (req, res) => {
     return ("email does not exists");
   }
   const otpSend = {
-    from: "as797007@gmail.com",
+    from: process.env.email,//"as797007@gmail.com",
     to: userData.email,
     subject: "Your Password Reset Link",
     text: `http://localhost:4200/resetpassword/${userData._id}`,
@@ -349,5 +349,5 @@ exports.resetPassword = async (req, res) => {
 //     return new ExpressError(500, err.message);
 //   }
 // };
-
+ 
 
