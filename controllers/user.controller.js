@@ -47,6 +47,7 @@ exports.createUser = async (req) => {
     }
   };
 }
+
 // exports.createUserByLink = async (req) => {
 //   const { email, password, first_name, last_name } = req.body;
 //   if (!password || !email || !first_name || !last_name) {
@@ -246,11 +247,11 @@ return {
 // };
 
 exports.resetPassword = async (req, res) => {
-  const { _id, newPassword,confirmpassword } = req.body;
-  if (!_id || !newPassword || !confirmpassword) {
+  const { _id, newPassword} = req.body;
+  if (!_id || !newPassword ) {
     return ("plz enter the  _id or newPassword")
   }
-  if (newPassword===confirmpassword){
+  if (newPassword){
   const password = bcrypt.hashSync(newPassword, 10);
   const updateData = {
     _id,
