@@ -48,7 +48,7 @@ const UserSchema = new mongoose.Schema({
     required : true,
     default : "Singapore"
   },
-  dateOfBirth : {
+  dob : {
     type : String,
   
   },

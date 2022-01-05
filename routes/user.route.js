@@ -1,7 +1,7 @@
 const express = require("express");
 // const passport = require("passport");
 // const upload = require("../middleware/multer");
-// const { authenticateToken } = require("../JsonWebToken/jwt");
+const { authenticateToken } = require("../JsonWebToken/jwt");
 const router = express.Router();
 const userController = require("../controllers/user.controller");
 
@@ -16,10 +16,11 @@ router.post("/signup", async (req, res) => {
 //   return res.send(result);
 // });
 
-// router.get("/getUser", authenticateToken, async (request, response) => {
-//   const result = await userController.getUser(request);
-//   return response.json(result);
-// });
+router.get("/getUser",authenticateToken ,async (request, response) => {
+  const result = await userController.getUser(request);
+  return response.json(result);
+});
+
 
 router.post("/login", async (req, res) => {
   const result = await userController.loginUser(req);

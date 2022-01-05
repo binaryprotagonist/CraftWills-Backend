@@ -8,8 +8,8 @@ const transPorter = nodeMailer.createTransport({
   //   pass: "s5@9009120899",
   // },
   auth: {
-    user: "as797007@gmail.com",
-    pass: "djdjankur123",
+    user: process.env.email,//"as797007@gmail.com",
+    pass: process.env.password//"djdjankur123",
   },
 });
 
