@@ -4,7 +4,7 @@ const express = require("express");
 const { authenticateToken } = require("../JsonWebToken/jwt");
 const router = express.Router();
 const userController = require("../controllers/user.controller");
-
+// const session = require ("express-session")
 
 router.post("/signup", async (req, res) => {
   const result = await userController.createUser(req);
@@ -111,10 +111,6 @@ router.put("/resetPassword", async (req, res) => {
 // //   }
 // // );
 
-// router.get("/logout", (req, res) => {
-//   req.session = null;
-//   req.logout();
-//   res.redirect("/users");
-// });
+
 
 module.exports = router;
