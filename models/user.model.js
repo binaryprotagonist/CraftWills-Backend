@@ -22,7 +22,6 @@ const UserSchema = new mongoose.Schema({
   id_number : {
     type : String,
     required : true
-
   },
   gender : {
     type : String,
@@ -43,6 +42,18 @@ const UserSchema = new mongoose.Schema({
   postalCode : {
     type : Number,
     required : true
+  },
+  id_country : {
+    type : String,
+    required : true,
+    default : "Singapore"
+  },
+  dateOfBirth : {
+    type : String,
+    required : true
+  },
+  Citizenship : {
+    type : String,
   }
 });
 

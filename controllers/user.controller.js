@@ -101,26 +101,29 @@ exports.loginUser = async (req, res) => {
   };
 };
 
+
+
+
 // // Update 
 
-// exports.updateUser = async (req, res) => {
-//   const _id = req.token_data._id;
-//   const updateData = {
-//     _id,
-//     toUpdate: {
-//       contact: req.body.contact,
-//       first_name: req.body.first_name,
-//       last_name: req.body.last_name,
-//     },
-//   };
-//   const update = await usersDataAccess.updateUser(updateData);
-//   return {
-//     error: false,
-//     sucess: true,
-//     message: "updated user successfully",
-//     data: update,
-//   };
-// };
+exports.updateUser = async (req, res) => {
+  const _id = req.token_data._id;
+  const updateData = {
+    _id,
+    toUpdate: {
+      id_country : req.body.id_country,
+      dateOfBirth : req.body.dateOfBirth,
+      Citizenship : req.body.Citizenship
+    },
+  };
+const update = await usersDataAccess.updateUser(updateData);
+  return {
+    error: false,
+    sucess: true,
+    message: "updated user successfully",
+    data: update,
+  };
+};
 
 // exports.updatePassword = async (req, res) => {
 //   const _id = req.token_data._id;
@@ -151,28 +154,28 @@ exports.loginUser = async (req, res) => {
 //   };
 // };
 
-// exports.uploadImage = async (req, res) => {
-//   const _id = req.token_data._id;
-//   let image;
-//   if (!req.file) {
-//     image = "uploads/1633780506772defaultImage.jpg";
-//   } else {
-//     image = "/uploads/" + req.file.filename;
-//   }
-//   const updateImage = {
-//     _id,
-//     toUpdate: {
-//       profileImage: image,
-//     },
-//   };
-//   const updatedProfile = await usersDataAccess.updateUser(updateImage);
-//   return {
-//     error: false,
-//     sucess: true,
-//     message: "Uploaded Image Sucessfully",
-//     data: updatedProfile,
-//   };
-// };
+exports.uploadImage = async (req, res) => {
+  const _id = req.token_data._id;
+  let image;
+  if (!req.file) {
+    image = "uploads/1633780506772defaultImage.jpg";
+  } else {
+    image = "/uploads/" + req.file.filename;
+  }
+  const updateImage = {
+    _id,
+    toUpdate: {
+      profileImage: image,
+    },
+  };
+  const updatedProfile = await usersDataAccess.updateUser(updateImage);
+  return {
+    error: false,
+    sucess: true,
+    message: "Uploaded Image Sucessfully",
+    data: updatedProfile,
+  };
+};
 
 // exports.getAllusers = async (req, res) => {
 //   const users = await usersDataAccess.findAll();
@@ -203,7 +206,7 @@ exports.forgotPassword = async (req, res) => {
     from: "a.singh@braininventory.com",
     to: userData.email,
     subject: "Your Password Reset Link",
-    text: `https://craftwillllls.herokuapp.com/Resetpassword/${userData._id}`,
+    text: `http://localhost:4200//${userData._id}`,
   };
   myFunction(otpSend);
 return {
