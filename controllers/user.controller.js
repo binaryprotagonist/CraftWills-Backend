@@ -212,7 +212,7 @@ exports.forgotPassword = async (req, res) => {
     return ("email does not exists");
   }
   const otpSend = {
-    from: "ankursingh3908@gmail.com",
+    from: "as797007@gmail.com",
     to: userData.email,
     subject: "Your Password Reset Link",
     text: `http://localhost:4200/resetpassword/${userData._id}`,
