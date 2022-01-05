@@ -11,8 +11,8 @@ const {myFunction} = require ("../nodemailer/nodemailer")
 
 
 exports.createUser = async (req) => {
-  const { email, password, first_name, last_name} = req.body;
-  if (!password || !email || !first_name || !last_name) {
+  const { email, password, first_name, last_name,id_type,id_number,gender,floorNumber,unitNumber,streetName,postalCode} = req.body;
+  if (!password || !email || !first_name || !last_name || !id_type || !id_number || !gender || !floorNumber || !unitNumber || !streetName || !postalCode) {
     // throw new ExpressError(401, "Bad request");
     console.log('err')
   }
@@ -32,11 +32,19 @@ exports.createUser = async (req) => {
    };
 
   const storedUser = await usersDataAccess.storeUser(data);
+  if (storedUser){
   return {
     error: false,
     sucess: true,
     message: "user created successfully",
     data: storedUser,
+  }}
+  else{
+    return{
+      error : true,
+      sucess : false ,
+      message : "something went wrong",
+    }
   };
 }
 // exports.createUserByLink = async (req) => {
