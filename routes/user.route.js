@@ -1,6 +1,6 @@
 const express = require("express");
 // const passport = require("passport");
-// const upload = require("../middleware/multer");
+const upload = require("../middleware/multer");
 const { authenticateToken } = require("../JsonWebToken/jwt");
 const router = express.Router();
 const userController = require("../controllers/user.controller");
@@ -37,14 +37,14 @@ router.post("/login", async (req, res) => {
 //   return res.send(result);
 // });
 
-// // router.put("/upload",
-// //   authenticateToken,
-// //   upload.single("attachments"),
-// //   async (req, res) => {
-// //     const result = await userController.uploadImage(req);
-// //     return res.send(result);
-// //   }
-// // );
+router.put("/upload",
+  authenticateToken,
+  upload.single("attachments"),
+  async (req, res) => {
+    const result = await userController.uploadImage(req);
+    return res.send(result);
+  }
+);
 
 router.put("/forgotPassword", async (req, res) => {
   const result = await userController.forgotPassword(req);
@@ -110,7 +110,5 @@ router.put("/resetPassword", async (req, res) => {
 // //     res.redirect("/users/success");
 // //   }
 // // );
-
-
 
 module.exports = router;
