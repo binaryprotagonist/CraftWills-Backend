@@ -18,6 +18,7 @@ exports.createUser = async (req) => {
   }
   const passwordHash = bcrypt.hashSync(req.body.password, 10);
   const data = {
+
     fullName : req.body.fullName,
     email: req.body.email,
     id_type : req.body.id_type,
@@ -27,8 +28,8 @@ exports.createUser = async (req) => {
     floorNumber : req.body.floorNumber,
     unitNumber : req.body.unitNumber,
     streetName : req.body.streetName,
-    postalCode : req.body.postalCode
-
+    postalCode : req.body.postalCode,
+    profileImage : req.file.filename
    };
 
   const storedUser = await usersDataAccess.storeUser(data);
@@ -131,7 +132,8 @@ exports.updateUser = async (req, res) => {
       postalCode : req.body.postalCode,
       id_country : req.body.id_country,
       dob : req.body.dob,
-      citizenship : req.body.citizenship
+      citizenship : req.body.citizenship,
+      profileImage : req.file.filename
     },
   };
 const update = await usersDataAccess.updateUser(updateData);

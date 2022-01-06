@@ -1,25 +1,20 @@
-// const { number, string } = require("joi");
 const mongoose = require("mongoose");
-const UserSchema = new mongoose.Schema({
+const MemberSchema = new mongoose.Schema({
   
-  fullName : {
+  fullname : {
     type : String,
     required : true
   },
-  email: {
+  relationship: {
     type: String,
     required: true,
     unique: true,
   },
-  password: {
-    type: String,
-    // required: true,
-  },
-  id_type: {
+  id_number : {
     type : String,
     required : true
   },
-  id_number : {
+  id_type : {
     type : String,
     required : true
   },
@@ -43,7 +38,7 @@ const UserSchema = new mongoose.Schema({
     type : Number,
     required : true
   },
-  id_country : {
+  country : {
     type : String,
     required : true,
     default : "Singapore"
@@ -58,7 +53,8 @@ const UserSchema = new mongoose.Schema({
   profileImage : {
     type : String
   }
+
 });
 
-const User = mongoose.model("UserData", UserSchema);
-module.exports = User;
+const Member = mongoose.model("MemberData", MemberSchema);
+module.exports = Member;
