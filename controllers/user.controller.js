@@ -215,7 +215,20 @@ exports.getUser = async (req, res) => {
     error: false,
     sucess: true,
     message: "User Found Successfully",
-    data: users,
+    data: {
+    fullName : users.fullName,
+    email: users.email,
+    id_type : users.id_type,
+    id_number : users.id_number,
+    gender : users.gender,
+    floorNumber : users.floorNumber,
+    unitNumber : users.unitNumber,
+    streetName : users.streetName,
+    postalCode : users.postalCode,
+    citizenship : users.citizenship,
+    dob : users.dob,
+
+    }
   };
 };
 // exports.getId = async (req, res) => {

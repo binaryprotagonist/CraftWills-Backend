@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 require("dotenv").config();
 // const ExpressError = require("../Errorgenerator/errorGenerator");
 const { generateAccessToken } = require("../JsonWebToken/jwt");
-const BankDataAccess= require("../dal/asset/bankaccount")
+const BankDataAccess= require("../dal/bankaccount.dal")
 const {myFunction} = require ("../nodemailer/nodemailer")
 
 

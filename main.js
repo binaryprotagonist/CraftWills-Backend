@@ -27,7 +27,7 @@ require("dotenv").config();
 require("./mongo");
 const express = require("express");
 const userRouters = require("./routes/user.route");
-// const bankRouters = require ("./routes/asset/bank.route")
+// const bankRouters = require ("./routes/bank.route")
 const app = express();
 const cors = require('cors')
 
