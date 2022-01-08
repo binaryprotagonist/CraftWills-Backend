@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const assetSchema = new mongoose.Schema({
+const BankSchema = new mongoose.Schema({
   
   bankname : {
     type : String,
@@ -25,5 +25,5 @@ const assetSchema = new mongoose.Schema({
   }
 });
 
-const Asset = mongoose.model("AssetData", assetSchema);
-module.exports = Asset;
+const Bank = mongoose.model("BankData", BankSchema);
+module.exports = Bank;

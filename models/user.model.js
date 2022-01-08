@@ -50,10 +50,10 @@ const UserSchema = new mongoose.Schema({
   },
   dob : {
     type : String,
-  
   },
   Citizenship : {
     type : String,
+    default : "Singapore"
   },
   profileImage : {
     type : String
