@@ -44,6 +44,4 @@ const storeBank = async (bankToStore) => {
 module.exports = {
     findBank,
     storeBank
-
-
 };
