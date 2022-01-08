@@ -19,8 +19,7 @@ const investmentSchema = new mongoose.Schema({
     type : String,
     required : true,
   },
-
 });
 
-const Investment = mongoose.model("InvestmentData", investmentSchema);
+const Investment = mongoose.model("InvestmentData",investmentSchema);
 module.exports = Investment;

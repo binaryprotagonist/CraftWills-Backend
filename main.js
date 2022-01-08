@@ -27,6 +27,7 @@ require("dotenv").config();
 require("./mongo");
 const express = require("express");
 const userRouters = require("./routes/user.route");
+// const bankRouters = require ("./routes/asset/bank.route")
 const app = express();
 const cors = require('cors')
 
@@ -36,7 +37,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use("/users", userRouters);
-
+// app.use("/",bankRouters)
 app.listen(PORT, () => {
   console.log(`YOUR SERVER IS WORKING AT PORT ${PORT}`);
 });
