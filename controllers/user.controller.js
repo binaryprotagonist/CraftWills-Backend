@@ -220,6 +220,7 @@ exports.getUser = async (req, res) => {
     email: users.email,
     id_type : users.id_type,
     id_number : users.id_number,
+    id_country : users.id_country,
     gender : users.gender,
     floorNumber : users.floorNumber,
     unitNumber : users.unitNumber,
