@@ -6,7 +6,10 @@ const router = express.Router();
 const BankController = require("../controllers/bankaccount.controller");
 // const session = require ("express-session")
 
-router.post("/signup", async (req, res) => {
+router.post("/bankAccount", async (req, res) => {
   const result = await BankController.storeBank(req);
   return res.send(result);
 });
+
+
+module.exports  = router
