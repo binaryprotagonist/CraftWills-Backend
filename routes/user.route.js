@@ -27,10 +27,10 @@ router.post("/login", async (req, res) => {
   return res.send(result);
 });
 
-// router.put("/updateProfile", authenticateToken, async (req, res) => {
-//   const result = await userController.updateUser(req);
-//   return res.json(result);
-// });
+router.put("/updateProfile", authenticateToken, async (req, res) => {
+  const result = await userController.updateUser(req);
+  return res.json(result);
+});
 
 // router.put("/updatePassword", authenticateToken, async (req, res) => {
 //   const result = await userController.updatePassword(req);

@@ -45,7 +45,6 @@ const MemberSchema = new mongoose.Schema({
   },
   dob : {
     type : String,
-  
   },
   Citizenship : {
     type : String,
@@ -53,7 +52,6 @@ const MemberSchema = new mongoose.Schema({
   profileImage : {
     type : String
   }
-
 });
 
 const Member = mongoose.model("MemberData", MemberSchema);

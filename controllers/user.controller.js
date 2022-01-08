@@ -29,7 +29,8 @@ exports.createUser = async (req) => {
     unitNumber : req.body.unitNumber,
     streetName : req.body.streetName,
     postalCode : req.body.postalCode,
-    profileImage : req.file.filename
+    citizenship : req.body.citizenship,
+    dob : req.body.dob
    };
 
   const storedUser = await usersDataAccess.storeUser(data);
@@ -133,17 +134,18 @@ exports.updateUser = async (req, res) => {
       id_country : req.body.id_country,
       dob : req.body.dob,
       citizenship : req.body.citizenship,
-      profileImage : req.file.filename
+      // profileImage : req.file.filename
     },
   };
 const update = await usersDataAccess.updateUser(updateData);
+if (update){
   return {
     error: false,
     sucess: true,
     message: "updated user successfully",
     data: update,
   };
-};
+};}
 
 // exports.updatePassword = async (req, res) => {
 //   const _id = req.token_data._id;

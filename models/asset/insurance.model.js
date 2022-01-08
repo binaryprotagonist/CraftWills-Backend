@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const investmentSchema = new mongoose.Schema({
+const InsuranceSchema = new mongoose.Schema({
   
   policyname : {
     type : String,
@@ -19,8 +19,7 @@ const investmentSchema = new mongoose.Schema({
     type : String,
     required : true,
   },
-
 });
 
-const Investment = mongoose.model("InvestmentData", investmentSchema);
-module.exports = Investment;
+const Insurance = mongoose.model("InsuranceData", InsuranceSchema);
+module.exports = Insurance;
