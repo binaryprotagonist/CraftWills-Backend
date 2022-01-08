@@ -291,6 +291,36 @@ exports.resetPassword = async (req, res) => {
   };
 };
 };
+
+
+exports.updatePassword = async (req, res) => {
+  const _id = req.token_data._id;
+  const { password, newPassword } = req.body;
+  if (!password || !newPassword) {
+    return "please enter password or new password"
+  }
+  const userData = await usersDataAccess.findUser({
+    _id: _id,
+  });
+  const match = bcrypt.compareSync(password, userData.password);
+  if (!match) {
+    return "Your Old Password is Invalid";
+  }
+  const passwordd = bcrypt.hashSync(newPassword, 10);
+  const updateData = {
+    _id,
+    toUpdate: {
+      password: passwordd,
+    },
+  };
+  const updatePass = await usersDataAccess.updateUser(updateData);
+  return {
+    error: false,
+    sucess: true,
+    message: "updated password successfully",
+    data: updatePass,
+  };
+};
 // exports.reminderTime = async (req, res) => {
 //   const { dailyReminder, subject, text, timezone, reminderTime } = req.body;
 //   if (!dailyReminder || !subject || !text || !timezone || !reminderTime) {
