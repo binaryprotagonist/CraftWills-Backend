@@ -21,6 +21,11 @@ router.get("/getUser",authenticateToken ,async (request, response) => {
   return response.json(result);
 });
 
+router.get("/getProfilepic",authenticateToken ,async (request, response) => {
+  const result = await userController.getProfilepic(request);
+  return response.json(result);
+});
+
 
 router.post("/login", async (req, res) => {
   const result = await userController.loginUser(req);

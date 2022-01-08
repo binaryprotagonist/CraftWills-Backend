@@ -28,7 +28,7 @@ exports.storeBank = async (req) => {
     return {
       error: false,
       sucess: true,
-      message: "user created successfully",
+      message: "bank account stored successfully",
       data: storedBank,
     }}
     else{

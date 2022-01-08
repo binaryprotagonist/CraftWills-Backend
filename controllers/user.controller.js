@@ -232,6 +232,14 @@ exports.getUser = async (req, res) => {
     }
   };
 };
+
+
+exports.getProfilepic = async (req, res) => {
+  const users = await usersDataAccess.findUser(req.token_data._id);
+  return {
+    profileImage : users.profileImage
+}
+  };
 // exports.getId = async (req, res) => {
 //   res.send(req.params._id);
 // };
