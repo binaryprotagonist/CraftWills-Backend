@@ -133,7 +133,7 @@ exports.updateUser = async (req, res) => {
       postalCode : req.body.postalCode,
       id_country : req.body.id_country,
       dob : req.body.dob,
-      citizenship : req.body.citizenship,
+      Citizenship : req.body.Citizenship,
       // profileImage : req.file.filename
     },
   };
@@ -225,7 +225,7 @@ exports.getUser = async (req, res) => {
     unitNumber : users.unitNumber,
     streetName : users.streetName,
     postalCode : users.postalCode,
-    citizenship : users.citizenship,
+    Citizenship : users.Citizenship,
     dob : users.dob,
 
     }

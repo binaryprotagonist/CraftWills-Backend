@@ -50,6 +50,7 @@ const UserSchema = new mongoose.Schema({
   },
   dob : {
     type : String,
+    default : " "
   },
   Citizenship : {
     type : String,
