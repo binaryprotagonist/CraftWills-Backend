@@ -21,15 +21,15 @@ const storeBank = async (bankToStore) => {
 //   return user;
 // };
 
-// const updateUser = async (userData) => {
-//   const user = await User.findByIdAndUpdate(
-//     userData._id,
-//     { $set: userData.toUpdate },
-//     { new: true }
-//   );
-//   await user.save()
-//   return user;
-// };
+const updateBank = async (userData) => {
+  const user = await Bank.findByIdAndUpdate(
+    userData._id,
+    { $set: userData.toUpdate },
+    { new: true }
+  );
+  // await user.save()
+  return user;
+};
 
 // const findAll = async () => {
 //   const user = await User.find({});
@@ -43,5 +43,6 @@ const storeBank = async (bankToStore) => {
 
 module.exports = {
     findBank,
-    storeBank
+    storeBank,
+    updateBank
 };

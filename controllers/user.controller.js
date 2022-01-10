@@ -228,7 +228,6 @@ exports.getUser = async (req, res) => {
     postalCode : users.postalCode,
     Citizenship : users.Citizenship,
     dob : users.dob,
-
     }
   };
 };
@@ -236,10 +235,12 @@ exports.getUser = async (req, res) => {
 
 exports.getProfilepic = async (req, res) => {
   const users = await usersDataAccess.findUser(req.token_data._id);
-  return {
+  
+  return { 
     profileImage : users.profileImage
 }
   };
+
 // exports.getId = async (req, res) => {
 //   res.send(req.params._id);
 // };

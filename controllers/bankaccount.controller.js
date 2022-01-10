@@ -4,17 +4,20 @@ require("dotenv").config();
 // const ExpressError = require("../Errorgenerator/errorGenerator");
 const { generateAccessToken } = require("../JsonWebToken/jwt");
 const BankDataAccess= require("../dal/bankaccount.dal")
+const usersDataAccess= require("../dal/user.dal")
+const User = require("../models/user.model")
+
 const {myFunction} = require ("../nodemailer/nodemailer")
 
-
-
-exports.storeBank = async (req) => {
+exports.storeBank = async (req,res) => {
+  const _id = req.token_data._id
     const {bankname,accountNumber,country,estimateValue,specifyOwnershipType} = req.body;
-    if (!bankname || !accountNumber || !country || !estimateValue || !specifyOwnershipType ) {
+    if (!bankname || !accountNumber || !country || !estimateValue || !specifyOwnershipType) {
       // throw new ExpressError(401, "Bad request");
       console.log('err')
     }
     const data = {
+      _id,
         bankname : req.body.bankname,
         accountNumber : req.body.accountNumber,
         country : req.body.country,
@@ -39,4 +42,48 @@ exports.storeBank = async (req) => {
       }
     };
 }
+
+// Getting Bank Details
+
+
+exports.getBankDetails = async (req, res) => {
+  const users = await BankDataAccess.findBank(req.params._id);
   
+  return {
+    error: false,
+    sucess: true,
+    message: "User Found Successfully",
+    data: {users}
+  };
+
+};
+
+
+// Update Bank Details
+
+exports.UpdateBank = async (req, res) => {
+  const _id = req.token_data._id;
+  console.log(_id)
+  const updateData = {
+    _id,
+    toUpdate: {
+      bankname : req.body.bankname,
+      accountNumber : req.body.accountNumber,
+      country : req.body.country,
+      estimateValue : req.body.estimateValue,
+      specifyOwnershipType : req.body.specifyOwnershipType
+    },
+  };
+const update = await BankDataAccess.updateBank(updateData);
+if (update){
+  return {
+    error: false,
+    sucess: true,
+    message: "updated Bank successfully",
+    data: update,
+  };
+}
+else {
+return "something went wrong"
+}
+};
