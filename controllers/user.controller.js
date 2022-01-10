@@ -180,7 +180,7 @@ exports.uploadImage = async (req, res) => {
   const _id = req.token_data._id;
   let image;
   if (!req.file) {
-    image = "uploads/1633780506772defaultImage.jpg";
+    image = "/uploads/defaultimage.png";
   } else {
     image = "/uploads/" + req.file.filename;
   }
