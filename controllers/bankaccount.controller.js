@@ -10,14 +10,14 @@ const User = require("../models/user.model")
 const {myFunction} = require ("../nodemailer/nodemailer")
 
 exports.storeBank = async (req,res) => {
-  const _id = req.token_data._id
+  const user = req.token_data._id
     const {bankname,accountNumber,country,estimateValue,specifyOwnershipType} = req.body;
     if (!bankname || !accountNumber || !country || !estimateValue || !specifyOwnershipType) {
       // throw new ExpressError(401, "Bad request");
       console.log('err')
     }
     const data = {
-      _id,
+        user_id : user,
         bankname : req.body.bankname,
         accountNumber : req.body.accountNumber,
         country : req.body.country,

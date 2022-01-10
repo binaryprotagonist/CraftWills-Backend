@@ -6,7 +6,7 @@ const router = express.Router();
 const BankController = require("../controllers/bankaccount.controller");
 // const session = require ("express-session")
 
-router.post("/bankAccount", async (req, res) => {
+router.post("/bankAccount",authenticateToken ,async (req, res) => {
   const result = await BankController.storeBank(req);
   return res.send(result);
 });
