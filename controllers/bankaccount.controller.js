@@ -47,12 +47,13 @@ exports.storeBank = async (req,res) => {
 
 
 exports.getBankDetails = async (req, res) => {
-  const users = await BankDataAccess.findBank(req.params._id);
+  const user = req.token_data._id
+  const users = await BankDataAccess.findBank(user);
   
   return {
     error: false,
     sucess: true,
-    message: "User Found Successfully",
+    message: "Bank Account Found Successfully",
     data: {users}
   };
 
