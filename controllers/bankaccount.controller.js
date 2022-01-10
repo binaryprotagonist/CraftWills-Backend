@@ -63,6 +63,7 @@ exports.getBankDetails = async (req, res) => {
 // Update Bank Details
 
 exports.UpdateBank = async (req, res) => {
+  
   const updateData = {
     
     toUpdate: {
