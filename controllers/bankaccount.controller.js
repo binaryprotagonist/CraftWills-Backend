@@ -62,10 +62,8 @@ exports.getBankDetails = async (req, res) => {
 // Update Bank Details
 
 exports.UpdateBank = async (req, res) => {
-  const _id = req.token_data._id;
-  console.log(_id)
   const updateData = {
-    _id,
+    
     toUpdate: {
       bankname : req.body.bankname,
       accountNumber : req.body.accountNumber,

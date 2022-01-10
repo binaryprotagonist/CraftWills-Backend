@@ -57,7 +57,8 @@ const UserSchema = new mongoose.Schema({
     default : "Singapore"
   },
   profileImage : {
-    type : String
+    type : String,
+    default : "uploads/defaultimage.png"
   }
 });
 
