@@ -51,24 +51,17 @@ exports.createMember = async (req) => {
 
 
 exports.getMember = async (req, res) => {
-    const users = await MemberDataAccess.findMember();
+  const user_id = req.token_data._id
+  console.log(user_id)
+  const member = await Member.findOne({user_id:user_id})
+
+   
+    // const users = await MemberDataAccess.findMember(user_id);
     return {
       error: false,
       sucess: true,
       message: "Member Found Successfully",
-      data: {
-        users
-        // fullname : users.fullname,
-        // Relationship : users.Relationship,
-        // dob : users.dob,
-        // gender : users.gender,
-        // country : users.country,
-        // id_type : users.id_type,
-        // id_number : users.id_number,
-        // floorNumber : users.floorNumber,
-        // unitNumber : users.unitNumber,
-        // streetName : users.streetName,
-        // postalCode : users.postalCode
-      }
+      data: 
+        member
     };
   };
