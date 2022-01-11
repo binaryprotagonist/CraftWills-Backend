@@ -53,7 +53,7 @@ exports.createMember = async (req) => {
 exports.getMember = async (req, res) => {
   const user_id = req.token_data._id
   console.log(user_id)
-  const member = await Member.findOne({user_id:user_id})
+  const member = await Member.find({user_id:user_id})
 
    
     // const users = await MemberDataAccess.findMember(user_id);
