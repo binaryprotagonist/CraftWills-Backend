@@ -7,6 +7,7 @@ const BankDataAccess= require("../dal/bankaccount.dal")
 const usersDataAccess= require("../dal/user.dal")
 const User = require("../models/user.model")
 
+
 const {myFunction} = require ("../nodemailer/nodemailer")
 
 exports.storeBank = async (req,res) => {
@@ -23,8 +24,7 @@ exports.storeBank = async (req,res) => {
         country : req.body.country,
         estimateValue : req.body.estimateValue,
         specifyOwnershipType : req.body.specifyOwnershipType
-
-     };
+    };
   
     const storedBank = await BankDataAccess.storeBank(data);
     if (storedBank){
@@ -63,9 +63,9 @@ exports.getBankDetails = async (req, res) => {
 // Update Bank Details
 
 exports.UpdateBank = async (req, res) => {
-  
+  const _id = req.token_data._id
   const updateData = {
-    
+    _id,
     toUpdate: {
       bankname : req.body.bankname,
       accountNumber : req.body.accountNumber,

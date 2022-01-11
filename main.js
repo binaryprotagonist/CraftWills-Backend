@@ -4,6 +4,7 @@ require("./mongo");
 const express = require("express");
 const userRouters = require("./routes/user.route");
 const bankRouters = require ("./routes/bank.route")
+const memberPersonRouters = require ("./routes/member.person.route")
 const app = express();
 const cors = require('cors')
 const path = require ('path')
@@ -25,6 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use("/users", userRouters);
 app.use("/",bankRouters)
+app.use("/",memberPersonRouters)
 app.listen(PORT, () => {
   console.log(`YOUR SERVER IS WORKING AT PORT ${PORT}`);
 });
