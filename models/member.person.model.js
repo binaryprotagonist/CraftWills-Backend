@@ -10,7 +10,6 @@ const MemberSchema = new mongoose.Schema({
   },
   Relationship: {
     type: String, 
-    required: true,
   },
   id_number : {
     type : String,
@@ -54,5 +53,5 @@ const MemberSchema = new mongoose.Schema({
 
 });
 
-const Member = mongoose.model("MemberData", MemberSchema);
+const Member = mongoose.model("Memberdata", MemberSchema);
 module.exports = Member;
