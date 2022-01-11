@@ -2,7 +2,7 @@ const MemberPerson = require("../models/member.person.model");
 require("../JsonWebToken/jwt");
 
 const findMember = async (data) => {
-  const user = await MemberPerson.findById(data);
+  const user = await MemberPerson.findOne(data);
   return user;
 };
 
