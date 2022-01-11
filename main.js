@@ -5,6 +5,7 @@ const express = require("express");
 const userRouters = require("./routes/user.route");
 const bankRouters = require ("./routes/bank.route")
 const memberPersonRouters = require ("./routes/member.person.route")
+const memberOrganisationRouters = require ("./routes/member.organisation.route")
 const app = express();
 const cors = require('cors')
 const path = require ('path')
@@ -27,6 +28,7 @@ app.use(cors());
 app.use("/users", userRouters);
 app.use("/",bankRouters)
 app.use("/",memberPersonRouters)
+app.use("/",memberOrganisationRouters)
 app.listen(PORT, () => {
   console.log(`YOUR SERVER IS WORKING AT PORT ${PORT}`);
 });

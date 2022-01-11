@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const MemberSchema = new mongoose.Schema({
+const MemberOrganisationSchema = new mongoose.Schema({
   organisationName : {
     type : String
   }
@@ -8,50 +8,26 @@ const MemberSchema = new mongoose.Schema({
     type : String,
     required : true
   },
-  Relationship: {
+  id_country: {
     type: String, 
-  },
-  id_number : {
-    type : String,
-    required : true
-  },
-  id_type : {
-    type : String,
-    required : true
-  },
-  gender : {
-    type : String,
-    required : true
   },
   floorNumber : {
     type : String,
     required : true
   },
-  unitNumber : {
+  unitNumber: {
     type : String,
     required : true
   },
-  streetName :{
+  streetName : {
     type : String,
     required : true
   },
   postalCode : {
-    type : Number,
+    type : String,
     required : true
-  },
-  country : {
-    type : String,
-    required : true,
-    default : "Singapore"
-  },
-  dob : {
-    type : String,
-  },
-  Citizenship : {
-    type : String,
   }
-
 });
 
-const Member = mongoose.model("Memberdata", MemberSchema);
+const Member = mongoose.model("MemberOrganisationData", MemberOrganisationSchema);
 module.exports = Member;
