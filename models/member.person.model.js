@@ -1,14 +1,16 @@
 const mongoose = require("mongoose");
 const MemberSchema = new mongoose.Schema({
-  
+  user_id : {
+    type : String
+  }
+  ,
   fullname : {
     type : String,
     required : true
   },
-  relationship: {
-    type: String,
+  Relationship: {
+    type: String, 
     required: true,
-    unique: true,
   },
   id_number : {
     type : String,
@@ -48,10 +50,8 @@ const MemberSchema = new mongoose.Schema({
   },
   Citizenship : {
     type : String,
-  },
-  profileImage : {
-    type : String
   }
+
 });
 
 const Member = mongoose.model("MemberData", MemberSchema);

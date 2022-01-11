@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 const BankSchema = new mongoose.Schema({
   user_id : {
     type : String,
-    
-  }
+    }
   ,
   bankname : {
     type : String,
