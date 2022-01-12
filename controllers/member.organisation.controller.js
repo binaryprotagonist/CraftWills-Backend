@@ -60,3 +60,33 @@ exports.getMember = async (req, res) => {
         member
     };
   };
+
+
+
+  /// Update Member Organisation
+
+  exports.updateMember = async (req, res) => {
+    const _id = req.token_data._id;
+    const updateData = {
+      _id,
+      toUpdate: {
+        organisationName: req.body.organisationName,
+        registration_number: req.body.registration_number,
+        id_country: req.body.id_country,
+        floorNumber: req.body.floorNumber,
+        unitNumber: req.body.unitNumber,
+        streetName: req.body.streetName,
+        postalCode: req.body.postalCode,
+        // profileImage : req.file.filename
+      },
+    };
+  const update = await MemberDataAccess.updateUser(updateData);
+  if (update){
+    return {
+      error: false,
+      sucess: true,
+      message: "updated Member successfully",
+      data: update,
+    };
+  };}
+  

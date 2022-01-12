@@ -1,5 +1,5 @@
-const Bank = require("../models/bankAccount.model");
-require("../JsonWebToken/jwt");
+const Bank = require("../../models/asset/bankAccount.model");
+require("../../JsonWebToken/jwt");
 
 const findBank = async (data) => {
   const user = await Bank.findById(data);

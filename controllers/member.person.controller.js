@@ -29,7 +29,7 @@ exports.createMember = async (req) => {
     postalCode : req.body.postalCode,
     citizenship : req.body.citizenship,
     dob : req.body.dob,
-    cuntry : req.body.country
+    country : req.body.country
    };
 
   const storedUser = await MemberDataAccess.storeMember(data);
@@ -65,3 +65,39 @@ exports.getMember = async (req, res) => {
         member
     };
   };
+
+
+
+  // Update Member Person Controller
+
+
+  exports.updateMember = async (req, res) => {
+    const _id = req.token_data._id;
+    const updateData = {
+      _id,
+      toUpdate: {
+        fullname : req.body.fullname,
+        Relationship : req.body.Relationship,
+        id_type : req.body.id_type,
+        id_number : req.body.id_number,
+        gender : req.body.gender,
+        floorNumber : req.body.floorNumber,
+        unitNumber : req.body.unitNumber,
+        streetName : req.body.streetName,
+        postalCode : req.body.postalCode,
+        citizenship : req.body.citizenship,
+        dob : req.body.dob,
+        country : req.body.country
+        // profileImage : req.file.filename
+      },
+    };
+  const update = await MemberDataAccess.updateUser(updateData);
+  if (update){
+    return {
+      error: false,
+      sucess: true,
+      message: "updated Member successfully",
+      data: update,
+    };
+  };}
+  
