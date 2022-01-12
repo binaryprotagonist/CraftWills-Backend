@@ -5,7 +5,7 @@ require("dotenv").config();
 const { generateAccessToken } = require("../JsonWebToken/jwt");
 const MemberDataAccess= require("../dal/member.organisation.dal")
 const {myFunction} = require ("../nodemailer/nodemailer");
-const Member = require("../models/member.person.model");
+const Member = require("../models/member.organisation.model");
 
 exports.createMember = async (req) => {
   const _id = req.token_data._id
@@ -55,7 +55,7 @@ exports.getMember = async (req, res) => {
     return {
       error: false,
       sucess: true,
-      message: "Member Found Successfully",
+      message: "Organisation Found Successfully",
       data: 
         member
     };

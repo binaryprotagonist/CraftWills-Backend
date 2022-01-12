@@ -1,5 +1,9 @@
 const mongoose = require("mongoose");
 const MemberOrganisationSchema = new mongoose.Schema({
+  user_id : {
+    type : String
+  }
+  ,
   organisationName : {
     type : String
   }
