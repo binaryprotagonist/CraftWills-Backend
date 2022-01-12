@@ -15,4 +15,9 @@ router.get("/getMemberOrganisation",authenticateToken ,async (request, response)
     return response.json(result);
   });
 
+router.put("/updateOrgMember", authenticateToken, async (req, res) => {
+    const result = await memberOrganisationController.UpdateMember(req);
+    return res.json(result);
+  });
+
 module.exports = router;

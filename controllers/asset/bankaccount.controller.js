@@ -2,13 +2,13 @@ const bcrypt = require("bcrypt");
 // const momen = require("moment-timezone");
 require("dotenv").config();
 // const ExpressError = require("../Errorgenerator/errorGenerator");
-const { generateAccessToken } = require("../JsonWebToken/jwt");
-const BankDataAccess= require("../dal/bankaccount.dal")
-const usersDataAccess= require("../dal/user.dal")
-const User = require("../models/user.model")
+const { generateAccessToken } = require("../../JsonWebToken/jwt");
+const BankDataAccess= require("../../dal/asset/bankaccount.dal")
+const usersDataAccess= require("../../dal/user.dal")
+const User = require("../../models/user.model")
 
 
-const {myFunction} = require ("../nodemailer/nodemailer")
+const {myFunction} = require ("../../nodemailer/nodemailer")
 
 exports.storeBank = async (req,res) => {
   const user = req.token_data._id

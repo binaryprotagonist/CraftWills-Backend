@@ -15,4 +15,9 @@ router.get("/getMember",authenticateToken ,async (request, response) => {
     return response.json(result);
   });
 
+router.put("/updatePersonMember", authenticateToken, async (req, res) => {
+    const result = await memberPersonController.updateMember(req);
+    return res.json(result);
+  });
+  
 module.exports = router;

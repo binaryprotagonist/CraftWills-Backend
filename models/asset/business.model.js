@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
-const investmentSchema = new mongoose.Schema({
+const BunsinessSchema = new mongoose.Schema({
+  user_id : {
+    type : String,
+    },
   
   policyName : {
     type : String,
@@ -21,5 +24,5 @@ const investmentSchema = new mongoose.Schema({
   },
 });
 
-const Investment = mongoose.model("InvestmentData",investmentSchema);
-module.exports = Investment;
+const Insurance = mongoose.model("InsuranceData", InsuranceSchema);
+module.exports = Insurance;

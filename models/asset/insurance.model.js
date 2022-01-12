@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 const InsuranceSchema = new mongoose.Schema({
+  user_id : {
+    type : String,
+    },
   
-  policyname : {
+  policyName : {
     type : String,
     required : true
   },
