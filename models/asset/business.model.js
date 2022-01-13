@@ -1,28 +1,25 @@
 const mongoose = require("mongoose");
-const BunsinessSchema = new mongoose.Schema({
+const BusinessSchema = new mongoose.Schema({
   user_id : {
     type : String,
     },
-  
-  policyName : {
+  businessName :{
     type : String,
     required : true
   },
-  policyNumber: {
-    type: String,
-    required: true,
-    unique: true,
+  UEN_no : {
+    type : String
   },
   country : {
     type : String,
-    required : true,
-    default : "Singapore"
+    default : "Singapore",
+    required : true
   },
   specifyOwnershipType : {
     type : String,
-    required : true,
-  },
+    required : true
+  } 
 });
 
-const Insurance = mongoose.model("InsuranceData", InsuranceSchema);
-module.exports = Insurance;
+const Business = mongoose.model("BusinessData", BusinessSchema);
+module.exports = Business;
