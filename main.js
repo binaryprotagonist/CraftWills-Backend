@@ -8,6 +8,9 @@ const memberPersonRouters = require ("./routes/member.person.route")
 const memberOrganisationRouters = require ("./routes/member.organisation.route")
 const insurancePolicyRouters = require("./routes/asset/insurance.policy.route")
 const investmentAccountRouters = require("./routes/asset/investment.route")
+const BusinessAssetRouters = require("./routes/asset/business.route")
+const RealEstateAssetRouters = require ("./routes/asset/realEstate.route")
+const MotorVehicleAssetRouters = require("./routes/asset/motorVehicle.route")
 const app = express();
 const cors = require('cors')
 const path = require ('path')
@@ -17,6 +20,7 @@ const PORT = process.env.PORT || 3000;
 
 
 const bodyParser = require('body-parser');
+const MotorVehicle = require("./models/asset/motorVehicle.model");
 
 app.use(bodyParser.json());
 
@@ -33,7 +37,9 @@ app.use("/",memberPersonRouters)
 app.use("/",memberOrganisationRouters)
 app.use("/",insurancePolicyRouters)
 app.use("/",investmentAccountRouters)
-
+app.use("/",BusinessAssetRouters)
+app.use("/",RealEstateAssetRouters)
+app.use("/",MotorVehicleAssetRouters)
 app.listen(PORT, () => {
   console.log(`YOUR SERVER IS WORKING AT PORT ${PORT}`);
 });
