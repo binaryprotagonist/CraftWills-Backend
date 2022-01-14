@@ -5,16 +5,14 @@ require("dotenv").config();
 const { generateAccessToken } = require("../../JsonWebToken/jwt");
 const MotorVehicleDataAccess= require("../../dal/asset/motorVehicle.dal")
 const usersDataAccess= require("../../dal/user.dal")
-const User = require("../../models/user.model")
-
-
-const {myFunction} = require ("../../nodemailer/nodemailer");
+const User = require("../../models/user.model");
 const MotorVehicle = require("../../models/asset/motorVehicle.model");
+
 
 exports.storeVehicle = async (req,res) => {
   const user = req.token_data._id
-    const {CarModel,plateNo,country,specifyOwnershipType} = req.body;
-    if (!CarModel|| !plateNo || !country || !specifyOwnershipType) {
+    const {CarModel,plateNo,country ,SpecifyOwnershipType} = req.body;
+    if (!CarModel || !plateNo || !country || !SpecifyOwnershipType) {
       // throw new ExpressError(401, "Bad request");
       console.log('err')
     }
@@ -23,16 +21,16 @@ exports.storeVehicle = async (req,res) => {
         CarModel : req.body.CarModel,
         plateNo : req.body.plateNo,
         country : req.body.country,
-        specifyOwnershipType : req.body.specifyOwnershipType
+        SpecifyOwnershipType : req.body.SpecifyOwnershipType
     };
   
-    const storeddata = await MotorVehicleDataAccess.storeVehicle(data);
-    if (storeddata){
+    const storedVehicle = await MotorVehicleDataAccess.storeVehicle(data);
+    if (storedVehicle){
     return {
       error: false,
       sucess: true,
-      message: "MotorVehicle stored successfully",
-      data: storeddata,
+      message: "Vehicle stored successfully",
+      data: storedVehicle,
     }}
     else{
       return{
@@ -53,7 +51,7 @@ exports.getVehicleDetails = async (req, res) => {
   return {
     error: false,
     sucess: true,
-    message: "Real Estate data Found Successfully",
+    message: "Motor Vehicle data Found Successfully",
     data: {users}
   };
 
@@ -67,10 +65,10 @@ exports.UpdateVehicle = async (req, res) => {
   const updateData = {
     _id,
     toUpdate: {
-        CarModel : req.body.CarModel,
-        plateNo : req.body.plateNo,
-        country : req.body.country,
-        specifyOwnershipType : req.body.specifyOwnershipType
+      CarModel : req.body.CarModel,
+      plateNo : req.body.plateNo,
+      country : req.body.country,
+      SpecifyOwnershipType : req.body.SpecifyOwnershipType
     },
   };
 const update = await MotorVehicleDataAccess.updateVehicle(updateData);
@@ -78,7 +76,7 @@ if (update){
   return {
     error: false,
     sucess: true,
-    message: "updated Policy successfully",
+    message: "Motor Vehicle data update successfully",
     data: update,
   };
 }

@@ -3,35 +3,36 @@ const bcrypt = require("bcrypt");
 require("dotenv").config();
 // const ExpressError = require("../Errorgenerator/errorGenerator");
 const { generateAccessToken } = require("../../JsonWebToken/jwt");
-const BusinessDataAccess= require("../../dal/asset/business.dal")
+const personalPossesionDataAccess= require("../../dal/asset/personalPossession.dal")
 const usersDataAccess= require("../../dal/user.dal")
 const User = require("../../models/user.model")
 
 
-const {myFunction} = require ("../../nodemailer/nodemailer")
+const {myFunction} = require ("../../nodemailer/nodemailer");
+const SafeDeposit = require("../../models/asset/safeDepositBox.model");
 
-exports.storeBusiness = async (req,res) => {
+exports.storePossession = async (req,res) => {
   const user = req.token_data._id
-    const {businessName,UEN_no,country,specifyOwnershipType} = req.body;
-    if (!businessName || !UEN_no || !country || !specifyOwnershipType) {
+    const {Name,id_No,country,specifyOwnershipType} = req.body;
+    if (!Name || !id_No || !country || !specifyOwnershipType) {
       // throw new ExpressError(401, "Bad request");
       console.log('err')
     }
     const data = {
         user_id : user,
-        businessName : req.body.businessName,
-        UEN_no : req.body.UEN_no,
+        Name : req.body.Name,
+        id_No : req.body.safe_No,
         country : req.body.country,
         specifyOwnershipType : req.body.specifyOwnershipType
     };
   
-    const storedBusiness = await BusinessDataAccess.storeBusiness(data);
-    if (storedBusiness){
+    const storedPossession = await personalPossesionDataAccess.storePossession(data);
+    if (storedPossession){
     return {
       error: false,
       sucess: true,
-      message: "Business Details stored successfully",
-      data: storedBusiness,
+      message: "Policy stored successfully",
+      data: storedPossession,
     }}
     else{
       return{
@@ -42,17 +43,17 @@ exports.storeBusiness = async (req,res) => {
     };
 }
 
-// Getting Business Details
+// Getting Bank Details
 
 
-exports.getBusinessDetails = async (req, res) => {
+exports.getPossessionDetails = async (req, res) => {
   const user = req.token_data._id
-  const users = await BusinessDataAccess.findBusiness({user_id:user});
+  const users = await personalPossesionDataAccess.findPossession({user_id:user});
   
   return {
     error: false,
     sucess: true,
-    message: "Bank Account Found Successfully",
+    message: "personal possesion data Found Successfully",
     data: {users}
   };
 
@@ -61,23 +62,23 @@ exports.getBusinessDetails = async (req, res) => {
 
 // Update Bank Details
 
-exports.UpdateBusiness = async (req, res) => {
+exports.UpdatePossession = async (req, res) => {
   const _id = req.token_data._id
   const updateData = {
     _id,
     toUpdate: {
-        businessName : req.body.businessName,
-        UEN_no : req.body.UEN_no,
+        Name : req.body.Name,
+        id_No : req.body.safe_No,
         country : req.body.country,
         specifyOwnershipType : req.body.specifyOwnershipType
     },
   };
-const update = await BusinessDataAccess.updateBusiness(updateData);
+const update = await personalPossesionDataAccess.updatePossession(updateData);
 if (update){
   return {
     error: false,
     sucess: true,
-    message: "updated Business successfully",
+    message: "updated Posession successfully",
     data: update,
   };
 }

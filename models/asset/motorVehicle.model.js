@@ -3,25 +3,26 @@ const MotorVehicleSchema = new mongoose.Schema({
     user_id: {
         type: String,
     },
-    CarModel: {
-        type: String,
-        required: true
-    },
-    plateNo :{
+    CarModel : {
         type : String,
         required : true
     },
-    country: {
-        type: String,
-        default: "Singapore",
-        required: true
+    plateNo : {
+        type : String,
+        required : true
     },
-    specifyOwnershipType: {
+    country :{
+        type : String,
+        required : true,
+        default : "Singapore"
+    },
+    SpecifyOwnershipType: {
         type: String,
         required: true
     }
 
 });
+
 
 const MotorVehicle = mongoose.model("MotorVehicleData", MotorVehicleSchema);
 module.exports = MotorVehicle;

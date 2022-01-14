@@ -23,5 +23,6 @@ const SafeDepositSchema = new mongoose.Schema({
 
 });
 
-module.exports = SafeDeposit;
+
 const SafeDeposit = mongoose.model("SafeDepositData", SafeDepositSchema);
+module.exports = SafeDeposit;

@@ -1,4 +1,4 @@
-const MotorVehicle = require("../../models/asset/realEstate.model");
+const MotorVehicle = require("../../models/asset/motorVehicle.model");
 require("../../JsonWebToken/jwt");
 
 const findVehicle = async (data) => {
