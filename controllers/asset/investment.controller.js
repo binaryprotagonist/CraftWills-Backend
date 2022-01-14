@@ -30,7 +30,7 @@ exports.storeInvestmentAccount = async (req,res) => {
     return {
       error: false,
       sucess: true,
-      message: "Policy stored successfully",
+      message: "Investment Account stored successfully",
       data: storedPolicy,
     }}
     else{
