@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 const investmentSchema = new mongoose.Schema({
   
-  policyName : {
+  accountName : {
     type : String,
     required : true
   },
-  policyNumber: {
+  accountNo: {
     type: String,
     required: true,
     unique: true,

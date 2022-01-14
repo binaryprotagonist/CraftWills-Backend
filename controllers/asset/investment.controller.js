@@ -19,8 +19,8 @@ exports.storeInvestmentAccount = async (req,res) => {
     }
     const data = {
         user_id : user,
-        policyName : req.body.policyName,
-        policyNumber : req.body.policyNumber,
+        accountName : req.body.accountName,
+        accountNo : req.body.accountNo,
         country : req.body.country,
         specifyOwnershipType : req.body.specifyOwnershipType
     };
@@ -66,10 +66,10 @@ exports.UpdateInvestment = async (req, res) => {
   const updateData = {
     _id,
     toUpdate: {
-      policyName : req.body.bankname,
-      policyNumber : req.body.accountNumber,
-      country : req.body.country,
-      specifyOwnershipType : req.body.specifyOwnershipType
+        accountName : req.body.accountName,
+        accountNo : req.body.accountNo,
+        country : req.body.country,
+        specifyOwnershipType : req.body.specifyOwnershipType
     },
   };
 const update = await investmentAccountDataAccess.updatePolicy(updateData);
