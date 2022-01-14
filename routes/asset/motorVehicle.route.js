@@ -12,7 +12,7 @@ router.post("/storeVehicle",authenticateToken ,async (req, res) => {
 });
 
 router.put("/updateVehicle", authenticateToken, async (req, res) => {
-  const result = await MotorVehicleController.updateVehicle(req);
+  const result = await MotorVehicleController.UpdateVehicle(req);
   return res.json(result);
 });
 

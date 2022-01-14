@@ -3,35 +3,36 @@ const bcrypt = require("bcrypt");
 require("dotenv").config();
 // const ExpressError = require("../Errorgenerator/errorGenerator");
 const { generateAccessToken } = require("../../JsonWebToken/jwt");
-const BusinessDataAccess= require("../../dal/asset/business.dal")
+const safeDepositDataAccess= require("../../dal/asset/safeDeposit.dal")
 const usersDataAccess= require("../../dal/user.dal")
 const User = require("../../models/user.model")
 
 
-const {myFunction} = require ("../../nodemailer/nodemailer")
+const {myFunction} = require ("../../nodemailer/nodemailer");
+const SafeDeposit = require("../../models/asset/safeDepositBox.model");
 
-exports.storeBusiness = async (req,res) => {
+exports.storeDeposit = async (req,res) => {
   const user = req.token_data._id
-    const {businessName,UEN_no,country,specifyOwnershipType} = req.body;
-    if (!businessName || !UEN_no || !country || !specifyOwnershipType) {
+    const {safe_Box_Location,safe_No,country,specifyOwnershipType} = req.body;
+    if (!safe_Box_Location || !safe_No || !country || !specifyOwnershipType) {
       // throw new ExpressError(401, "Bad request");
       console.log('err')
     }
     const data = {
         user_id : user,
-        businessName : req.body.businessName,
-        UEN_no : req.body.UEN_no,
+        safe_Box_Location : req.body.safe_Box_Location,
+        safe_No : req.body.safe_No,
         country : req.body.country,
         specifyOwnershipType : req.body.specifyOwnershipType
     };
   
-    const storedBusiness = await BusinessDataAccess.storeBusiness(data);
-    if (storedBusiness){
+    const storedDeposit = await safeDepositDataAccess.storeDeposit(data);
+    if (storedDeposit){
     return {
       error: false,
       sucess: true,
-      message: "Business Details stored successfully",
-      data: storedBusiness,
+      message: "Policy stored successfully",
+      data: storedDeposit,
     }}
     else{
       return{
@@ -42,17 +43,17 @@ exports.storeBusiness = async (req,res) => {
     };
 }
 
-// Getting Business Details
+// Getting Bank Details
 
 
-exports.getBusinessDetails = async (req, res) => {
+exports.getDepositDetails = async (req, res) => {
   const user = req.token_data._id
-  const users = await BusinessDataAccess.findBusiness({user_id:user});
+  const users = await safeDepositDataAccess.findDeposit({user_id:user});
   
   return {
     error: false,
     sucess: true,
-    message: "Bank Account Found Successfully",
+    message: "Safe Deposit data Found Successfully",
     data: {users}
   };
 
@@ -61,23 +62,23 @@ exports.getBusinessDetails = async (req, res) => {
 
 // Update Bank Details
 
-exports.UpdateBusiness = async (req, res) => {
+exports.UpdateDeposit = async (req, res) => {
   const _id = req.token_data._id
   const updateData = {
     _id,
     toUpdate: {
-        businessName : req.body.businessName,
-        UEN_no : req.body.UEN_no,
+        safe_Box_Location : req.body.safe_Box_Location,
+        safe_No : req.body.safe_No,
         country : req.body.country,
         specifyOwnershipType : req.body.specifyOwnershipType
     },
   };
-const update = await BusinessDataAccess.updateBusiness(updateData);
+const update = await safeDepositDataAccess.updateDeposit(updateData);
 if (update){
   return {
     error: false,
     sucess: true,
-    message: "updated Business successfully",
+    message: "updated Policy successfully",
     data: update,
   };
 }

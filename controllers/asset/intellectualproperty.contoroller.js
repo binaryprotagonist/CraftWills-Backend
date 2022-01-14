@@ -3,34 +3,36 @@ const bcrypt = require("bcrypt");
 require("dotenv").config();
 // const ExpressError = require("../Errorgenerator/errorGenerator");
 const { generateAccessToken } = require("../../JsonWebToken/jwt");
-const RealEstateDataAccess= require("../../dal/asset/realEstate.dal")
+const intellectualPropertyDataAccess= require("../../dal/asset/intellectualproperty.dal")
 const usersDataAccess= require("../../dal/user.dal")
 const User = require("../../models/user.model")
 
 
-const {myFunction} = require ("../../nodemailer/nodemailer")
+const {myFunction} = require ("../../nodemailer/nodemailer");
+const IntellectualProperty = require("../../models/asset/intellectualProperty.model");
 
-exports.storeEstate = async (req,res) => {
+exports.storeProperty = async (req,res) => {
   const user = req.token_data._id
-    const {address,country,specifyOwnershipType} = req.body;
-    if (!address || !country || !specifyOwnershipType) {
+    const {ip_Name,ip_No,country,specifyOwnershipType} = req.body;
+    if (!ip_Name || !ip_No || !country || !specifyOwnershipType) {
       // throw new ExpressError(401, "Bad request");
       console.log('err')
     }
     const data = {
         user_id : user,
-        address : req.body.address,
+        ip_Name : req.body.ip_Name,
+        ip_No : req.body.ip_No,
         country : req.body.country,
-        specifyOwnershipType : req.body.specifyOwnershipType
+        SpecifyOwnershipType : req.body.SpecifyOwnershipType
     };
   
-    const storeddata = await RealEstateDataAccess.storeEstate(data);
-    if (storeddata){
+    const storedProperty = await intellectualPropertyDataAccess.storeProperty(data);
+    if (storedProperty){
     return {
       error: false,
       sucess: true,
-      message: "RealEstate stored successfully",
-      data: storeddata,
+      message: "Property stored successfully",
+      data: storedProperty,
     }}
     else{
       return{
@@ -44,14 +46,14 @@ exports.storeEstate = async (req,res) => {
 // Getting Bank Details
 
 
-exports.getEstateDetails = async (req, res) => {
+exports.getPropertyDetails = async (req, res) => {
   const user = req.token_data._id
-  const users = await RealEstateDataAccess.findEstate({user_id:user});
+  const users = await intellectualPropertyDataAccess.findProperty({user_id:user});
   
   return {
     error: false,
     sucess: true,
-    message: "Real Estate data Found Successfully",
+    message: "Intellectual Property data Found Successfully",
     data: {users}
   };
 
@@ -66,7 +68,6 @@ exports.UpdateInvestment = async (req, res) => {
     _id,
     toUpdate: {
       policyName : req.body.bankname,
-      address : req.body.address,
       policyNumber : req.body.accountNumber,
       country : req.body.country,
       specifyOwnershipType : req.body.specifyOwnershipType
