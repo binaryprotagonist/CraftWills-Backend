@@ -31,7 +31,7 @@ exports.storeDeposit = async (req,res) => {
     return {
       error: false,
       sucess: true,
-      message: "Policy stored successfully",
+      message: "safeDeposit stored successfully",
       data: storedDeposit,
     }}
     else{

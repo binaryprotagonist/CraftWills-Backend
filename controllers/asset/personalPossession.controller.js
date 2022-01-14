@@ -31,7 +31,7 @@ exports.storePossession = async (req,res) => {
     return {
       error: false,
       sucess: true,
-      message: "Policy stored successfully",
+      message: "Personal Possession stored successfully",
       data: storedPossession,
     }}
     else{
