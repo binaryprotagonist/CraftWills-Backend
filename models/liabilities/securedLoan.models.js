@@ -4,33 +4,36 @@ const SecuredLoanSchema = new mongoose.Schema({
     type : String
   }
   ,
-  organisationName : {
-    type : String
+  loanName : {
+    type : String,
+    required : true
   }
   ,
-  registration_number : {
+  loanProvider : {
     type : String,
     required : true
   },
-  id_country: {
-    type: String, 
+  loan_Number: {
+    type: String,
+    required : true 
   },
-  floorNumber : {
+  loan_Id_Number : {
+    type : Number,
+    required : true
+  },
+  current_Outstanding_Amount: {
     type : String,
     required : true
   },
-  unitNumber: {
-    type : String,
-    required : true
+  description :{
+    type : String
   },
-  streetName : {
-    type : String,
-    required : true
-  },
-  postalCode : {
-    type : String,
-    required : true
-  }
+  addAssets : [
+    {
+      type : mongoose.Schema.Types.ObjectId,
+      ref : "BankData"
+    }
+  ]
 });
 
 const LoanSchema = mongoose.model("SecuredLoanData", SecuredLoanSchema);

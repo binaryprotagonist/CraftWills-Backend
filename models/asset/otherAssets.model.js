@@ -19,7 +19,6 @@ const OtherAssetsSchema = new mongoose.Schema({
         required : true
     }
 
-
 });
 
 const OtherAssets = mongoose.model("OtherAssetsData", OtherAssetsSchema);
