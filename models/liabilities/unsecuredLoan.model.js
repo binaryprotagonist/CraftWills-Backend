@@ -8,28 +8,22 @@ const unSecuredLoanSchema = new mongoose.Schema({
     type : String,
     required : true
   },
-  loan_Id_Number :{
-    type : String,
-    required : true
- }
-  ,
-  loan_number : {
-    type : String,
+  loan_Number: {
+    type: String,
+    required : true 
+  },
+  loan_Id_Number : {
+    type : Number,
     required : true
   },
-  loan_Id: {
-    type: String, 
-    required : true
-  },
-  current_Outstanding_Amount : {
+  current_Outstanding_Amount: {
     type : String,
     required : true
   },
-  description: {
-    type : String,
+  description :{
+    type : String
   },
-
 });
 
-const UnsecuredLoanSchema = mongoose.model("UnSecuredLoanData", unSecuredLoanSchema);
-module.exports = UnsecuredLoanSchema;
+const UnSecureLoanSchema = mongoose.model("unSecuredLoanData", unSecuredLoanSchema);
+module.exports = UnSecureLoanSchema;
