@@ -14,6 +14,7 @@ const MotorVehicleAssetRouters = require("./routes/asset/motorVehicle.route")
 const IntellectualPropertyRouters = require("./routes/asset/intellectualProperty.route")
 const SafeDepositRouters = require("./routes/asset/safeDeposit.route")
 const PersonalPossessionRouters = require("./routes/asset/personalPossession.route")
+const OtherAssetsRouters = require("./routes/asset/otherAssets.route")
 const app = express();
 const cors = require('cors')
 const path = require ('path')
@@ -46,6 +47,7 @@ app.use("/",MotorVehicleAssetRouters)
 app.use("/",IntellectualPropertyRouters)
 app.use("/",SafeDepositRouters)
 app.use("/",PersonalPossessionRouters)
+app.use("/",OtherAssetsRouters)
 app.listen(PORT, () => {
   console.log(`YOUR SERVER IS WORKING AT PORT ${PORT}`);
 });
