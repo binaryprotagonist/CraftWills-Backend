@@ -6,7 +6,7 @@ const router = express.Router();
 const unSecuredLoanController = require("../../controllers/liabilities/unSecuredLoan.controller");
 // const session = require ("express-session")
 
-router.post("/storeLoan",authenticateToken ,async (req, res) => {
+router.post("/storeUnsecureLoan",authenticateToken ,async (req, res) => {
   const result = await unSecuredLoanController.storeLoan(req);
   return res.send(result);
 });
@@ -16,7 +16,7 @@ router.put("/updateLoan", authenticateToken, async (req, res) => {
   return res.json(result);
 });
 
-router.get("/getLoanDetails",authenticateToken ,async (request, response) => {
+router.get("/getUnsecureLoanDetails",authenticateToken ,async (request, response) => {
   const result = await unSecuredLoanController.getLoanDetails(request);
   return response.json(result);
 });
