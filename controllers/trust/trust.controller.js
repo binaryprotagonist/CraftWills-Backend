@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 require("dotenv").config();
 // const ExpressError = require("../Errorgenerator/errorGenerator");
 const { generateAccessToken } = require("../../JsonWebToken/jwt");
-const TrustDataAccess= require("../../dal/trust/trust.dal")
+const TrustDataAccess= require("../../dal/trust.dal")
 const usersDataAccess= require("../../dal/user.dal")
 const User = require("../../models/user.model")
 const {myFunction} = require ("../../nodemailer/nodemailer")
