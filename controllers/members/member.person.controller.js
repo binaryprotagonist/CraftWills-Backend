@@ -2,10 +2,10 @@ const bcrypt = require("bcrypt");
 // const momen = require("moment-timezone");
 require("dotenv").config();
 // const ExpressError = require("../Errorgenerator/errorGenerator");
-const { generateAccessToken } = require("../JsonWebToken/jwt");
-const MemberDataAccess= require("../dal/member.person.dal")
-const {myFunction} = require ("../nodemailer/nodemailer");
-const Member = require("../models/member.person.model");
+const { generateAccessToken } = require("../../JsonWebToken/jwt");
+const MemberDataAccess= require("../../dal/member.person.dal")
+const {myFunction} = require ("../../nodemailer/nodemailer");
+const Member = require("../../models/member.person.model");
 
 exports.createMember = async (req) => {
   const _id =req.token_data._id
