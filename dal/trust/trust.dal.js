@@ -1,4 +1,4 @@
-const Trust = require("../../models/trust/trust.model")
+const Trust = require("../../models/trust/Trust.model");
 require("../../JsonWebToken/jwt");
 
 const findTrust = async (data) => {
