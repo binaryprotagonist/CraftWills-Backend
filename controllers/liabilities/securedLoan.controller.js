@@ -12,8 +12,8 @@ const {myFunction} = require ("../../nodemailer/nodemailer")
 
 exports.storeLoan = async (req,res) => {
   const user = req.token_data._id
-    const {loanName,loanProvider,loan_Number,loan_Id_Number,current_Outstanding_Amount,description} = req.body;
-    if (!loanName || !loanProvider || !loan_Number || !loan_Id_Number || !current_Outstanding_Amount || !description) {
+    const {loanName,loanProvider,loan_Number,loan_Id_Number,current_Outstanding_Amount,description,addAssets} = req.body;
+    if (!loanName || !loanProvider || !loan_Number || !loan_Id_Number || !current_Outstanding_Amount || !description || !addAssets) {
       // throw new ExpressError(401, "Bad request");
       console.log('err')
     }
@@ -24,7 +24,8 @@ exports.storeLoan = async (req,res) => {
         loan_Number : req.body.loan_Number,
         loan_Id_Number : req.body.loan_Id_Number,
         current_Outstanding_Amount : req.body.current_Outstanding_Amount,
-        description : req.body.description
+        description : req.body.description,
+        addAssets : req.body.addAssets
     };
   
     const storedLoan = await SecuredLoanDataAccess.storeLoan(data);

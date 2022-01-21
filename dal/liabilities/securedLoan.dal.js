@@ -2,7 +2,7 @@ const SecuredLoan = require("../../models/liabilities/securedLoan.models");
 require("../../JsonWebToken/jwt");
 
 const findLoan = async (data) => {
-  const user = await SecuredLoan.find(data);
+  const user = await SecuredLoan.find(data).populate('addAssets');
   return user;
 };
 

@@ -1,13 +1,15 @@
-// const { number, string } = require("joi");
 const mongoose = require("mongoose");
 const TrustSchema = new mongoose.Schema({
-  
-    trustName : {
-        type : String,
-        required : true
+    user_id: {
+        type: String
     },
-    description : {
-        type : String
+
+    trustName: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String
     }
 });
 

@@ -8,8 +8,8 @@ const userRouters = require("./routes/user.route");
 // Assets
 
 const bankRouters = require ("./routes/asset/bank.route")
-const memberPersonRouters = require ("./routes/member.person.route")
-const memberOrganisationRouters = require ("./routes/member.organisation.route")
+const memberPersonRouters = require ("./routes/members/member.person.route")
+const memberOrganisationRouters = require ("./routes/members/member.organisation.route")
 const insurancePolicyRouters = require("./routes/asset/insurance.policy.route")
 const investmentAccountRouters = require("./routes/asset/investment.route")
 const BusinessAssetRouters = require("./routes/asset/business.route")
@@ -26,6 +26,9 @@ const securedLoanRouters = require ("./routes/liabilities/securedLoan.route")
 const unSecuredLoanRouters = require ("./routes/liabilities/unSecuredLoan.route")
 const privateDeptRouters = require("./routes/liabilities/privateDept.route")
 
+// Trust
+
+const trustRouter = require ("./routes/trust/trust.route")
 
 // App
 
@@ -76,12 +79,13 @@ app.use("/",OtherAssetsRouters)
 
 // Liabilities 
 
-
 app.use("/liabilities",securedLoanRouters)
 app.use("/liabilities",unSecuredLoanRouters)
 app.use("/liabilities",privateDeptRouters)
 
+// Trust
 
+app.use("/trust",trustRouter)
 
 
 app.listen(PORT, () => {
