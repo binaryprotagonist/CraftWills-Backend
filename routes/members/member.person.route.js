@@ -3,7 +3,7 @@ const express = require("express");
 const upload = require("../../middleware/multer");
 const { authenticateToken } = require("../../JsonWebToken/jwt");
 const router = express.Router();
-const memberPersonController = require("../../controllers/member.person.controller");
+const memberPersonController = require("../../controllers/members/member.person.controller");
 
 router.post("/addMember",authenticateToken,async (req,res)=>{
     const member = await memberPersonController.createMember(req)
