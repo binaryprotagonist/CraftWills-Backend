@@ -25,6 +25,11 @@ const BankSchema = new mongoose.Schema({
   specifyOwnershipType :{
     type : String,
     required : true
+  },
+  Type : {
+    type : String,
+    default : "Bank Account"
+
   }
 });
 
