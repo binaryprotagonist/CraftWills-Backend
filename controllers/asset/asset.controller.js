@@ -28,6 +28,7 @@ exports.getAssetDetails = async (req, res) => {
         Promise.all([bankData,businessData,insuranceData,intellectualPropertyData,investmentData,motorVehicleData,otherAssetsData,personalPossessionData,
         realEstateData,safeDepostdata]).then((values)=>{
             console.log(values);
+            res.send(values);
             })
     }catch(err) {
         console.log(err)
