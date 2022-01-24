@@ -18,6 +18,10 @@ const PersonalPossessionSchema = new mongoose.Schema({
     specifyOwnershipType : {
         type : String,
         required : true
+    },
+    Type : {
+        type : String,
+        default : "Personal Possession"
     }
 
 

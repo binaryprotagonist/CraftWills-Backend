@@ -18,7 +18,12 @@ const IntellectualPrpertySchema = new mongoose.Schema({
     SpecifyOwnershipType :{
         type : String,
         required : true
-    }
+    },
+    Type : {
+        type : String,
+        default : "Intellectual Property"
+    },
+    
 });
 
 const IntellectualProperty = mongoose.model("IntellectualPropertyData", IntellectualPrpertySchema);
