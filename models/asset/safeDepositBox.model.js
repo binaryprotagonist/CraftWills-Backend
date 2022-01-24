@@ -19,6 +19,10 @@ const SafeDepositSchema = new mongoose.Schema({
     specifyOwnershipType: {
         type: String,
         required: true
+    },
+    Type : {
+        type : String,
+        default : "Safe Deposit Box"
     }
 
 });

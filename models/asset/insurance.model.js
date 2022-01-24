@@ -22,6 +22,10 @@ const InsuranceSchema = new mongoose.Schema({
     type : String,
     required : true,
   },
+  Type : {
+    type : String,
+    default : "Insurance Policy"
+  }
 });
 
 const Insurance = mongoose.model("InsuranceData", InsuranceSchema);

@@ -19,6 +19,10 @@ const MotorVehicleSchema = new mongoose.Schema({
     SpecifyOwnershipType: {
         type: String,
         required: true
+    },
+    Type : {
+        type : String,
+        default : "Motor Vehicle"
     }
 
 });

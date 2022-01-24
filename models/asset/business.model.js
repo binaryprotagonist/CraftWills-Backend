@@ -18,7 +18,11 @@ const BusinessSchema = new mongoose.Schema({
   specifyOwnershipType : {
     type : String,
     required : true
-  } 
+  },
+  Type : {
+    type : String,
+    default : "Business"
+  }
 });
 
 const Business = mongoose.model("BusinessData", BusinessSchema);

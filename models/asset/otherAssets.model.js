@@ -17,6 +17,10 @@ const OtherAssetsSchema = new mongoose.Schema({
     specifyOwnershipType : {
         type : String,
         required : true
+    },
+    Type : {
+        type : String,
+        default : "Other Assets"
     }
 
 });

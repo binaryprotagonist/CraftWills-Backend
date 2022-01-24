@@ -19,6 +19,10 @@ const investmentSchema = new mongoose.Schema({
     type : String,
     required : true,
   },
+  Type : {
+    type : String,
+    default : "Investment Account"
+  }
 });
 
 const Investment = mongoose.model("InvestmentData",investmentSchema);
