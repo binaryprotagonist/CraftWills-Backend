@@ -19,6 +19,7 @@ const IntellectualPropertyRouters = require("./routes/asset/intellectualProperty
 const SafeDepositRouters = require("./routes/asset/safeDeposit.route")
 const PersonalPossessionRouters = require("./routes/asset/personalPossession.route")
 const OtherAssetsRouters = require("./routes/asset/otherAssets.route")
+const getAssetsDetailsRouter = require ("./routes/asset/getassets")
 
 // Liabilities
 
@@ -76,6 +77,7 @@ app.use("/",IntellectualPropertyRouters)
 app.use("/",SafeDepositRouters)
 app.use("/",PersonalPossessionRouters)
 app.use("/",OtherAssetsRouters)
+app.use("/asset",getAssetsDetailsRouter)
 
 // Liabilities 
 
