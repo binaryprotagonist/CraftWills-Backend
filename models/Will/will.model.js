@@ -106,8 +106,42 @@ const WillSchema = new mongoose.Schema({
     },
     Assets : {
         addAssets : [{
-            type : mongoose.Schema.Types.ObjectId,
-            ref : ["BankData","BusinessData","InsuranceData","IntellectualPropertyData","MotorVehicleData","OtherAssetsData","PersonalPossessionData","PersonalPossessionData","RealEstateData","SafeDepositData"]
+            BankData : {
+                type : mongoose.Schema.Types.ObjectId,
+                ref : "BankData"
+            },
+            BusinessData : {
+                type : mongoose.Schema.Types.ObjectId,
+                ref : "BusinessData"
+            },
+            InsuranceData : {
+                type : mongoose.Schema.Types.ObjectId,
+                ref : "InsuranceData"
+            },
+            IntellectualPropertyData : {
+                type : mongoose.Schema.Types.ObjectId,
+                ref : "IntellectualPropertyData"
+            },
+            MotorVehicleData : {
+                type : mongoose.Schema.Types.ObjectId,
+                ref : "MotorVehicleData"
+            },
+            OtherAssetsData : {
+                type : mongoose.Schema.Types.ObjectId,
+                ref : "OtherAssetsData"
+            },
+            PersonalPossessionData : {
+                type : mongoose.Schema.Types.ObjectId,
+                ref : "PersonalPossessionData"
+            },
+            RealEstateData : {
+                type : mongoose.Schema.Types.ObjectId,
+                ref : "RealEstateData"
+            },
+            SafeDepositData : {
+                type : mongoose.Schema.Types.ObjectId,
+                ref : "SafeDepositData"
+            },
         }],
         addBankData : [{
             type : mongoose.Schema.Types.ObjectId,
@@ -121,7 +155,7 @@ const WillSchema = new mongoose.Schema({
             ref : "TrustData"
         }]
     },
-    specify_Gift_Benificiaries : {
+    specify_Residual_Asset_Benificiaries : {
         addMember : [{
             type : mongoose.Schema.Types.ObjectId,
             ref : "Memberdata"
@@ -131,26 +165,55 @@ const WillSchema = new mongoose.Schema({
             required : true
         }
     },
-    specify_Replacement_Benificiaries : {
+
+    trust_Fallback : {
+        fallback_Type : {
+            type : String
+        },
+        split_Equally : {
+            type : Boolean
+        },
         addMember : [{
             type : mongoose.Schema.Types.ObjectId,
             ref : "Memberdata"
         }],
-        specify_Shares :{
-            type : Number,
-            required : true
-        }
-    },
-    Fallback : {
-        type : String
+
     },
  
     additional_Clauses : {
-        delay_Payout :{
-            type : String
+        delayed_Payout :{
+            managedBy : {
+                type : String,
+            },
+            age_Validity : {
+                type : Number
+            },
+            appoint_Benificiaries : [{
+                type : mongoose.Schema.Types.ObjectId,
+                ref : "Memberdata"
+            }],
         },
-        recommended_Expert_Advisor : {
-            type : String
+        recommended_Advisor : {
+            advisor_Name : {
+                type : String
+            },
+            contact_Number : {
+                type : Number
+            },
+            expertise : {
+                type : String
+            },
+        appoint_Advisor :{
+            advisor_Name : {
+                type : String
+            },
+            contact_Number : {
+                type : Number
+            },
+            expertise : {
+                type : String
+            }
+        }
         },
         final_Words : {
             type : String     
@@ -160,30 +223,10 @@ const WillSchema = new mongoose.Schema({
         },
         custom_Clause : {
             type : String
-        },
+        },  
 
     },
-   Delay_Payout : {
-       source_Of_Payout : {
-           type : String
-       },
-       denomination_Of_Payout: {
-           type : String
-       },
-       frequency_Of_Payout : {
-           type : String
-       },
-       conditions_Of_Payout : {
-           type : String
-       },
-       purpose_Of_Payout : {
-           type : String
-       },
-    fallback : {
-        type : String
-    }   
-
-   }
+    
 });
 
 const Will = mongoose.model("WillData", WillSchema);

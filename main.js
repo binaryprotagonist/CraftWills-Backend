@@ -26,10 +26,14 @@ const getAssetsDetailsRouter = require ("./routes/asset/getassets")
 const securedLoanRouters = require ("./routes/liabilities/securedLoan.route")
 const unSecuredLoanRouters = require ("./routes/liabilities/unSecuredLoan.route")
 const privateDeptRouters = require("./routes/liabilities/privateDept.route")
+const getLiabilities = require ("./routes/liabilities/getLiabilities")
 
 // Trust
 
 const trustRouter = require ("./routes/trust/trust.route")
+
+// Will
+const willRouter = require("./routes/Will/will.route")
 
 // App
 
@@ -84,11 +88,12 @@ app.use("/asset",getAssetsDetailsRouter)
 app.use("/liabilities",securedLoanRouters)
 app.use("/liabilities",unSecuredLoanRouters)
 app.use("/liabilities",privateDeptRouters)
-
+app.use("/",getLiabilities)
 // Trust
-
 app.use("/trust",trustRouter)
+//Will
 
+app.use('/will',willRouter)
 
 app.listen(PORT, () => {
   console.log(`YOUR SERVER IS WORKING AT PORT ${PORT}`);

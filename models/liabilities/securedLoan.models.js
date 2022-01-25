@@ -33,7 +33,11 @@ const SecuredLoanSchema = new mongoose.Schema({
       type : mongoose.Schema.Types.ObjectId,
       ref : "BankData"
     }
-  ]
+  ],
+  Type : {
+    type : String,
+    default : "Secured Loan"
+  }
 });
 
 const LoanSchema = mongoose.model("SecuredLoanData", SecuredLoanSchema);

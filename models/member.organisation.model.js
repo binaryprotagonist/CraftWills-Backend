@@ -30,6 +30,10 @@ const MemberOrganisationSchema = new mongoose.Schema({
   postalCode : {
     type : String,
     required : true
+  },
+  Type : {
+    type : String,
+    default : "Organisation"
   }
 });
 
