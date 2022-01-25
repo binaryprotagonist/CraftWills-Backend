@@ -23,6 +23,10 @@ const unSecuredLoanSchema = new mongoose.Schema({
   description :{
     type : String
   },
+  Type : {
+    type : String,
+    default : "Unsecured Loan"
+  }
 });
 
 const UnSecureLoanSchema = mongoose.model("unSecuredLoanData", unSecuredLoanSchema);

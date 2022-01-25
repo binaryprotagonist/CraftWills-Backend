@@ -22,7 +22,12 @@ const privateDeptSchema = new mongoose.Schema({
           type : mongoose.Schema.Types.ObjectId,
           ref : "Memberdata"
       }
-  ]
+  ],
+  Type : {
+    type : String,
+    default : "Private Debt"
+
+  }
 
 });
 

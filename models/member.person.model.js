@@ -49,6 +49,10 @@ const MemberSchema = new mongoose.Schema({
   },
   Citizenship : {
     type : String,
+  },
+  Type : {
+    type : String,
+    default : "Person"
   }
 
 });
