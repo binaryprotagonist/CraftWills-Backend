@@ -19,6 +19,7 @@ exports.storeWill = async (req,res) => {
       executor_type: appoint_Primary_Executor.executor_type,
       addExecutor : appoint_Primary_Executor.memberIds
     }
+    console.log("something is "+ executor_type)
     const appointRE = {
       executor_type : appoint_Replacement_Executor.executor_type,
       addExecutor : appoint_Replacement_Executor.memberIds
@@ -77,6 +78,7 @@ exports.storeWill = async (req,res) => {
       contact_Number : appoint_Advisor.contact_Number,
       expertise : appoint_Advisor.expertise
     }
+
     const data = {
         user_id : user,
         id_Number : req.body.id_Number,
@@ -131,7 +133,7 @@ exports.getWillDetails = async (req, res) => {
   const user = req.token_data._id
   const users = await WillDataAccess.findWill(user);
   
-  return {
+return {
     error: false,
     sucess: true,
     message: "Will Found Successfully",

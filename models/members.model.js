@@ -1,0 +1,77 @@
+const mongoose = require ("mongoose")
+
+
+const membersSchema = new mongoose.Schema ({
+
+    user_id : {
+        type : String
+    },
+    memberAsPerson : {
+        fullname : {
+            type : String,
+          },
+          Relationship: {
+            type: String, 
+          },
+          id_number : {
+            type : String
+          },
+          id_type : {
+            type : String
+          },
+          gender : {
+            type : String
+          },
+          floorNumber : {
+            type : String
+          },
+          unitNumber : {
+            type : String
+          },
+          streetName :{
+            type : String
+          },
+          postalCode : {
+            type : Number
+          },
+          country : {
+            type : String,
+            default : "Singapore"
+          },
+          dob : {
+            type : String,
+          },
+          Citizenship : {
+            type : String,
+          },
+
+
+    },
+    memberAsOrganisation : {
+        organisationName : {
+            type : String
+          },
+          registration_number : {
+            type : String,
+          },
+          id_country: {
+            type: String, 
+          },
+          floorNumber : {
+            type : String
+          },
+          unitNumber: {
+            type : String
+          },
+          streetName : {
+            type : String
+          },
+          postalCode : {
+            type : String
+          }
+    }
+},{ timestamps: true })
+
+
+const Members = mongoose.model("Members", membersSchema)
+module.exports = Members

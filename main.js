@@ -4,29 +4,16 @@ const express = require("express");
 // User
 
 const userRouters = require("./routes/user.route");
-
+const memberRouter = require ("./routes/members/members.route")
 // Assets
 
-const bankRouters = require ("./routes/asset/bank.route")
-const memberPersonRouters = require ("./routes/members/member.person.route")
-const memberOrganisationRouters = require ("./routes/members/member.organisation.route")
-const insurancePolicyRouters = require("./routes/asset/insurance.policy.route")
-const investmentAccountRouters = require("./routes/asset/investment.route")
-const BusinessAssetRouters = require("./routes/asset/business.route")
-const RealEstateAssetRouters = require ("./routes/asset/realEstate.route")
-const MotorVehicleAssetRouters = require("./routes/asset/motorVehicle.route")
-const IntellectualPropertyRouters = require("./routes/asset/intellectualProperty.route")
-const SafeDepositRouters = require("./routes/asset/safeDeposit.route")
-const PersonalPossessionRouters = require("./routes/asset/personalPossession.route")
-const OtherAssetsRouters = require("./routes/asset/otherAssets.route")
-const getAssetsDetailsRouter = require ("./routes/asset/getassets")
+const assetsRouter = require ("./routes/asset/assets")
 
 // Liabilities
 
-const securedLoanRouters = require ("./routes/liabilities/securedLoan.route")
-const unSecuredLoanRouters = require ("./routes/liabilities/unSecuredLoan.route")
-const privateDeptRouters = require("./routes/liabilities/privateDept.route")
-const getLiabilities = require ("./routes/liabilities/getLiabilities")
+const liabilitiesRouter = require ("./routes/liabilities/liabilities.route")
+
+// const getLiabilities = require ("./routes/liabilities/getLiabilities")
 
 // Trust
 
@@ -52,7 +39,6 @@ const PORT = process.env.PORT || 3000;
 
 
 const bodyParser = require('body-parser');
-const MotorVehicle = require("./models/asset/motorVehicle.model");
 
 app.use(bodyParser.json());
 
@@ -67,30 +53,24 @@ app.use(cors());
 // Users
 app.use("/users", userRouters);
 
+//members
+
+app.use ("/",memberRouter)
+
 // Assets
 
-app.use("/",bankRouters)
-app.use("/",memberPersonRouters)
-app.use("/",memberOrganisationRouters)
-app.use("/",insurancePolicyRouters)
-app.use("/",investmentAccountRouters)
-app.use("/",BusinessAssetRouters)
-app.use("/",RealEstateAssetRouters)
-app.use("/",MotorVehicleAssetRouters)
-app.use("/",IntellectualPropertyRouters)
-app.use("/",SafeDepositRouters)
-app.use("/",PersonalPossessionRouters)
-app.use("/",OtherAssetsRouters)
-app.use("/asset",getAssetsDetailsRouter)
+app.use("/",assetsRouter)
 
 // Liabilities 
 
-app.use("/liabilities",securedLoanRouters)
-app.use("/liabilities",unSecuredLoanRouters)
-app.use("/liabilities",privateDeptRouters)
-app.use("/",getLiabilities)
+app.use("/",liabilitiesRouter)
+
+// app.use("/",getLiabilities)
+
 // Trust
+
 app.use("/trust",trustRouter)
+
 //Will
 
 app.use('/will',willRouter)
