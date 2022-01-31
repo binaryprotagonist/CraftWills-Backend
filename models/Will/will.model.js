@@ -5,169 +5,141 @@ const WillSchema = new mongoose.Schema({
         type: String
     },
     id_Number : {
-        type : Number,
-        required : true
+        type : Number
     },
     id_Type : {
-        type : String,
-        required : true
+        type : String
     },
     fullName : {
-        type : String,
-        required : true
+        type : String
     },
     gender : {
-        type : String,
-        required : true
+        type : String
     },
     email : {
-        type : String,
-        required : true
+        type : String
     },
     floorNumber : {
-        type : String,
-        required : true
+        type : String
     },
     unitNumber : {
-        type : Number,
-        required : true
+        type : Number
     },
     streetName : {
-        type : String,
-        required : true
+        type : String
     },
     postalCode : {
-        type : Number,
-        required : true
+        type : Number
     },
     assetScope :{
         type : String,
-        default : "Singapore",
-        required : true
-    },
-    appoint_Primary_Executor :{
-        executor_type : {type : String,
-        required : true},
+        default : "Singapore"
+    },  
 
-        addExecutor : [
-            {type : mongoose.Schema.Types.ObjectId,
-            ref : "Memberdata"}
-        ]
-    },
-    appoint_Replacement_Executor : {
-        executor_type : {
+    /// Primary Executor
+
+        primary_executor_type : {
             type : String,
-            required : true
         },
-        addExecutor : [
-            {type : mongoose.Schema.Types.ObjectId ,
-            ref : "Memberdata"}
-        ]
-    },
-    
 
-    appoint_Guardian : {
+        addPrimaryExecutor : [
+            {type : mongoose.Schema.Types.ObjectId,
+            ref : "Members"}
+        ],
+
+    /// Replacement Executor
+
+        replacement_executor_type : {
+            type : String
+        },
+        addReplacementExecutor : [
+            {type : mongoose.Schema.Types.ObjectId ,
+            ref : "Members"}
+        ],
+    
+    /// Appoint Guardian
+
         guardian_type : {
             type : String,
         },
-        executor_type : {
+        guardian_executor_type : {
             type : String,
             required : true
         },
-        addExecutor : [{
+        addGuardianExecutor : [{
             type : mongoose.Schema.Types.ObjectId,
-            ref : "Memberdata"
-        }]
-    },
-    appoint_Replacement_Guardian : {
-        executor_type : {
+            ref : "Members"
+        }],
+
+    /// Appoint Replacement Guardian
+
+        guardian_replacement_executor_type : {
             type : String,  
             required : true
         },
-        addExecutor : [{
+        addGuardianReplacementExecutor : [{
             type : mongoose.Schema.Types.ObjectId,
             ref : "Memberdata"
-        }]
-    },
-    liabilities : {
-        addSecuredLoanData:  [{
-            type : mongoose.Schema.Types.ObjectId,
-            ref : "SecuredLoanData"
         }],
-        addUnsecuredLoanData : [{
-            type : mongoose.Schema.Types.ObjectId,
-            ref : "unSecuredLoanData"
-        }],
-        addPrivateDeptData : [{
-            type : mongoose.Schema.Types.ObjectId,
-            ref : "PrivateDeptData"
-        }]
 
-    },
-    Assets : {
-        addAssets : [{
-            BankData : {
-                type : mongoose.Schema.Types.ObjectId,
-                ref : "BankData"
-            },
-            BusinessData : {
-                type : mongoose.Schema.Types.ObjectId,
-                ref : "BusinessData"
-            },
-            InsuranceData : {
-                type : mongoose.Schema.Types.ObjectId,
-                ref : "InsuranceData"
-            },
-            IntellectualPropertyData : {
-                type : mongoose.Schema.Types.ObjectId,
-                ref : "IntellectualPropertyData"
-            },
-            MotorVehicleData : {
-                type : mongoose.Schema.Types.ObjectId,
-                ref : "MotorVehicleData"
-            },
-            OtherAssetsData : {
-                type : mongoose.Schema.Types.ObjectId,
-                ref : "OtherAssetsData"
-            },
-            PersonalPossessionData : {
-                type : mongoose.Schema.Types.ObjectId,
-                ref : "PersonalPossessionData"
-            },
-            RealEstateData : {
-                type : mongoose.Schema.Types.ObjectId,
-                ref : "RealEstateData"
-            },
-            SafeDepositData : {
-                type : mongoose.Schema.Types.ObjectId,
-                ref : "SafeDepositData"
-            },
-        }],
-        addBankData : [{
+    /// Liabilities
+
+        liabilities : {
             type : mongoose.Schema.Types.ObjectId,
-            ref : "BankData"
-        }]
-    }
-    ,
-    Trust : {
+            ref : 'Liabilities'
+
+        },
+
+   ///Assets
+        Assets : {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : "AssetsData"
+        },
+ //Trust 
         addTrust : [{
             type : mongoose.Schema.Types.ObjectId,
             ref : "TrustData"
-        }]
+        }],
+        
+ // appoint_primary_trustee
+        appoint_primary_trustee : {
+            type : String,
+        },
+        addPrimaryTrustee :[{
+            type : mongoose.Schema.Types.ObjectId,
+            ref : "Members"
+        }],
+// appoint_replacement_trustee
+       appoint_replacement_trustee : {
+           type : String,
+
+       },
+       addReplacementTrustee :[{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "Members"
+    }] ,
+    replacementTrusteeDescription : {
+        type : String
     },
-    specify_Residual_Asset_Benificiaries : {
-        addMember : [{
+
+    assetsOfTrust  : [{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "Members"
+    }],
+
+   
+// specify_Residual_Asset_Benificiaries 
+        addResidualAssetMember : [{
             type : mongoose.Schema.Types.ObjectId,
             ref : "Memberdata"
         }],
         specify_Shares : {      
             type : Number,
             required : true
-        }
-    },
+        },
 
-    trust_Fallback : {
-        fallback_Type : {
+    // trust_Fallback 
+        trust_fallback_Type : {
             type : String
         },
         split_Equally : {
@@ -178,12 +150,13 @@ const WillSchema = new mongoose.Schema({
             ref : "Memberdata"
         }],
 
-    },
- 
-    additional_Clauses : {
-        delayed_Payout :{
+// Clauses
+
+    // additional_Clauses  
+    
+        delayed_payout :{
             managedBy : {
-                type : String,
+                type : String
             },
             age_Validity : {
                 type : Number
@@ -192,7 +165,7 @@ const WillSchema = new mongoose.Schema({
                 type : mongoose.Schema.Types.ObjectId,
                 ref : "Memberdata"
             }],
-        },
+    
         recommended_Advisor : {
             advisor_Name : {
                 type : String
@@ -203,6 +176,7 @@ const WillSchema = new mongoose.Schema({
             expertise : {
                 type : String
             },
+
         appoint_Advisor :{
             advisor_Name : {
                 type : String

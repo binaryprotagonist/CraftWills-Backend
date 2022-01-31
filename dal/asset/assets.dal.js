@@ -1,15 +1,15 @@
-const Bank = require("../../models/asset/bankAccount.model");
+const Assets = require("../../models/asset/assets.model");
 require("../../JsonWebToken/jwt");
 
-const findBank = async (data) => {
-  const user = await Bank.findById(data);
+const findAsset = async (data) => {
+  const user = await Assets.findById(data);
   return user;
 };
 
-const storeBank = async (bankToStore) => {
+const storeAsset = async (AssetsToStore) => {
   try{
-  const storedBank = await Bank.create(bankToStore);
-  return storedBank;
+  const storedAsset = await Assets.create(AssetsToStore);
+  return storedAsset;
   }
   catch(err){
     console.log(err)
@@ -21,8 +21,8 @@ const storeBank = async (bankToStore) => {
 //   return user;
 // };
 
-const updateBank = async (userData) => {
-  const user = await Bank.findByIdAndUpdate(
+const updateAsset = async (userData) => {
+  const user = await Assets.findByIdAndUpdate(
     userData._id,
     { $set: userData.toUpdate },
     { new: true }
@@ -42,7 +42,7 @@ const updateBank = async (userData) => {
 // };
 
 module.exports = {
-    findBank,
-    storeBank,
-    updateBank
+    findAsset,
+    storeAsset,
+    updateAsset
 };
