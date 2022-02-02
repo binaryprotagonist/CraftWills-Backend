@@ -1,10 +1,13 @@
 const mongoose = require ("mongoose")
 
-
 const membersSchema = new mongoose.Schema ({
 
     user_id : {
         type : String
+    },
+    country : {
+      type : String,
+      default : "Singapore"
     },
     memberAsPerson : {
         fullname : {
@@ -34,18 +37,12 @@ const membersSchema = new mongoose.Schema ({
           postalCode : {
             type : Number
           },
-          country : {
-            type : String,
-            default : "Singapore"
-          },
           dob : {
             type : String,
           },
           Citizenship : {
             type : String,
           },
-
-
     },
     memberAsOrganisation : {
         organisationName : {
@@ -53,9 +50,6 @@ const membersSchema = new mongoose.Schema ({
           },
           registration_number : {
             type : String,
-          },
-          id_country: {
-            type: String, 
           },
           floorNumber : {
             type : String

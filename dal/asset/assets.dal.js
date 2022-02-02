@@ -31,10 +31,10 @@ const updateAsset = async (userData) => {
   return user;
 };
 
-// const findAll = async () => {
-//   const user = await User.find({});
-//   return user;
-// };
+const findAssetsMonthly = async (data) => {
+  const user = await Assets.find({isoDate: {$gte: data.fromDate, $lt: data.endDate}});
+  return user;
+};
 
 // const deleteAll = async () => {
 //   const user = await User.remove({});
@@ -44,5 +44,6 @@ const updateAsset = async (userData) => {
 module.exports = {
     findAsset,
     storeAsset,
-    updateAsset
+    updateAsset,
+    findAssetsMonthly
 };
