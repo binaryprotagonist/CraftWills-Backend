@@ -222,7 +222,37 @@ const WillSchema = new mongoose.Schema({
       specifyShares : {
           type : Number
       }
-    }],
+    }],trustFallback : {
+        trustType : {
+            type : String
+        },
+        memberData : [{
+            members : {
+                type : mongoose.Schema.Types.ObjectId,
+                ref : "Members"
+            },
+            specifyShares : {
+                type : Number
+            }
+        }]
+    },
+
+    clauses : {
+        additionalClauses : {
+            delayed_payout : {
+                beneficiaryManagedBy : {
+                    type : String
+                },
+
+            },
+            appointBeneficiaries :[{
+                type : mongoose.Schema.Types.ObjectId,
+                ref : "Members"
+            }]
+
+        }
+    },
+
 
 
 
