@@ -17,7 +17,6 @@ const storeAssets = async (req, res) => {
     const creatTime = moment().tz("Asia/Kolkata").format("2010-11-30");
     // const creatTime ="2010-11-30";
     try {
-        console.log(req.body.bankAccount.bankname)
     const Asset = new asset({
         user_id: user,
         country: req.body.country,
@@ -80,6 +79,7 @@ const storeAssets = async (req, res) => {
             message :err.message,
             error : err
         })
+        console.log(err)
     }
 
 }
