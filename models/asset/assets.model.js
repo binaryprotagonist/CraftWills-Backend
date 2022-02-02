@@ -18,8 +18,8 @@ const AssetsSchema = new mongoose.Schema({
     specifyShares : {
         type : String
     },
-    estimateValue: {
-        type: Number
+    isoDate:{
+        type:String
     },
     bankAccount: {
         bankname: {
@@ -29,6 +29,9 @@ const AssetsSchema = new mongoose.Schema({
             type: String,
             unique: true,
             sparse : true
+        },
+        estimateValue: {
+            type: Number
         },
     },
     business : {

@@ -1,6 +1,5 @@
 const liabilities = require ("../../models/liabilities/liabilities.model");
 const mongoose = require ("mongoose")
-
 const storeLiabilities = async (req,res) => {
     const _id = req.token_data._id;
     console.log(req.body.securedLoan)
@@ -71,7 +70,7 @@ const liabilitystats = async (req,res)=>{
     const aggCursor = await liabilities.aggregate([
         {
           $match: {
-            user_id: '61f789f2f478cc6fb8a7dbed'
+            user_id: req.token_data._id
           }
         }, {
           $group: {
@@ -82,13 +81,12 @@ const liabilitystats = async (req,res)=>{
           }
         }
       ]);
-      res.json({
-          message : "total Liability Amount",
-          data : aggCursor
-      })
-      console.log(aggCursor)
+      aggCursor.forEach(function (item, index) {
+        console.log(item.total)
+        res.json(item.total)   
+    });
+      
 }
-
 
 
 module.exports = {storeLiabilities , getLiabilities ,liabilitystats}

@@ -5,6 +5,7 @@ const createMember = async (req, res) => {
     try {
         const data = new members({
             user_id: _id,
+            country: req.body?.country,
             memberAsPerson: {
                 fullname: req.body.memberAsPerson?.fullname,
                 Relationship: req.body.memberAsPerson?.Relationship,
@@ -16,20 +17,18 @@ const createMember = async (req, res) => {
                 streetName: req.body.memberAsPerson?.streetName,
                 postalCode: req.body.memberAsPerson?.postalCode,
                 citizenship: req.body.memberAsPerson?.citizenship,
-                dob: req.body.memberAsPerson?.dob,
-                country: req.body.memberAsPerson?.country
+                dob: req.body.memberAsPerson?.dob
+                
             },
             memberAsOrganisation: {
                 organisationName: req.body.memberAsOrganisation?.organisationName,
                 registration_number: req.body.memberAsOrganisation?.registration_number,
-                id_country: req.body.memberAsOrganisation?.id_country,
                 floorNumber: req.body.memberAsOrganisation?.floorNumber,
                 unitNumber: req.body.memberAsOrganisation?.unitNumber,
                 streetName: req.body.memberAsOrganisation?.streetName,
                 postalCode: req.body.memberAsOrganisation?.postalCode,
             }
-
-        })
+    })
 
         const savedData = await data.save()
         res.json({
