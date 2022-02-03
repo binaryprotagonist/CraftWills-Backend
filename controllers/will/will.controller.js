@@ -63,6 +63,7 @@ exports.storeWill = async (req,res) => {
       success : true,
       data : savedData
     })
+    
   } catch (err){
     res.json({
       message : "Error Found",
@@ -70,7 +71,6 @@ exports.storeWill = async (req,res) => {
       error : err.message
     })
   }
-
 }
 
 
