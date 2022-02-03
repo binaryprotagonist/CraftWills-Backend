@@ -3,6 +3,9 @@ const LiabilitiesSchema = mongoose.Schema({
     user_id: {
         type: String
     },
+    current_Outstanding_Amount: {
+        type: Number
+    },
     privateDept: {
         dept_Name: {
             type: String
@@ -17,9 +20,7 @@ const LiabilitiesSchema = mongoose.Schema({
                 ref: "Memberdata"
             }
         ],
-        current_Outstanding_Amount: {
-            type: Number
-        },
+    
     },
     securedLoan: {
         loanName: {
@@ -44,9 +45,7 @@ const LiabilitiesSchema = mongoose.Schema({
                 ref: "BankData"
             }
         ],
-        current_Outstanding_Amount: {
-            type: Number
-        },
+
 
     },
     unsecuredLoan: {
@@ -61,10 +60,7 @@ const LiabilitiesSchema = mongoose.Schema({
         },
         description: {
             type: String
-        },
-        current_Outstanding_Amount: {
-            type: Number
-        }, 
+        }
 
     }
 },{ timestamps: true })

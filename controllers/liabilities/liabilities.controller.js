@@ -6,10 +6,10 @@ const storeLiabilities = async (req,res) => {
     try{
     const data = new liabilities ({
         user_id : _id,
+        current_Outstanding_Amount : req.body?.current_Outstanding_Amount,
         privateDept: {
             dept_Name: req.body.privateDept?.dept_Name,
             description: req.body.privateDept?.description,
-            current_Outstanding_Amount : req.body.privateDept?.current_Outstanding_Amount,
             lender: req.body.privateDept?.memberId
         },
         securedLoan: req.body?.securedLoan ? {
@@ -19,14 +19,12 @@ const storeLiabilities = async (req,res) => {
             loan_Id_Number: req.body.securedLoan?.loan_Id_Number,
             description: req.body.securedLoan?.description,
             addAssets: req.body.securedLoan?.assetId,
-            current_Outstanding_Amount : req.body.securedLoan?.current_Outstanding_Amount
         } : {},
         unsecuredLoan: {
             loanProvider: req.body.unsecuredLoan?.loanProvider,
             loan_Number: req.body.unsecuredLoan?.loan_Number,
             loan_Id_Number: req.body.unsecuredLoan?.loan_Id_Number,
             description: req.body.unsecuredLoan?.description,
-            current_Outstanding_Amount : req.body.unsecuredLoan?.current_Outstanding_Amount
     
         }
     })
