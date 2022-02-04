@@ -7,6 +7,12 @@ const findWill = async (data) => {
   return user;
 };
 
+const findPastVersions = async (data) => {
+  const fetchdata = ["willName","DATE"]
+  const user = await Will.find({user_id : data}).select(fetchdata);
+  return user;
+};
+
 // storeWill
 const storeWill = async (willToStore) => {
   try{
@@ -33,5 +39,6 @@ const updateWill = async (userData) => {
 module.exports = {
     findWill,
     storeWill,
-    updateWill
+    updateWill,
+    findPastVersions
 };

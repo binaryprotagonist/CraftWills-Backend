@@ -42,7 +42,7 @@ const LiabilitiesSchema = mongoose.Schema({
         addAssets: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: "BankData"
+                ref: "AssetsData"
             }
         ],
 

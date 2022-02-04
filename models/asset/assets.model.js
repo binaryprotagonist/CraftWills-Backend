@@ -5,7 +5,7 @@ const AssetsSchema = new mongoose.Schema({
         type: String,
     },
     assetType : {
-        type : String
+        type : String    // liquid or iliquid
     },
     country: {
         type: String,
