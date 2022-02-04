@@ -6,6 +6,9 @@ const LiabilitiesSchema = mongoose.Schema({
     current_Outstanding_Amount: {
         type: Number
     },
+    type : {
+        type : String
+    },
     privateDept: {
         dept_Name: {
             type: String

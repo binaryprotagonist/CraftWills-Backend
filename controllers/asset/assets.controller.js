@@ -21,6 +21,7 @@ const storeAssets = async (req, res) => {
         user_id: user,
         country: req.body.country,
         specifyOwnershipType: req.body.specifyOwnershipType,
+        type : req.body.type,
         isoDate: `${creatTime}T00:00:00Z `,
         bankAccount:
        {
@@ -243,14 +244,16 @@ const totalNetWorth = async(req,res)=>{
 const getAssetsMonthly = async (req,res)=> {
   try{
     let n =req.body.monthNumber;// "3"
-    let m; 
+    let m;
+    let month= moment().tz("Asia/Kolkata").format("MM");
     let year = moment().tz("Asia/Kolkata").format("YYYY");
     m=n+1;
-    // if (n > m) {
-    //   n = n - m;
-    //   m = 12;
-    //   // year--;
-    // }
+
+    if (n > month) {
+      // n = n - month;
+      // month = 12;
+      year--;
+    }
     // let month = m - n;
     // console.log("month is " + month)
     // if (month < 10) {
@@ -259,7 +262,7 @@ const getAssetsMonthly = async (req,res)=> {
   
     // const date = momen().tz("Asia/Kolkata").format("YYYY-MM-DD");
     // const date = moment().tz("Asia/Kolkata").format();
-    const date = moment().format(`2022-0${m}-01`);
+    const date = moment().format(`${year}-0${m}-01`);
   
     let changeMonth = moment().format(`${year}-0${n}-01`);
     // const date = "2022-03-01";

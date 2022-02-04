@@ -6,6 +6,7 @@ const createMember = async (req, res) => {
         const data = new members({
             user_id: _id,
             country: req.body?.country,
+            type : req.body.type,
             memberAsPerson: {
                 fullname: req.body.memberAsPerson?.fullname,
                 Relationship: req.body.memberAsPerson?.Relationship,
