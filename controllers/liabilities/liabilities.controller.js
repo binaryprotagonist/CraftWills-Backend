@@ -7,6 +7,7 @@ const storeLiabilities = async (req,res) => {
     const data = new liabilities ({
         user_id : _id,
         current_Outstanding_Amount : req.body?.current_Outstanding_Amount,
+        type : req.body.type,
         privateDept: {
             dept_Name: req.body.privateDept?.dept_Name,
             description: req.body.privateDept?.description,

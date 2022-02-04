@@ -7,6 +7,9 @@ const AssetsSchema = new mongoose.Schema({
     assetType : {
         type : String    // liquid or iliquid
     },
+    type : {
+        type : String
+    },
     country: {
         type: String,
         default: "Singapore"

@@ -9,6 +9,9 @@ const membersSchema = new mongoose.Schema ({
       type : String,
       default : "Singapore"
     },
+    type : {
+      type : String
+    },
     memberAsPerson : {
         fullname : {
             type : String,
