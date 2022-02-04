@@ -25,14 +25,14 @@ exports.storeTrust = async (req,res) => {
     if (storedTrust){
     return {
       error: false,
-      sucess: true,
+      success: true,
       message: "Trust data stored successfully",
       data: storedTrust,
     }}
     else{
       return{
         error : true,
-        sucess : false ,
+        success : false ,
         message : "something went wrong",
       }
     };
@@ -47,7 +47,7 @@ exports.getTrustDetails = async (req, res) => {
   
   return {
     error: false,
-    sucess: true,
+    success: true,
     message: "Trust data Found Successfully",
     data: {users}
   };
@@ -70,7 +70,7 @@ const update = await TrustDataAccess.updateTrust(updateData);
 if (update){
   return {
     error: false,
-    sucess: true,
+    success: true,
     message: "Trust data updated successfully",
     data: update,
   };
