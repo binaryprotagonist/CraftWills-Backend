@@ -89,15 +89,15 @@ return {
   };
 }
 
-
 exports.pastVersions = async (req,res)=>{
   const user = req.token_data._id
   try {
-  const users = await WillDataAccess.findWill(user)
+  const users = await WillDataAccess.findPastVersions(user)
   console.log(users)
   res.json({
-    willName : users.willName,
-    DATE : users.DATE
+    message : "data found successfully",
+    success : true,
+    data : users
   })
 } catch (err){
   res.json({

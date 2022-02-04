@@ -14,7 +14,7 @@ const { myFunction } = require("../../nodemailer/nodemailer")
 
 const storeAssets = async (req, res) => {
     const user = req.token_data._id
-    const creatTime = moment().tz("Asia/Kolkata").format("2010-11-30");
+    const creatTime = moment().tz("Asia/Kolkata").format("2022-04-10");
     // const creatTime ="2010-11-30";
     try {
     const Asset = new asset({
@@ -28,8 +28,8 @@ const storeAssets = async (req, res) => {
             accountNumber: req.body.bankAccount?.accountNumber,
             estimateValue: req.body.bankAccount?.estimateValue,
         },
+        businessName: req.body.business?.businessName,
         business: {
-            businessName: req.body.business?.businessName,
             UEN_no: req.body.business?.UEN_no
         },
         insurancePolicy: {
@@ -185,9 +185,9 @@ const totalAssetsAmount = async(req,res)=>{
         }
       ]);
    
-    aggCursor.forEach(function (item, index) {
-    console.log(item.total)
-    res.json(item.total)   
+aggCursor.forEach(function (item, index) {
+console.log(item.total)
+res.json(item.total)   
 });
 }
 
@@ -220,6 +220,7 @@ const totalNetWorth = async(req,res)=>{
           }
         }
       ])
+
      var a=0;
      var b=0;
      aggCursor1.forEach(function (item, index) {
@@ -241,16 +242,35 @@ const totalNetWorth = async(req,res)=>{
 
 const getAssetsMonthly = async (req,res)=> {
   try{
-    let changeMonth = moment(`2022-03-01`).format();
-    // let changeMonth = "2022-02-01";
-    const date = moment(changeMonth).add(1, 'month').format();
+    let n =req.body.monthNumber;// "3"
+    let m; 
+    let year = moment().tz("Asia/Kolkata").format("YYYY");
+    m=n+1;
+    // if (n > m) {
+    //   n = n - m;
+    //   m = 12;
+    //   // year--;
+    // }
+    // let month = m - n;
+    // console.log("month is " + month)
+    // if (month < 10) {
+    //   month = "0" + month;
+    // }
+  
+    // const date = momen().tz("Asia/Kolkata").format("YYYY-MM-DD");
+    // const date = moment().tz("Asia/Kolkata").format();
+    const date = moment().format(`2022-0${m}-01`);
+  
+    let changeMonth = moment().format(`${year}-0${n}-01`);
     // const date = "2022-03-01";
     console.log(changeMonth)
     console.log(date)
   const assetData = await AssetsDataAccess.findAssetsMonthly({
-      fromDate: `${changeMonth}`,
-      endDate: `${date}`
+      fromDate: `${changeMonth}T00:00:00Z`,
+      endDate: `${date}T00:00:00Z`, 
   })
+  console.log(assetData.fromDate)
+  console.log(assetData.endDate)
   if(assetData){
     console.log(assetData)
   }
@@ -268,8 +288,6 @@ const getAssetsMonthly = async (req,res)=> {
       })
   }
 }
-
-
 
 
 module.exports = {storeAssets,getAssetsMonthly,updateAssets,totalAssetsAmount,totalNetWorth,getAssets}
