@@ -175,7 +175,7 @@ if (update){
   return {
     error: false,
     message: "Will data updated successfully",
-    sucess: true,
+    success: true,
     data: update,
   };
 }

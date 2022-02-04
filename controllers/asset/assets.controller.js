@@ -157,7 +157,7 @@ const updateAssets = async (req, res) => {
   if (update){
     return {
       error: false,
-      sucess: true,
+      success: true,
       message: "Assets data updated successfully",
       data: update,
     };

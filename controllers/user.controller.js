@@ -36,14 +36,14 @@ exports.createUser = async (req) => {
   if (storedUser){
   return {
     error: false,
-    sucess: true,
+    success: true,
     message: "user created successfully",
     data: storedUser,
   }}
   else{
     return{
       error : true,
-      sucess : false ,
+      success : false ,
       message : "something went wrong",
     }
   };
@@ -104,7 +104,7 @@ exports.loginUser = async (req, res) => {
   const token = generateAccessToken({ _id: userData._id });
   return {
     error: false,
-    sucess: true,
+    success: true,
     message: "login user successfully",
     data: userData,
     token,
@@ -140,7 +140,7 @@ const update = await usersDataAccess.updateUser(updateData);
 if (update){
   return {
     error: false,
-    sucess: true,
+    success: true,
     message: "updated user successfully",
     data: update,
   };
@@ -192,7 +192,7 @@ exports.uploadImage = async (req, res) => {
   const updatedProfile = await usersDataAccess.updateUser(updateImage);
   return {
     error: false,
-    sucess: true,
+    success: true,
     message: "Uploaded Image Sucessfully",
     data: updatedProfile,
   };
@@ -212,7 +212,7 @@ exports.getUser = async (req, res) => {
   const users = await usersDataAccess.findUser(req.token_data._id);
   return {
     error: false,
-    sucess: true,
+    success: true,
     message: "User Found Successfully",
     data: {
     fullName : users.fullName,
@@ -264,7 +264,7 @@ exports.forgotPassword = async (req, res) => {
   myFunction(otpSend);
 return {
     error: false,
-    sucess: true,
+    success: true,
     message: "forgot password link has been sent successfully to this email",
     data: userData,
   };
@@ -307,7 +307,7 @@ exports.resetPassword = async (req, res) => {
 
   return {
     error: false,
-    sucess: true,
+    success: true,
     message: "reset password successfully",
     data: updatePass,
   };
@@ -338,7 +338,7 @@ exports.updatePassword = async (req, res) => {
   const updatePass = await usersDataAccess.updateUser(updateData);
   return {
     error: false,
-    sucess: true,
+    success: true,
     message: "updated password successfully",
     data: updatePass,
   };
