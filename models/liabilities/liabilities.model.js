@@ -17,7 +17,7 @@ const LiabilitiesSchema = mongoose.Schema({
         lender: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: "Memberdata"
+                ref: "Members"
             }
         ],
     
