@@ -12,6 +12,9 @@ const membersSchema = new mongoose.Schema ({
     type : {
       type : String
     },
+    isoDate : {
+      type : String
+    },
     memberAsPerson : {
         fullname : {
             type : String,

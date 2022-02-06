@@ -2,11 +2,13 @@ const members = require("../../models/members.model")
 
 const createMember = async (req, res) => {
     const _id = req.token_data._id
+    const creatTime = moment().tz("Asia/Kolkata").format("YYYY-MM-DD");
     try {
         const data = new members({
             user_id: _id,
             country: req.body?.country,
             type : req.body.type,
+            isoDate: `${creatTime}T00:00:00Z`,
             memberAsPerson: {
                 fullname: req.body.memberAsPerson?.fullname,
                 Relationship: req.body.memberAsPerson?.Relationship,
@@ -65,7 +67,31 @@ const getMembers = async(req,res)=>{
     }
 }
 
+const membersFilter = async(req,res)=>{
+    const data = await members.find()
+    const filters = {};
+    if (req.body.type) {
+      filters.type = req.body.type;
+    }
+    if (req.body.isoDate) {
+      filters.isoDate = req.body.isoDate;
+    }
+    if (req.body.country){
+        filters.country = req.body.country;
+    }
+    const filteredUsers = data.filter(user => {
+      let isValid = true;
+      for (key in filters) {
+        console.log(key, user[key], filters[key]);
+        isValid = isValid && user[key] == filters[key];
+      }
+      return isValid;
+    });
+    res.send(filteredUsers);
+}
+
 module.exports = {
     createMember,
-    getMembers
+    getMembers,
+    membersFilter
 }

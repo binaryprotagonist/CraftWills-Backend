@@ -1,13 +1,16 @@
 const liabilities = require ("../../models/liabilities/liabilities.model");
 const mongoose = require ("mongoose")
+const moment = require ("moment-timezone")
 const storeLiabilities = async (req,res) => {
     const _id = req.token_data._id;
+    const creatTime = moment().tz("Asia/Kolkata").format("YYYY-MM-DD");
     console.log(req.body.securedLoan)
     try{
     const data = new liabilities ({
         user_id : _id,
         current_Outstanding_Amount : req.body?.current_Outstanding_Amount,
         type : req.body.type,
+        isoDate: `${creatTime}T00:00:00Z`,
         privateDept: {
             dept_Name: req.body.privateDept?.dept_Name,
             description: req.body.privateDept?.description,
@@ -87,5 +90,25 @@ const liabilitystats = async (req,res)=>{
       
 }
 
+const liabilitiesFilter = async(req,res)=>{
+    const data = await liabilities.find()
+    const filters = {};
+  if (req.body.type) {
+    filters.type = req.body.type;
+  }
+  if (req.body.isoDate) {
+    filters.isoDate = req.body.isoDate;
+  }
+  const filteredUsers = data.filter(user => {
+    let isValid = true;
+    for (key in filters) {
+      console.log(key, user[key], filters[key]);
+      isValid = isValid && user[key] == filters[key];
+    }
+    return isValid;
+  });
+  res.send(filteredUsers);
+    
+}
 
-module.exports = {storeLiabilities , getLiabilities ,liabilitystats}
+module.exports = {storeLiabilities , getLiabilities ,liabilitystats,liabilitiesFilter}
