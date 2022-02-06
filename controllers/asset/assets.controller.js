@@ -14,7 +14,7 @@ const { myFunction } = require("../../nodemailer/nodemailer")
 
 const storeAssets = async (req, res) => {
     const user = req.token_data._id
-    const creatTime = moment().tz("Asia/Kolkata").format("2022-04-10");
+    const creatTime = moment().tz("Asia/Kolkata").format("2022-05-14");
     // const creatTime ="2010-11-30";
     try {
     const Asset = new asset({
@@ -22,16 +22,17 @@ const storeAssets = async (req, res) => {
         country: req.body.country,
         specifyOwnershipType: req.body.specifyOwnershipType,
         type : req.body.type,
-        isoDate: `${creatTime}T00:00:00Z `,
+        isoDate: `${creatTime}T00:00:00Z`,
         bankAccount:
        {
             bankname: req.body.bankAccount?.bankname,
             accountNumber: req.body.bankAccount?.accountNumber,
             estimateValue: req.body.bankAccount?.estimateValue,
         },
-        businessName: req.body.business?.businessName,
+        
         business: {
-            UEN_no: req.body.business?.UEN_no
+            UEN_no: req.body.business?.UEN_no,
+            businessName: req.body.business?.businessName
         },
         insurancePolicy: {
             policyName: req.body.insurancePolicy?.policyName,
@@ -149,8 +150,10 @@ const updateAssets = async (req, res) => {
             address: req.body.realEstate?.address,
         },
         safeDepositBox : {
+
             safe_Box_Location : req.body.safeDepositBox?.safe_Box_Location,
-            safe_No: req.body.safeDepositBox?.safe_No
+            safe_No : req.body.safeDepositBox?.safe_No
+
         }
       },
     };
@@ -239,33 +242,19 @@ const totalNetWorth = async(req,res)=>{
     console.log(b-a)    
 }
 
-
-
 const getAssetsMonthly = async (req,res)=> {
   try{
-    let n =req.body.monthNumber;// "3"
+    let n =req.body.monthNumber;
     let m;
     let month= moment().tz("Asia/Kolkata").format("MM");
     let year = moment().tz("Asia/Kolkata").format("YYYY");
     m=n+1;
-
-    if (n > month) {
-      // n = n - month;
-      // month = 12;
-      year--;
-    }
-    // let month = m - n;
-    // console.log("month is " + month)
-    // if (month < 10) {
-    //   month = "0" + month;
+    // if (n >= month) {
+    //       year--;
     // }
-  
-    // const date = momen().tz("Asia/Kolkata").format("YYYY-MM-DD");
-    // const date = moment().tz("Asia/Kolkata").format();
     const date = moment().format(`${year}-0${m}-01`);
   
     let changeMonth = moment().format(`${year}-0${n}-01`);
-    // const date = "2022-03-01";
     console.log(changeMonth)
     console.log(date)
   const assetData = await AssetsDataAccess.findAssetsMonthly({
@@ -282,6 +271,7 @@ const getAssetsMonthly = async (req,res)=> {
       message : "Data found successfully",
       data : assetData
   })
+  console.log(assetData)
   }
   catch (err) {
       res.json({
@@ -293,4 +283,37 @@ const getAssetsMonthly = async (req,res)=> {
 }
 
 
-module.exports = {storeAssets,getAssetsMonthly,updateAssets,totalAssetsAmount,totalNetWorth,getAssets}
+
+const filterAssets = async(req,res)=>{
+  const data = await asset.find()
+  const filters = {};
+  if (req.body.type) {
+    filters.type = req.body.type;
+  }
+  if (req.body.specifyOwnershipType){
+    filters.specifyOwnershipType = req.body.specifyOwnershipType;
+  }
+  if (req.body.isoDate) {
+    filters.isoDate = req.body.isoDate;
+  }
+  if (req.body.country) {
+    filters.country = req.body.country;
+  }
+  const filteredUsers = data.filter(user => {
+    let isValid = true;
+    for (key in filters) {
+      console.log(key, user[key], filters[key]);
+      isValid = isValid && user[key] == filters[key];
+    }
+    return isValid;
+  });
+  res.send(filteredUsers);
+}
+
+
+
+
+
+
+
+module.exports = {storeAssets,getAssetsMonthly,updateAssets,totalAssetsAmount,totalNetWorth,getAssets,filterAssets}

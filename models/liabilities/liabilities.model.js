@@ -9,6 +9,9 @@ const LiabilitiesSchema = mongoose.Schema({
     type : {
         type : String
     },
+    isoDate : {
+        type : String
+    },
     privateDept: {
         dept_Name: {
             type: String

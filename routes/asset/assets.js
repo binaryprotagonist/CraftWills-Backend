@@ -9,5 +9,6 @@ router.get ("/getAssets",authenticateToken,AssetsController.getAssets)
 router.put("/updateAssets",authenticateToken,AssetsController.updateAssets)
 router.get("/getAssetStat",authenticateToken,AssetsController.totalAssetsAmount)
 router.get("/totalNetWorth",authenticateToken,AssetsController.totalNetWorth)
-router.get ("/getAssetsMonthly",authenticateToken,AssetsController.getAssetsMonthly)
+router.get ("/getAssetsMonthly",authenticateToken,AssetsController.getAssetsMonthly);
+router.get("/filterAssets",authenticateToken,AssetsController.filterAssets)
 module.exports = router; 

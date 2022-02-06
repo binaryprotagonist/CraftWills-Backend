@@ -5,7 +5,7 @@ const membersController = require ("../../controllers/members/members.controller
 
 router.post("/createMember",authenticateToken,membersController.createMember)
 router.get ("/getMembers",authenticateToken,membersController.getMembers)
-
+router.get("/filterMembers",authenticateToken,membersController.membersFilter)
 
 
 module.exports = router
