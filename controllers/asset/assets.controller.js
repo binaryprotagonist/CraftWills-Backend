@@ -106,7 +106,7 @@ const getAssets = async (req,res)=> {
 
 
 const updateAssets = async (req, res) => {
-    const _id = req.token_data._id
+    const _id = req.params.id
     const updateData = {
       _id,
       toUpdate: {

@@ -1,5 +1,5 @@
 const members = require("../../models/members.model")
-
+const membersDataAccess = require("../../dal/member/members.dal")
 const createMember = async (req, res) => {
     const _id = req.token_data._id
     const creatTime = moment().tz("Asia/Kolkata").format("YYYY-MM-DD");
@@ -90,8 +90,55 @@ const membersFilter = async(req,res)=>{
     res.send(filteredUsers);
 }
 
+const updateMember = async (req, res) => {
+    const _id = req.params.id
+    const updateData = {
+      _id,
+      toUpdate: {
+        country: req.body?.country,
+        type : req.body.type,
+        isoDate: `${creatTime}T00:00:00Z`,
+        memberAsPerson: {
+            fullname: req.body.memberAsPerson?.fullname,
+            Relationship: req.body.memberAsPerson?.Relationship,
+            id_type: req.body.memberAsPerson?.id_type,
+            id_number: req.body.memberAsPerson?.id_number,
+            gender: req.body.memberAsPerson?.gender,
+            floorNumber: req.body.memberAsPerson?.floorNumber,
+            unitNumber: req.body.memberAsPerson?.unitNumber,
+            streetName: req.body.memberAsPerson?.streetName,
+            postalCode: req.body.memberAsPerson?.postalCode,
+            citizenship: req.body.memberAsPerson?.citizenship,
+            dob: req.body.memberAsPerson?.dob
+            
+        },
+        memberAsOrganisation: {
+            organisationName: req.body.memberAsOrganisation?.organisationName,
+            registration_number: req.body.memberAsOrganisation?.registration_number,
+            floorNumber: req.body.memberAsOrganisation?.floorNumber,
+            unitNumber: req.body.memberAsOrganisation?.unitNumber,
+            streetName: req.body.memberAsOrganisation?.streetName,
+            postalCode: req.body.memberAsOrganisation?.postalCode,
+        }
+      },
+    };
+  const update = await membersDataAccess.updateMember(updateData);
+  if (update){
+    return {
+      error: false,
+      success: true,
+      message: "Member data updated successfully",
+      data: update,
+    };
+  }
+  else {
+  return "something went wrong"
+  }
+  };
+
 module.exports = {
     createMember,
     getMembers,
-    membersFilter
+    membersFilter,
+    updateMember
 }

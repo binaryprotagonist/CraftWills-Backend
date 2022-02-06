@@ -1,5 +1,6 @@
 const liabilities = require ("../../models/liabilities/liabilities.model");
 const mongoose = require ("mongoose")
+const liabilitiesDataAccess = require("../../dal/liabilities/liabilities.dal")
 const moment = require ("moment-timezone")
 const storeLiabilities = async (req,res) => {
     const _id = req.token_data._id;
@@ -46,6 +47,54 @@ const storeLiabilities = async (req,res) => {
         })
     }
 }
+
+const updateLiabilities = async (req, res) => {
+  const _id = req.params.id
+  const updateData = {
+    _id,
+    toUpdate: {
+      current_Outstanding_Amount : req.body?.current_Outstanding_Amount,
+      type : req.body.type,
+      isoDate: `${creatTime}T00:00:00Z`,
+      privateDept: {
+          dept_Name: req.body.privateDept?.dept_Name,
+          description: req.body.privateDept?.description,
+          lender: req.body.privateDept?.memberId
+      },
+      securedLoan: req.body?.securedLoan ? {
+          loanName: req.body.securedLoan?.loanName,
+          loanProvider: req.body.securedLoan?.loanProvider,
+          loan_Number: req.body.securedLoan?.loan_Number,
+          loan_Id_Number: req.body.securedLoan?.loan_Id_Number,
+          description: req.body.securedLoan?.description,
+          addAssets: req.body.securedLoan?.assetId,
+      } : {},
+      unsecuredLoan: {
+          loanProvider: req.body.unsecuredLoan?.loanProvider,
+          loan_Number: req.body.unsecuredLoan?.loan_Number,
+          loan_Id_Number: req.body.unsecuredLoan?.loan_Id_Number,
+          description: req.body.unsecuredLoan?.description,
+  
+      }
+    },
+  };
+const update = await liabilitiesDataAccess.updateLiabilities(updateData);
+if (update){
+  return {
+    error: false,
+    success: true,
+    message: "Liabilities data updated successfully",
+    data: update,
+  };
+}
+else {
+return "something went wrong"
+}
+};
+
+
+
+
 
 const getLiabilities = async (req,res) =>{
     const _id = req.token_data._id
@@ -111,4 +160,4 @@ const liabilitiesFilter = async(req,res)=>{
     
 }
 
-module.exports = {storeLiabilities , getLiabilities ,liabilitystats,liabilitiesFilter}
+module.exports = {storeLiabilities , getLiabilities ,liabilitystats,liabilitiesFilter,updateLiabilities}

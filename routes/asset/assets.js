@@ -6,7 +6,7 @@ const AssetsController = require ("../../controllers/asset/assets.controller");
 
 router.post('/storeAssets',authenticateToken,AssetsController.storeAssets)
 router.get ("/getAssets",authenticateToken,AssetsController.getAssets)
-router.put("/updateAssets",authenticateToken,AssetsController.updateAssets)
+router.put("/updateAssets/:id",authenticateToken,AssetsController.updateAssets)
 router.get("/getAssetStat",authenticateToken,AssetsController.totalAssetsAmount)
 router.get("/totalNetWorth",authenticateToken,AssetsController.totalNetWorth)
 router.get ("/getAssetsMonthly",authenticateToken,AssetsController.getAssetsMonthly);
