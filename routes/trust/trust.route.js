@@ -20,5 +20,5 @@ router.get("/getTrustDetails",authenticateToken ,async (request, response) => {
   return response.json(result);
 });
 
-router.get("/filterTrust",authenticateToken,TrustController.filterTrust)
+router.post("/filterTrust",authenticateToken,TrustController.filterTrust)
 module.exports  = router

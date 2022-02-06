@@ -4,14 +4,14 @@ const liabilitiesDataAccess = require("../../dal/liabilities/liabilities.dal")
 const moment = require ("moment-timezone")
 const storeLiabilities = async (req,res) => {
     const _id = req.token_data._id;
-    const creatTime = moment().tz("Asia/Kolkata").format("YYYY-MM-DD");
+    const creatTime = moment().format("YYYY-MM-DD");
     console.log(req.body.securedLoan)
     try{
     const data = new liabilities ({
         user_id : _id,
         current_Outstanding_Amount : req.body?.current_Outstanding_Amount,
         type : req.body.type,
-        isoDate: `${creatTime}T00:00:00Z`,
+        isoDate: `${creatTime}`,
         privateDept: {
             dept_Name: req.body.privateDept?.dept_Name,
             description: req.body.privateDept?.description,

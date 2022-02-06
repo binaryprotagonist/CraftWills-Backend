@@ -2,13 +2,13 @@ const members = require("../../models/members.model")
 const membersDataAccess = require("../../dal/member/members.dal")
 const createMember = async (req, res) => {
     const _id = req.token_data._id
-    const creatTime = moment().tz("Asia/Kolkata").format("YYYY-MM-DD");
+    const creatTime = moment().format("YYYY-MM-DD");
     try {
         const data = new members({
             user_id: _id,
             country: req.body?.country,
             type : req.body.type,
-            isoDate: `${creatTime}T00:00:00Z`,
+            isoDate: `${creatTime}`,
             memberAsPerson: {
                 fullname: req.body.memberAsPerson?.fullname,
                 Relationship: req.body.memberAsPerson?.Relationship,
@@ -97,7 +97,6 @@ const updateMember = async (req, res) => {
       toUpdate: {
         country: req.body?.country,
         type : req.body.type,
-        isoDate: `${creatTime}T00:00:00Z`,
         memberAsPerson: {
             fullname: req.body.memberAsPerson?.fullname,
             Relationship: req.body.memberAsPerson?.Relationship,

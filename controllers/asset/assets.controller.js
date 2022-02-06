@@ -14,7 +14,7 @@ const { myFunction } = require("../../nodemailer/nodemailer")
 
 const storeAssets = async (req, res) => {
     const user = req.token_data._id
-    const creatTime = moment().tz("Asia/Kolkata").format("2022-05-14");
+    const creatTime = moment().format("YYYY-MM-DD");
     // const creatTime ="2010-11-30";
     try {
     const Asset = new asset({
@@ -22,7 +22,7 @@ const storeAssets = async (req, res) => {
         country: req.body.country,
         specifyOwnershipType: req.body.specifyOwnershipType,
         type : req.body.type,
-        isoDate: `${creatTime}T00:00:00Z`,
+        isoDate: `${creatTime}`,
         bankAccount:
        {
             bankname: req.body.bankAccount?.bankname,

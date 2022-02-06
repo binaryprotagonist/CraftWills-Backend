@@ -11,7 +11,7 @@ const {myFunction} = require ("../../nodemailer/nodemailer")
 
 exports.storeTrust = async (req,res) => {
   const user = req.token_data._id
-  const creatTime = moment().tz("Asia/Kolkata").format("YYYY-MM-DD");
+  const creatTime = moment().format("YYYY-MM-DD");
     const {trustName,description} = req.body;
     if (!trustName|| !description) {
       // throw new ExpressError(401, "Bad request");
@@ -19,7 +19,7 @@ exports.storeTrust = async (req,res) => {
     }
     const data = {
         user_id : user,
-        isoDate: `${creatTime}T00:00:00Z`,
+        isoDate: `${creatTime}`,
         trustName : req.body.trustName,
         description : req.body.description
     };
