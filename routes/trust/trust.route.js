@@ -10,7 +10,7 @@ router.post("/storeTrust",authenticateToken ,async (req, res) => {
 });
 
 //currently ignorable
-router.put("/updateTrust", authenticateToken, async (req, res) => {
+router.put("/updateTrust/:id", authenticateToken, async (req, res) => {
   const result = await TrustController.UpdateTrustData(req);
   return res.json(result);
 });
@@ -20,4 +20,5 @@ router.get("/getTrustDetails",authenticateToken ,async (request, response) => {
   return response.json(result);
 });
 
+router.get("/filterTrust",authenticateToken,TrustController.filterTrust)
 module.exports  = router

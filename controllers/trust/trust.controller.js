@@ -4,12 +4,14 @@ require("dotenv").config();
 // const ExpressError = require("../Errorgenerator/errorGenerator");
 const { generateAccessToken } = require("../../JsonWebToken/jwt");
 const TrustDataAccess= require("../../dal/trust.dal")
+const trust = require("../../models/trust.model")
 const usersDataAccess= require("../../dal/user.dal")
 const User = require("../../models/user.model")
 const {myFunction} = require ("../../nodemailer/nodemailer")
 
 exports.storeTrust = async (req,res) => {
   const user = req.token_data._id
+  const creatTime = moment().tz("Asia/Kolkata").format("YYYY-MM-DD");
     const {trustName,description} = req.body;
     if (!trustName|| !description) {
       // throw new ExpressError(401, "Bad request");
@@ -17,6 +19,7 @@ exports.storeTrust = async (req,res) => {
     }
     const data = {
         user_id : user,
+        isoDate: `${creatTime}T00:00:00Z`,
         trustName : req.body.trustName,
         description : req.body.description
     };
@@ -43,7 +46,7 @@ exports.storeTrust = async (req,res) => {
 
 exports.getTrustDetails = async (req, res) => {
   const user = req.token_data._id
-  const users = await TrustDataAccess.findTrust(user);
+  const users = await TrustDataAccess.findTrust(ser);
   
   return {
     error: false,
@@ -58,7 +61,7 @@ exports.getTrustDetails = async (req, res) => {
 // Update Bank Details
 
 exports.UpdateTrustData = async (req, res) => {
-  const _id = req.token_data._id
+  const _id = req.params.id
   const updateData = {
     _id,
     toUpdate: {
@@ -79,3 +82,25 @@ else {
 return "something went wrong"
 }
 };
+
+
+exports.filterTrust = async(req,res)=>{
+  const data = await trust.find();
+  const filters = {};
+    if (req.body.type) {
+      filters.type = req.body.type;
+    }
+    if (req.body.isoDate) {
+      filters.isoDate = req.body.isoDate;
+    }
+    const filteredUsers = data.filter(user => {
+      let isValid = true;
+      for (key in filters) {
+        console.log(key, user[key], filters[key]);
+        isValid = isValid && user[key] == filters[key];
+      }
+      return isValid;
+    });
+    res.send(filteredUsers);
+
+  }
