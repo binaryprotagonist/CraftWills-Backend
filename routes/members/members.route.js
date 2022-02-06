@@ -5,8 +5,8 @@ const membersController = require ("../../controllers/members/members.controller
 
 router.post("/createMember",authenticateToken,membersController.createMember)
 router.get ("/getMembers",authenticateToken,membersController.getMembers)
-router.get("/filterMembers",authenticateToken,membersController.membersFilter)
-router.get("/updateMember/:id",authenticateToken,membersController.updateMember)
+router.post("/filterMembers",authenticateToken,membersController.membersFilter)
+router.put("/updateMember/:id",authenticateToken,membersController.updateMember)
 
 
 module.exports = router
