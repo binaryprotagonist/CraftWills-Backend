@@ -136,9 +136,29 @@ const updateMember = async (req, res) => {
   }
   };
 
+
+const deleteMembers = async (req,res)=>{
+    try {
+        const data = members.remove({})
+        res.json({
+            message : "data has been removed",
+            success : false,
+            data : data
+        })
+    }
+    catch (err){
+        res.json({
+            message : "something went wrong",
+            success : false,
+            error : err.message
+        })
+    }
+}
+
 module.exports = {
     createMember,
     getMembers,
     membersFilter,
-    updateMember
+    updateMember,
+    deleteMembers
 }

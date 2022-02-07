@@ -7,6 +7,5 @@ router.post("/createMember",authenticateToken,membersController.createMember)
 router.get ("/getMembers",authenticateToken,membersController.getMembers)
 router.post("/filterMembers",authenticateToken,membersController.membersFilter)
 router.put("/updateMember/:id",authenticateToken,membersController.updateMember)
-
-
+router.delete("/deleteMember",authenticateToken,membersController.deleteMembers)
 module.exports = router

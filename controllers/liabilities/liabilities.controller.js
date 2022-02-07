@@ -160,4 +160,24 @@ const liabilitiesFilter = async(req,res)=>{
     
 }
 
-module.exports = {storeLiabilities , getLiabilities ,liabilitystats,liabilitiesFilter,updateLiabilities}
+
+const deleteLiabilities = async(req,res)=>{
+  try {
+    const data = await liabilities.remove({});
+    res.json({
+      message : "data has been removed",
+      success : true,
+      data : data
+
+    })
+  }
+  catch (err){
+    res.json({
+      message : "something went wrong",
+      success : false,
+      error : err.message
+    })
+  }
+}
+
+module.exports = {storeLiabilities , getLiabilities ,liabilitystats,liabilitiesFilter,updateLiabilities,deleteLiabilities}

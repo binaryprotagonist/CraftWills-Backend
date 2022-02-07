@@ -311,9 +311,26 @@ const filterAssets = async(req,res)=>{
 }
 
 
+const deleteAssets = async (req,res)=>{
+  try{
+  const data = await asset.remove({})
+  res.json({
+    message : "data has been deleted successfully",
+    success : true,
+    data : data
+  })
+  }
+  catch (err) {
+    res.json({
+      message : "something went wrong",
+      success : false,
+      error : err.message
+    })
+  }
+
+}
 
 
 
 
-
-module.exports = {storeAssets,getAssetsMonthly,updateAssets,totalAssetsAmount,totalNetWorth,getAssets,filterAssets}
+module.exports = {storeAssets,getAssetsMonthly,updateAssets,totalAssetsAmount,totalNetWorth,getAssets,filterAssets,deleteAssets}
