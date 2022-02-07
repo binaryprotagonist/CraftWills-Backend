@@ -36,14 +36,15 @@ const findAssetsMonthly = async (data) => {
   return user;
 };
 
-// const deleteAll = async () => {
-//   const user = await User.remove({});
-//   return user;
-// };
+const deleteAll = async () => {
+  const user = await Assets.remove({});
+  return user;
+};
 
 module.exports = {
     findAsset,
     storeAsset,
     updateAsset,
-    findAssetsMonthly
+    findAssetsMonthly,
+    deleteAll
 };

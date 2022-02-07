@@ -105,3 +105,21 @@ exports.filterTrust = async(req,res)=>{
     res.send(filteredUsers);
 
   }
+
+exports.deleteTrusts = async (req,res)=> {
+  try {
+    const data = await trust.remove({});
+    res.json({
+      message : "data has been deleted",
+      success : true,
+      data : data
+    })
+  }
+  catch (err){
+    res.json({
+      message : "something went wrong",
+      success : false,
+      error : err.message
+    })
+  }}
+

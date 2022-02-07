@@ -8,6 +8,7 @@ router.get("/getLiabilities",authenticateToken , liabilitiesController.getLiabil
 router.get("/getStats",authenticateToken,liabilitiesController.liabilitystats);
 router.post("/filterLiabilities",authenticateToken,liabilitiesController.liabilitiesFilter);
 router.put("/UpdateLiabilities/:id",authenticateToken,liabilitiesController.updateLiabilities);
+router.delete("/deleteLiabilities",authenticateToken,liabilitiesController.deleteLiabilities)
 
 
 module.exports = router;

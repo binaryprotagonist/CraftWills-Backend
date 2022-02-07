@@ -11,4 +11,5 @@ router.get("/getAssetStat",authenticateToken,AssetsController.totalAssetsAmount)
 router.get("/totalNetWorth",authenticateToken,AssetsController.totalNetWorth)
 router.get ("/getAssetsMonthly",authenticateToken,AssetsController.getAssetsMonthly);
 router.post("/filterAssets",authenticateToken,AssetsController.filterAssets)
+router.delete("/deleteAssets",authenticateToken,AssetsController.deleteAssets)
 module.exports = router; 
