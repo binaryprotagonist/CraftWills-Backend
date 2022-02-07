@@ -257,6 +257,7 @@ const getAssetsMonthly = async (req,res)=> {
     let changeMonth = moment().format(`${year}-0${n}-01`);
     console.log(changeMonth)
     console.log(date)
+    
   const assetData = await AssetsDataAccess.findAssetsMonthly({
       fromDate: `${changeMonth}T00:00:00Z`,
       endDate: `${date}T00:00:00Z`, 
