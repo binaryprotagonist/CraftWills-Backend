@@ -39,7 +39,7 @@ const AssetsSchema = new mongoose.Schema({
     },
     business : {
         businessName :{
-            type : String,
+            type : String
           },
           UEN_no : {
             type : String
@@ -48,7 +48,7 @@ const AssetsSchema = new mongoose.Schema({
     },
     insurancePolicy : {
         policyName : {
-            type : String,
+            type : String
           },
           policyNumber: {
             type: String,
@@ -114,7 +114,7 @@ const AssetsSchema = new mongoose.Schema({
             type: String,
         },
         safe_No: {
-            type: Number,
+            type: Number
            
         },    
     }

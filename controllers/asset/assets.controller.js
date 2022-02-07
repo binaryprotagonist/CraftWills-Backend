@@ -9,6 +9,8 @@ const usersDataAccess = require("../../dal/user.dal")
 const User = require("../../models/user.model")
 const moment = require ("moment-timezone")
 const liabilities = require ("../../models/liabilities/liabilities.model")
+const liquid = ['bankAccount','investmentAccount','insurancePolicy','business','intellectualProperty','motorVehicle','personalPossession','safeDepositBox']
+const iliquid = ['']
 
 const { myFunction } = require("../../nodemailer/nodemailer")
 
@@ -87,8 +89,9 @@ const storeAssets = async (req, res) => {
 }
 
 const getAssets = async (req,res)=> {
+    const _id = req.token_data._id
     try{
-    const assetData = await asset.find()
+    const assetData = await asset.find({user_id : _id})
     res.json({
         success : true,
         message : "Data found successfully",
@@ -148,8 +151,8 @@ const updateAssets = async (req, res) => {
         },
         realEstate : {
             address: req.body.realEstate?.address,
+            safeDepositBox : {
         },
-        safeDepositBox : {
 
             safe_Box_Location : req.body.safeDepositBox?.safe_Box_Location,
             safe_No : req.body.safeDepositBox?.safe_No
@@ -255,24 +258,26 @@ const getAssetsMonthly = async (req,res)=> {
     const date = moment().format(`${year}-0${m}-01`);
   
     let changeMonth = moment().format(`${year}-0${n}-01`);
-    console.log(changeMonth)
-    console.log(date)
-    
+    // console.log(changeMonth)
+    // console.log(date)
+
   const assetData = await AssetsDataAccess.findAssetsMonthly({
       fromDate: `${changeMonth}T00:00:00Z`,
       endDate: `${date}T00:00:00Z`, 
+      type : "bankAccount"
   })
-  console.log(assetData.fromDate)
-  console.log(assetData.endDate)
-  if(assetData){
-    console.log(assetData)
-  }
+  
+  var total = 0
+  assetData.forEach(function (item, index) {
+    const Astdta= item.bankAccount.estimateValue;
+    total+=Astdta
+});
+console.log("total Assets Amount",total)
   res.json({
-      success : true,
-      message : "Data found successfully",
-      data : assetData
+    message : "Assets total amount found successfully",
+    success : true,
+    amount : total
   })
-  console.log(assetData)
   }
   catch (err) {
       res.json({
@@ -281,8 +286,8 @@ const getAssetsMonthly = async (req,res)=> {
           error : err.message
       })
   }
+  
 }
-
 
 
 const filterAssets = async(req,res)=>{
@@ -330,8 +335,6 @@ const deleteAssets = async (req,res)=>{
   }
 
 }
-
-
 
 
 module.exports = {storeAssets,getAssetsMonthly,updateAssets,totalAssetsAmount,totalNetWorth,getAssets,filterAssets,deleteAssets}

@@ -2,6 +2,7 @@ const liabilities = require ("../../models/liabilities/liabilities.model");
 const mongoose = require ("mongoose")
 const liabilitiesDataAccess = require("../../dal/liabilities/liabilities.dal")
 const moment = require ("moment-timezone")
+
 const storeLiabilities = async (req,res) => {
     const _id = req.token_data._id;
     const creatTime = moment().format("YYYY-MM-DD");
@@ -160,6 +161,44 @@ const liabilitiesFilter = async(req,res)=>{
     
 }
 
+// Get Liabilities monthly --
+
+const getLiabilitiesMonthly = async (req,res)=>{
+  try {
+    let n =req.body.monthNumber;
+    let m;
+    let month= moment().tz("Asia/Kolkata").format("MM");
+    let year = moment().tz("Asia/Kolkata").format("YYYY");
+    m=n+1;
+    const date = moment().format(`${year}-0${m}-01`);
+    let changeMonth = moment().format(`${year}-0${n}-01`);
+    
+  const liabilitiesData = await liabilitiesDataAccess.findLiabilitiesMonthly({
+    fromDate: `${changeMonth}T00:00:00Z`,
+    endDate: `${date}T00:00:00Z`, 
+  })
+  console.log(liabilitiesData)
+  var total=0
+  liabilitiesData.forEach(function (item, index) {
+    const liabdta= item.current_Outstanding_Amount;
+    total+=liabdta
+});
+console.log(total)
+  res.json({
+    message: "Liabilities total amount found successfully between a month",
+    success : true,
+    amount : total
+  })
+}
+  catch(err) {
+    res.json({
+      message : "something went wrong",
+      success : false,
+      error : err.message
+    })
+ 
+  }
+}
 
 const deleteLiabilities = async(req,res)=>{
   try {
@@ -180,4 +219,4 @@ const deleteLiabilities = async(req,res)=>{
   }
 }
 
-module.exports = {storeLiabilities , getLiabilities ,liabilitystats,liabilitiesFilter,updateLiabilities,deleteLiabilities}
+module.exports = {storeLiabilities , getLiabilities ,liabilitystats,liabilitiesFilter,updateLiabilities,deleteLiabilities,getLiabilitiesMonthly}

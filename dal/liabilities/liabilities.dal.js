@@ -3,7 +3,7 @@ require("../../JsonWebToken/jwt");
 
 
 const updateLiabilities = async (userData) => {
-  const user = await privateDept.findByIdAndUpdate(
+  const user = await liabilities.findByIdAndUpdate(
     userData._id,
     { $set: userData.toUpdate },
     { new: true }
@@ -13,11 +13,16 @@ const updateLiabilities = async (userData) => {
 };
 
 const deleteAllLiabilities = async () => {
-  const user = await privateDept.remove({});
+  const user = await liabilities.remove({});
   return user;
 };
 
+const findLiabilitiesMonthly = async (data) =>{
+  const user = await liabilities.find({isoDate: {$gte: data.fromDate, $lt: data.endDate}})
+  return user;
+}
 module.exports = {
  updateLiabilities,
- deleteAllLiabilities
+ deleteAllLiabilities,
+ findLiabilitiesMonthly
 };

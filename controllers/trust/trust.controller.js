@@ -47,7 +47,7 @@ exports.storeTrust = async (req,res) => {
 
 exports.getTrustDetails = async (req, res) => {
   const user = req.token_data._id
-  const users = await TrustDataAccess.findTrust(ser);
+  const users = await TrustDataAccess.findTrust(user);
   
   return {
     error: false,

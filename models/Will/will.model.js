@@ -108,7 +108,6 @@ const WillSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "AssetsData"
         },
-
         membersData: [{
             member: {
                 type: mongoose.Schema.Types.ObjectId,
@@ -161,7 +160,6 @@ const WillSchema = new mongoose.Schema({
             estimatedValueOfShare : {
                 type : Number
             }
-
         }],
         payouts : [{   addAPayout : {
             sourceOfPayout:{
