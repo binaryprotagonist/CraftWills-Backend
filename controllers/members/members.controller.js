@@ -1,5 +1,6 @@
 const members = require("../../models/members.model")
 const membersDataAccess = require("../../dal/member/members.dal")
+const moment = require ("moment-timezone")
 const createMember = async (req, res) => {
     const _id = req.token_data._id
     const creatTime = moment().format("YYYY-MM-DD");
