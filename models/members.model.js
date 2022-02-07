@@ -17,7 +17,7 @@ const membersSchema = new mongoose.Schema ({
     },
     memberAsPerson : {
         fullname : {
-            type : String,
+            type : String,  
           },
           Relationship: {
             type: String, 

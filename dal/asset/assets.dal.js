@@ -32,7 +32,7 @@ const updateAsset = async (userData) => {
 };
 
 const findAssetsMonthly = async (data) => {
-  const user = await Assets.find({isoDate: {$gte: data.fromDate, $lt: data.endDate}});
+  const user = await Assets.find({isoDate: {$gte: data.fromDate, $lt: data.endDate},type : data.type});
   return user;
 };
 
