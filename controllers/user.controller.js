@@ -31,6 +31,7 @@ exports.createUser = async (req) => {
     citizenship : req.body.citizenship,
     dob : req.body.dob,
    };
+  
 
    if (data.gender==="male" || data.gender==="Male"){
      data.profileImage = "/uploads/male.png"
@@ -51,7 +52,7 @@ exports.createUser = async (req) => {
     return{
       error : true,
       success : false ,
-      message : "something went wrong",
+      message : "User already exists",
     }
   };
 }
