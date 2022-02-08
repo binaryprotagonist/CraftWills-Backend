@@ -142,7 +142,15 @@ exports.updateUser = async (req, res) => {
       Citizenship : req.body.Citizenship,
       // profileImage : req.file.filename
     },
+
   };
+  if (updateData.gender==="male" || data.gender==="Male"){
+    updateData.profileImage = "/uploads/male.png"
+  }
+  if (updateData.gender==="female" || data.gender==="Female"){
+    updateData.profileImage = "/uploads/female.png"
+  }
+
 const update = await usersDataAccess.updateUser(updateData);
 if (update){
   return {
