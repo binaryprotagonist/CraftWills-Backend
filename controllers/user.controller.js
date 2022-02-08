@@ -29,8 +29,15 @@ exports.createUser = async (req) => {
     streetName : req.body.streetName,
     postalCode : req.body.postalCode,
     citizenship : req.body.citizenship,
-    dob : req.body.dob
+    dob : req.body.dob,
+   
    };
+   if (data.gender==="Male"){
+     data.profileImage = "/uploads/male.png"
+   }
+   if (data.gender==="Female"){
+     data.profileImage = "/uploads/female.png"
+   }
 
   const storedUser = await usersDataAccess.storeUser(data);
   if (storedUser){
