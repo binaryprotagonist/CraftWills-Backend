@@ -30,8 +30,8 @@ exports.createUser = async (req) => {
     postalCode : req.body.postalCode,
     citizenship : req.body.citizenship,
     dob : req.body.dob,
-   
    };
+
    if (data.gender==="male" || data.gender==="Male"){
      data.profileImage = "/uploads/male.png"
    }
