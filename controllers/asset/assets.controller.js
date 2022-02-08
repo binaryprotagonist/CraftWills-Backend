@@ -322,6 +322,7 @@ const filterAssets = async(req,res)=>{
   res.send(filteredUsers);
 }
 
+
 const deleteAssets = async (req,res)=>{
   try{
   const data = await asset.remove({})
