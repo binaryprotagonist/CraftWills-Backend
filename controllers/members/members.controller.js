@@ -51,8 +51,9 @@ const createMember = async (req, res) => {
 }
 
 const getMembers = async(req,res)=>{
+    const _id = req.token_data._id
     try {
-        const data = await members.find();
+        const data = await members.find({user_id : _id});
         res.json({
             message : "data found successfully",
             success : true,
