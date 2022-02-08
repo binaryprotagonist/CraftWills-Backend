@@ -32,10 +32,10 @@ exports.createUser = async (req) => {
     dob : req.body.dob,
    
    };
-   if (data.gender==="Male"){
+   if (data.gender==="male" || data.gender==="Male"){
      data.profileImage = "/uploads/male.png"
    }
-   if (data.gender==="Female"){
+   if (data.gender==="female" || data.gender==="Female"){
      data.profileImage = "/uploads/female.png"
    }
 
