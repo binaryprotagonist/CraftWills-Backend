@@ -100,7 +100,7 @@ const getAssets = async (req,res)=> {
     const assetData = await asset.find({user_id : _id})
     res.json({
         success : true,
-        message : "Data found successfully",
+        message : "Asset Data found successfully",
         data : assetData
     })
     }
@@ -327,7 +327,7 @@ const deleteAssets = async (req,res)=>{
   try{
   const data = await asset.remove({})
   res.json({
-    message : "data has been deleted successfully",
+    message : "Asset data has been deleted successfully",
     success : true,
     data : data
   })

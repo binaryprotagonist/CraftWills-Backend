@@ -255,12 +255,14 @@ exports.forgotPassword = async (req, res) => {
   if (!userData) {
     return ("email does not exists");
   }
+  console.log(userData.email)
   const otpSend = {
-    from: process.env.email,//"as797007@gmail.com",
+    from: "as797007@gmail.com",
     to: userData.email,
     subject: "Your Password Reset Link",
     text: `http://localhost:4200/resetpassword/${userData._id}`,
   };
+  
   myFunction(otpSend);
 return {
     error: false,
@@ -340,6 +342,7 @@ exports.updatePassword = async (req, res) => {
     },
   };
   const updatePass = await usersDataAccess.updateUser(updateData);
+
   return {
     error: false,
     success: true,
