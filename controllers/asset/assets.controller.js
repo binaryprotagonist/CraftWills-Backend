@@ -245,7 +245,7 @@ const totalNetWorth = async(req,res)=>{
          b+=agg2;
      })  
     res.json({
-        message : "Total Net Worth",
+        message : "Total net worth",
         amount : b-a
     })
     console.log(b-a)    
@@ -278,7 +278,7 @@ const getAssetsMonthly = async (req,res)=> {
     const Astdta= item.bankAccount.estimateValue;
     total+=Astdta
 });
-console.log("total Assets Amount",total)
+console.log("Total assets amount",total)
   res.json({
     message : "Assets total amount found successfully",
     success : true,
@@ -321,7 +321,6 @@ const filterAssets = async(req,res)=>{
   });
   res.send(filteredUsers);
 }
-
 
 const deleteAssets = async (req,res)=>{
   try{

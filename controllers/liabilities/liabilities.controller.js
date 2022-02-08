@@ -36,7 +36,7 @@ const storeLiabilities = async (req,res) => {
     })
     const savedData = await data.save();
     res.json({
-        message : "Data has been saved successfully",
+        message : "Lialibilties data has been saved successfully",
         storedData : savedData,
         success : true
     })
