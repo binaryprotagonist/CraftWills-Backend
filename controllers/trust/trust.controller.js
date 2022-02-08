@@ -20,18 +20,18 @@ exports.storeTrust = async (req,res) => {
     }
     const data = {
         user_id : user,
-        isoDate: `${creatTime}`,
+        isoDate: `${creatTime}`,  
         trustName : req.body.trustName,
         description : req.body.description
     };
-  
+    
     const storedTrust = await TrustDataAccess.storeTrust(data);
     if (storedTrust){
     return {
       error: false,
       success: true,
       message: "Trust data stored successfully",
-      data: storedTrust,
+      data: storedTrust
     }}
     else{
       return{
