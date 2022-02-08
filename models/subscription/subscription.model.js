@@ -1,5 +1,9 @@
 const mongoose = require('mongoose')
 const subscriptionSchema = mongoose.Schema({
+    user_id : {
+        type : String
+    }
+    ,
     regularPlan : {
         type : Number
     },
