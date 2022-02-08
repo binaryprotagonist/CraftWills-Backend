@@ -36,7 +36,7 @@ const createMember = async (req, res) => {
 
         const savedData = await data.save()
         res.json({
-            message: "Data has been saved Successfully",
+            message: "Member data has been saved successfully",
             success: true,
             data: savedData
         })
@@ -55,7 +55,7 @@ const getMembers = async(req,res)=>{
     try {
         const data = await members.find({user_id : _id});
         res.json({
-            message : "data found successfully",
+            message : "Member data found successfully",
             success : true,
             data : data
         })
@@ -133,7 +133,7 @@ const updateMember = async (req, res) => {
     };
   }
   else {
-  return "something went wrong"
+  return "Something went wrong"
   }
   };
 
@@ -142,7 +142,7 @@ const deleteMembers = async (req,res)=>{
     try {
         const data = members.remove({})
         res.json({
-            message : "data has been removed",
+            message : "Member data has been removed",
             success : false,
             data : data
         })
