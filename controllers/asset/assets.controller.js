@@ -12,11 +12,11 @@ const liabilities = require ("../../models/liabilities/liabilities.model")
 // const liquid = ['bankAccount','investmentAccount','insurancePolicy','business','intellectualProperty']
 const iliquid = ['personalPossession','realEsate','motorVehicle','safeDepositBox']
 
-const AssetTypeFind = async(req,res)=>{
-  const liquid = ['bankAccount','investmentAccount','insurancePolicy','business','intellectualProperty']
-  const data = await asset.find();
-  if 
-}
+// const AssetTypeFind = async(req,res)=>{
+//   const liquid = ['bankAccount','investmentAccount','insurancePolicy','business','intellectualProperty']
+//   const data = await asset.find();
+//   if 
+// }
 
 const { myFunction } = require("../../nodemailer/nodemailer")
 
