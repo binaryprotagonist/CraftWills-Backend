@@ -166,18 +166,30 @@ const updateAssets = async (req, res) => {
         }
       },
     };
+  try {
   const update = await AssetsDataAccess.updateAsset(updateData);
   if (update){
-    return {
+    res.send( {
       error: false,
       success: true,
       message: "Assets data updated successfully",
       data: update,
-    };
+    });
   }
   else {
-  return "something went wrong"
+  res.send({
+    error : true,
+    message : "something went wrong",
+    success : false
+  });
   }
+}catch (err){
+  res.send({
+    error : true,
+    success : false,
+    message : err.message
+  })
+}
   };
 
 
