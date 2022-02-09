@@ -154,13 +154,22 @@ exports.updateUser = async (req, res) => {
 
   };
   console.log(body.gender)
-  if (body.gender==="male" || body.gender==="Male"){
-    console.log('male');
-    updateData.profileImage = "/uploads/male.png"
-  }
-  if (body.gender==="female" || body.gender==="Female"){
-    console.log('female');
-    updateData.profileImage = "/uploads/female.png"
+  const user = await usersDataAccess.findUser(_id)
+  if(user){
+    let {profileImage} = user
+    const stringToCheck = profileImage.split('/')[2];
+    console.log(stringToCheck)
+    if(stringToCheck === 'defaultImage' || stringToCheck === 'male' || stringToCheck === 'female'){
+      if (body.gender==="male" || body.gender==="Male"){
+        console.log('male');
+        profileImage = "/uploads/male.png"
+      }
+      if (body.gender==="female" || body.gender==="Female"){
+        console.log('female');
+        profileImage = "/uploads/female.png"
+      }
+    }  
+    updateData.profileImage = profileImage
   }
   console.log(updateData);
 
