@@ -70,7 +70,8 @@ const getMembers = async(req,res)=>{
 }
 
 const membersFilter = async(req,res)=>{
-    const data = await members.find()
+    const _id = req.token_data._id
+    const data = await members.find({user_id : _id})
     const filters = {};
     if (req.body.type) {
       filters.type = req.body.type;

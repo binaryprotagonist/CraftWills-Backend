@@ -155,7 +155,8 @@ const liabilitystats = async (req,res)=>{
 }
 
 const liabilitiesFilter = async(req,res)=>{
-    const data = await liabilities.find()
+  const _id = req.token_data._id
+    const data = await liabilities.find({user_id : _id})
     const filters = {};
   if (req.body.type) {
     filters.type = req.body.type;
