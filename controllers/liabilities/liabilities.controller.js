@@ -43,8 +43,8 @@ const storeLiabilities = async (req,res) => {
     }
     catch (err) {
         res.json({
-            message : "Something Went Wrong!",
-            error : err.message
+            message : err.message,
+            error : true
         })
     }
 }
@@ -79,18 +79,31 @@ const updateLiabilities = async (req, res) => {
   
       }
     },
-  };
+  };try{
 const update = await liabilitiesDataAccess.updateLiabilities(updateData);
 if (update){
-  return {
+   res.send({
     error: false,
     success: true,
     message: "Liabilities data updated successfully",
     data: update,
-  };
+  });
 }
 else {
-return "something went wrong"
+res.send({
+  message : "Something Went wrong",
+  success : false,
+  error : true
+})
+}
+
+}
+catch(err) {
+  res.send({
+    message : err.message,
+    success : false,
+    error : true
+  })
 }
 };
 
