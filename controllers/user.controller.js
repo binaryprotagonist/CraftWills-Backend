@@ -101,19 +101,19 @@ exports.loginUser = async (req, res) => {
     email: req.body.email,
   });
   if (!userData) {
-    return ( res.json({
+    return {
       message : "Email not found in the database",
       success : false
       
-    }))
+    }
     // new ExpressError(404, "email not found in the database.");
   }
   const match = bcrypt.compareSync(req.body.password, userData.password);
   if (!match) {
-    return (res.json({
+    return {
       message : "Wrong password",
       success : false
-    }));
+    };
     // new ExpressError(403, "Invalid password");
   }
   const token = generateAccessToken({ _id: userData._id });
