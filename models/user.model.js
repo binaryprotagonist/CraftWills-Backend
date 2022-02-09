@@ -59,7 +59,7 @@ const UserSchema = new mongoose.Schema({
   profileImage : {
     type : String,
     default : "/uploads/defaultimage.png"
-  },
+  },  
   memberPersonDetails : {
    type: mongoose.Schema.Types.ObjectId,
    ref: 'MemberData'
