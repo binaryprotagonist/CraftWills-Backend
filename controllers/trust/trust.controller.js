@@ -70,17 +70,29 @@ exports.UpdateTrustData = async (req, res) => {
         description : req.body.description
     },
   };
+try {
 const update = await TrustDataAccess.updateTrust(updateData);
 if (update){
-  return {
+  res.send( {
     error: false,
     success: true,
     message: "Trust data updated successfully",
     data: update,
-  };
+  });
 }
 else {
-return "something went wrong"
+res.send({
+  message : "something went wrong",
+
+}) 
+
+}
+} catch(err){
+res.send({
+  error : true,
+  success : false,
+  message : err.message
+})
 }
 };
 

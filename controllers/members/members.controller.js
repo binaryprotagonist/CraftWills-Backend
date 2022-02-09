@@ -123,18 +123,29 @@ const updateMember = async (req, res) => {
         }
       },
     };
+try {
   const update = await membersDataAccess.updateMember(updateData);
   if (update){
-    return {
+    res.send({
       error: false,
       success: true,
       message: "Member data updated successfully",
       data: update,
-    };
+    });
   }
   else {
-  return "Something went wrong"
+  res.send({
+      message :"Something went wrong",
+      success : false
+  }) 
   }
+}catch(err){
+    res.send({
+        error : true,
+        success : false,
+        message : err.message
+    })
+}
   };
 
 
