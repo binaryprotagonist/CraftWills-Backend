@@ -309,7 +309,9 @@ console.log("Total assets amount",total)
 
 
 const filterAssets = async(req,res)=>{
-  const data = await asset.find()
+  const _id = req.token_data._id
+
+  const data = await asset.find({user_id : _id})
   const filters = {};
   if (req.body.type) {
     filters.type = req.body.type;
