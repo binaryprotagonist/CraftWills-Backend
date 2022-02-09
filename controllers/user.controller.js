@@ -153,9 +153,11 @@ exports.updateUser = async (req, res) => {
 
   };
   if (updateData.gender==="male" || updateData.gender==="Male"){
+    console.log('male');
     updateData.profileImage = "/uploads/male.png"
   }
   if (updateData.gender==="female" || updateData.gender==="Female"){
+    console.log('female');
     updateData.profileImage = "/uploads/female.png"
   }
 
