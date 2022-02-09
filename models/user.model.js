@@ -59,7 +59,6 @@ const UserSchema = new mongoose.Schema({
   profileImage : {
     type : String,
     // default : "/uploads/defaultimage.png"
-    default : null
   },  
   memberPersonDetails : {
    type: mongoose.Schema.Types.ObjectId,
