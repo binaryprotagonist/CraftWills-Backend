@@ -116,7 +116,6 @@ const getAssets = async (req,res)=> {
 
 const updateAssets = async (req, res) => {
     const _id = req.params.id
-    
     const updateData = {
       _id,
       toUpdate: {
@@ -193,7 +192,7 @@ const updateAssets = async (req, res) => {
 }
   };
 
-
+  
 const totalAssetsAmount = async(req,res)=>{
      
     const aggCursor = await asset.aggregate([

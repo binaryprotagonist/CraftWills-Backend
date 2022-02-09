@@ -276,6 +276,7 @@ exports.getUser = async (req, res) => {
     postalCode : users.postalCode,
     Citizenship : users.Citizenship,
     dob : users.dob,
+    profileImage : users.profileImage
     }
   };
 };
