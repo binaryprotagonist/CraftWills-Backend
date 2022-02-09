@@ -257,8 +257,15 @@ exports.uploadImage = async (req, res) => {
 //   };
 // };
 
+
 exports.getUser = async (req, res) => {
   const users = await usersDataAccess.findUser(req.token_data._id);
+  if (users.profileImage){
+    return profileImage = users.profileImage;
+  }
+  else{
+    return profileImage = null;
+  }
   return {
     error: false,
     success: true,
@@ -276,8 +283,9 @@ exports.getUser = async (req, res) => {
     postalCode : users.postalCode,
     Citizenship : users.Citizenship,
     dob : users.dob,
-    profileImage : users.profileImage
+    profileImage
     }
+    
   };
 };
 
