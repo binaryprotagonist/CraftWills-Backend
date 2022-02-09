@@ -51,12 +51,13 @@ const storeLiabilities = async (req,res) => {
 
 const updateLiabilities = async (req, res) => {
   const _id = req.params.id
+  const creatTime = moment().format("YYYY-MM-DD");
   const updateData = {
     _id,
     toUpdate: {
       current_Outstanding_Amount : req.body?.current_Outstanding_Amount,
       type : req.body.type,
-      isoDate: `${creatTime}T00:00:00Z`,
+      isoDate: `${creatTime}`,
       privateDept: {
           dept_Name: req.body.privateDept?.dept_Name,
           description: req.body.privateDept?.description,
