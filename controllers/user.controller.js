@@ -30,15 +30,17 @@ exports.createUser = async (req) => {
     postalCode : req.body.postalCode,
     citizenship : req.body.citizenship,
     dob : req.body.dob,
+    profileImage : null
    };
   
 
-   if (data.gender==="male" || data.gender==="Male"){
-     data.profileImage = "/uploads/male.png"
-   }
-   if (data.gender==="female" || data.gender==="Female"){
-     data.profileImage = "/uploads/female.png"
-   }
+
+  //  if (data.gender==="male" || data.gender==="Male"){
+  //    data.profileImage = "/uploads/male.png"
+  //  }
+  //  if (data.gender==="female" || data.gender==="Female"){
+  //    data.profileImage = "/uploads/female.png"
+  //  }
 
   const storedUser = await usersDataAccess.storeUser(data);
   if (storedUser){
@@ -215,15 +217,22 @@ if (update){
 
 exports.uploadImage = async (req, res) => {
   const _id = req.token_data._id;
-  const user = await usersDataAccess.findUser(_id)
-  let profileImage = ""
-  if (user.gender==="male" || user.gender==="Male"){
-    console.log('male');
-    profileImage = "/uploads/male.png"
+  // const user = await usersDataAccess.findUser(_id)
+  // let profileImage = ""
+  // if (user.gender==="male" || user.gender==="Male"){
+  //   console.log('male');
+  //   profileImage = "/uploads/male.png"
+  // }
+  // if (user.gender==="female" || user.gender==="Female"){
+  //   console.log('female');
+  //   profileImage = "/uploads/female.png"
+  // }
+  var profileImage = ""
+  if (req.body.profileImage===null){
+    profileImage = null;
   }
-  if (user.gender==="female" || user.gender==="Female"){
-    console.log('female');
-    profileImage = "/uploads/female.png"
+  else{
+    profileImage = req.body.profileImage;
   }
 
   // let image;
