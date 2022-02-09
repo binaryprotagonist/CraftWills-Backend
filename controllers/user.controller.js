@@ -133,7 +133,8 @@ exports.loginUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   const _id = req.token_data._id;
-  const updateData = {
+  const body = JSON.parse(JSON.stringify(req.body));
+  let updateData = {
     _id,
     toUpdate: {
       fullName : req.body.fullName,
@@ -152,14 +153,17 @@ exports.updateUser = async (req, res) => {
     },
 
   };
-  if (updateData.gender==="male" || updateData.gender==="Male"){
+  console.log(body.gender)
+  if (body.gender==="male" || body.gender==="Male"){
     console.log('male');
     updateData.profileImage = "/uploads/male.png"
   }
-  if (updateData.gender==="female" || updateData.gender==="Female"){
+  if (body.gender==="female" || body.gender==="Female"){
     console.log('female');
     updateData.profileImage = "/uploads/female.png"
   }
+  console.log(updateData);
+
 
 const update = await usersDataAccess.updateUser(updateData);
 if (update){
