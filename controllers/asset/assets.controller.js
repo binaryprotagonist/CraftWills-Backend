@@ -116,6 +116,7 @@ const getAssets = async (req,res)=> {
 
 const updateAssets = async (req, res) => {
     const _id = req.params.id
+    
     const updateData = {
       _id,
       toUpdate: {
@@ -123,9 +124,9 @@ const updateAssets = async (req, res) => {
         specifyOwnershipType: req.body.specifyOwnershipType,
         bankAccount:
        {
-            bankname: req.body.bankAccount.bankname,
-            accountNumber: req.body.bankAccount.accountNumber,
-            estimateValue: req.body.bankAccount.estimateValue
+            bankname: req.body.bankAccount?.bankname,
+            accountNumber: req.body.bankAccount?.accountNumber,
+            estimateValue: req.body.bankAccount?.estimateValue
         },
         business: {
             businessName: req.body.business?.businessName,
