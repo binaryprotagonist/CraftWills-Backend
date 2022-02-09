@@ -215,16 +215,27 @@ if (update){
 
 exports.uploadImage = async (req, res) => {
   const _id = req.token_data._id;
-  let image;
-  if (!req.file) {
-    image = "/uploads/defaultimage.png";
-  } else {
-    image = "/uploads/" + req.file.filename;
+  const user = await usersDataAccess.findUser(_id)
+  const profileImage = ""
+  if (user.gender==="male" || user.gender==="Male"){
+    console.log('male');
+    profileImage = "/uploads/male.png"
   }
+  if (user.gender==="female" || user.gender==="Female"){
+    console.log('female');
+    profileImage = "/uploads/female.png"
+  }
+
+  // let image;
+  // if (!req.file) {
+  //   image = "/uploads/defaultimage.png";
+  // } else {
+  //   image = "/uploads/" + req.file.filename;
+  // }
   const updateImage = {
     _id,
     toUpdate: {
-      profileImage: image,
+      profileImage,
     },
   };
   const updatedProfile = await usersDataAccess.updateUser(updateImage);
