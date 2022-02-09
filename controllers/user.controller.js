@@ -216,7 +216,7 @@ if (update){
 exports.uploadImage = async (req, res) => {
   const _id = req.token_data._id;
   const user = await usersDataAccess.findUser(_id)
-  const profileImage = ""
+  let profileImage = ""
   if (user.gender==="male" || user.gender==="Male"){
     console.log('male');
     profileImage = "/uploads/male.png"
