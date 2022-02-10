@@ -174,7 +174,7 @@ const updateAssets = async (req, res) => {
       success: true,
       message: "Assets data updated successfully",
       data: update,
-    });
+    }); 
   }
   else {
   res.send({
