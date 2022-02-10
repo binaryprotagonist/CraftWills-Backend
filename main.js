@@ -28,9 +28,9 @@ const willRouter = require("./routes/Will/will.route")
 
 const app = express();
 require("express-async-errors");
-const middleware = require("./Errorgenerator/middleware");
-app.use(middleware.unknownEndpoint);
-app.use(middleware.errorHandler);
+// const middleware = require("./Errorgenerator/middleware");
+// app.use(middleware.unknownEndpoint);
+// app.use(middleware.errorHandler);
 
 
 // Cors
