@@ -134,8 +134,8 @@ exports.loginUser = async (req, res) => {
 // // Update 
 
 exports.updateUser = async (req, res) => {
-  const _id = req.token_data._id;
-  const body = JSON.parse(JSON.stringify(req.body));
+  const  _id = req.token_data._id;
+  // const body = JSON.parse(JSON.stringify(req.body));
   let updateData = {
     _id,
     toUpdate: {
@@ -155,25 +155,25 @@ exports.updateUser = async (req, res) => {
     },
 
   };
-  console.log(body.gender)
-  const user = await usersDataAccess.findUser(_id)
-  if(user){
-    let {profileImage} = user
-    const stringToCheck = profileImage.split('/')[2];
-    console.log(stringToCheck)
-    if(stringToCheck === 'defaultImage' || stringToCheck === 'male' || stringToCheck === 'female'){
-      if (body.gender==="male" || body.gender==="Male"){
-        console.log('male');
-        profileImage = "/uploads/male.png"
-      }
-      if (body.gender==="female" || body.gender==="Female"){
-        console.log('female');
-        profileImage = "/uploads/female.png"
-      }
-    }  
-    updateData.profileImage = profileImage
-  }
-  console.log(updateData);
+  // console.log(body.gender)
+  // const user = await usersDataAccess.findUser(_id)
+  // if(user){
+  //   let {profileImage} = user
+  //   const stringToCheck = profileImage.split('/')[2];
+  //   console.log(stringToCheck)
+  //   if(stringToCheck === 'defaultImage' || stringToCheck === 'male' || stringToCheck === 'female'){
+  //     if (body.gender==="male" || body.gender==="Male"){
+  //       console.log('male');
+  //       profileImage = "/uploads/male.png"
+  //     }
+  //     if (body.gender==="female" || body.gender==="Female"){
+  //       console.log('female');
+  //       profileImage = "/uploads/female.png"
+  //     }
+  //   }  
+  //   updateData.profileImage = profileImage
+  // }
+  // console.log(updateData);
 
 
 const update = await usersDataAccess.updateUser(updateData);
