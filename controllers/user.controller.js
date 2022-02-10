@@ -226,14 +226,21 @@ exports.uploadImage = async (req, res) => {
   // if (user.gender==="female" || user.gender==="Female"){
   //   console.log('female');
   //   profileImage = "/uploads/female.png"
-  // }
-  var profileImage = ""
-  if (req.body.profileImage===null){
+  let profileImage;
+  if (!req.file) {
     profileImage = null;
+  } else {
+    profileImage = "/uploads/" + req.file.filename;
   }
-  else{
-    profileImage = req.body.profileImage;
-  }
+
+  // // }
+  // var profileImage = ""
+  // if (req.body.profileImage===null){
+  //   profileImage = null;
+  // }
+  // else{
+  //   profileImage = req.body.profileImage;
+  // }
 
   // let image;
   // if (!req.file) {
@@ -269,6 +276,8 @@ exports.uploadImage = async (req, res) => {
 
 exports.getUser = async (req, res) => {
   const users = await usersDataAccess.findUser(req.token_data._id);
+
+  console.log(users.profileImage)
    
   return {
     error: false,
