@@ -1,8 +1,13 @@
 const mongoose = require("mongoose");
 const subscriptionSchema = new mongoose.Schema({
-  userId: {
-    type: String,
-  },
+//   userId: {
+//     type: String,
+//   },
+   userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref: 'UserData'
+    },
   address: {
     type: String,
   },
@@ -21,6 +26,12 @@ const subscriptionSchema = new mongoose.Schema({
   createTime:{
     type:String
   },
+  subscriptionEndDate:{
+    type:String
+  },
+  subscriptionStartDate:{
+    type:String
+  },
   isoDate:{
     type:String
   },
@@ -29,6 +40,9 @@ const subscriptionSchema = new mongoose.Schema({
   },
   currentStreak:{
     type:String
+  },
+  subscription:{
+    type:Boolean
   },
   amount:{
     type:Number

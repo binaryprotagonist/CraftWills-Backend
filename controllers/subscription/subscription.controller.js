@@ -1,9 +1,11 @@
 const subscriptionDataAccess = require("../../dal/subscription/subscription.dal");
-const ExpressError = require("../../Errorgenerator/errorGenerator");
+// const ExpressError = require("../../Errorgenerator/errorGenerator");
 const moment = require("moment-timezone");
 require("../../JsonWebToken/jwt");
+const ExpressError = require("../../Errorgenerator/errorGenerator");
 
 exports.payment = async (req) => {
+  const _id = req.token_data._id;
   const customer = await subscriptionDataAccess.customers(req);
   const result = await subscriptionDataAccess.card(customer, req);
   const subscription = await subscriptionDataAccess.toke(result, req);
@@ -11,7 +13,12 @@ exports.payment = async (req) => {
   const subData = await subscriptionDataAccess.subId(sub);
   subData.createTime = moment().tz("Asia/Kolkata").format("YYYY-MM-DD");
   subData.isoDate = moment().tz("Asia/Kolkata").format("YYYY-MM-DD") + "T00:00:00Z";
-  subData.amount=sub.plan.amount
+  subData.amount=sub.plan.amount;
+  subData.userId=_id
+  let months=moment().tz("Asia/Kolkata").format("MM")
+  months=months+1
+  subData.subscriptionStartDate= moment().tz("Asia/Kolkata").format("YYYY-MM-DD");
+  subData.subscriptionStartDate= moment().tz("Asia/Kolkata").format(`YYYY-${months}-DD`);
   return await subscriptionDataAccess.storeData(subData);
 };
 
@@ -290,6 +297,10 @@ exports.deletePlan = async (req) => {
 //     data: list1,
 //   }
 // };
+///////////////////////////////////
 
 
-
+// const a=async()=>{
+// const df=await subscriptionDataAccess.findSub()
+// console.log(df)}
+// a()

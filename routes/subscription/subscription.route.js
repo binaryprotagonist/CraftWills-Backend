@@ -13,7 +13,7 @@ router.delete("/deletePlan", ( async (request, response) => {
   return response.json(result);
 }));
 
-router.post("/payment", async (req, res) => {
+router.post("/payment", authenticateToken,async (req, res) => {
   const result = await subscriptionController.payment(req);
   return res.json(result);
 });
@@ -64,3 +64,51 @@ router.post("/cancleSub", async (req, res) => {
 // });
 
 module.exports = router; 
+
+/*
+"stripeEmail": "subhashajmera@gmail.com",
+  "planName": "monthly",
+  "description": "subscription payment",
+  "priceId": "price_1KRYsLJrEVeMChFE8O5KA96B",
+  "planPrice": 200,
+  "currency": "USD",
+  "name": "sk_jmera",
+  "address": "510 Townsend St",
+  "zip": "98140",
+  "city": "San Francisco",
+  "state": "California",
+  "country": "United States",
+  "cardNumber": "4242 4242 4242 4242",
+  "expMonth": 5,
+  "expYear": 2024,
+  "cvc": 178,
+  "productId": "prod_L7oVgMCZWwbTIw",
+  "stripePlanId": "plan_L7oVI2nMjnjKRk"
+}
+*/
+
+
+
+/*
+{
+  "subId": "sub_1KRYyhJrEVeMChFEc5WAeQM2",
+  "priceId": "price_1KRYsLJrEVeMChFE8O5KA96B",
+  "createTime": "2022-02-10",
+  "isoDate": "2022-02-10T00:00:00Z",
+  "amount": 20000,
+  "_id": "6204db5bf5ce9fac47a29220",
+  "__v": 0
+}
+*/
+
+/*
+{
+  "userId": "6204a4926c53335322623741",
+  "subId": "sub_1KRZN5JrEVeMChFEDSYAt2SH",
+  "priceId": "price_1KRYsLJrEVeMChFE8O5KA96B",
+  "createTime": "2022-02-10",
+  "isoDate": "2022-02-10T00:00:00Z",
+  "amount": 20000,
+  "_id": "6204e14314518c74ca13c646",
+  "__v": 0
+}*/
