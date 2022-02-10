@@ -324,7 +324,7 @@ exports.forgotPassword = async (req, res) => {
     email: req.body.email,
   });
   if (!userData) {
-    return ("email does not exists");
+    res.json({success: false ,message : "email does not exists"})
   }
   console.log(userData.email)
   const otpSend = {

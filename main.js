@@ -4,6 +4,8 @@ const express = require("express");
 // User
 
 const userRouters = require("./routes/user.route");
+const subscriptionRouters = require("./routes/subscription/subscription.route");
+
 const memberRouter = require ("./routes/members/members.route")
 // Assets
 
@@ -25,6 +27,11 @@ const willRouter = require("./routes/Will/will.route")
 // App
 
 const app = express();
+require("express-async-errors");
+const middleware = require("./Errorgenerator/middleware");
+app.use(middleware.unknownEndpoint);
+app.use(middleware.errorHandler);
+
 
 // Cors
 
@@ -74,6 +81,10 @@ app.use("/trust",trustRouter)
 //Will
 
 app.use('/will',willRouter)
+
+// Subscription
+
+app.use("/subscription",subscriptionRouters)
 
 app.listen(PORT, () => {
   console.log(`YOUR SERVER IS WORKING AT PORT ${PORT}`);

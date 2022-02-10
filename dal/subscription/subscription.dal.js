@@ -8,9 +8,10 @@ const storeData = async (subscriptionToStore) => {
 };
 
 const findSub = async (data) => {
-  const reports = await Subscription.find(data);
+  const reports = await Subscription.find();
   return reports;
 };
+
 
 const customers = async (req) => {
     const createCustomer = await stripe.customers.create({
@@ -73,9 +74,9 @@ const subId = async (sub) => {
 
 const createPlan = async (data) => {
   const plan = await stripe.plans.create({
-    amount: data.planPrice * 100,
+    amount: data.planPrice,
     currency: data.currency,
-    interval: "year",
+    interval: "month",
     interval_count: data.stripeDuration,
     product: data.productId,
   });
@@ -93,9 +94,9 @@ const createProduct = async (req) => {
 
 const price = async (resp, req) => {
   const res = await stripe.prices.create({
-    unit_amount: req.body.planPrice * 100,
+    unit_amount: req.body.planPrice,
     currency: req.body.currency,
-    recurring: { interval: "year" },
+    recurring: { interval: "month" },
     product: resp.id,
   });
   return res;
