@@ -230,7 +230,7 @@ exports.uploadImage = async (req, res) => {
   if (!req.file) {
     profileImage = null;
   } else {
-    profileImage = "/uploads/" + req.file.filename;
+    profileImage = "uploads/" + req.file.filename;
   }
 
   // // }
