@@ -1,28 +1,39 @@
-const mongoose = require('mongoose')
-const subscriptionSchema = mongoose.Schema({
-    user_id : {
-        type : String
-    }
-    ,
-    regularPlan : {
-        type : Number
-    },
-    subscriptionStartDate :{
-        type : String
-    },
-    subscriptionEndDate : {
-        type : String
-    },
-    currentSubscription : {
-        type : Number
-    },
-    isValid : {
-        type : Boolean
-    }
-
+const mongoose = require("mongoose");
+const subscriptionSchema = new mongoose.Schema({
+  userId: {
+    type: String,
+  },
+  address: {
+    type: String,
+  },
+  name: {
+    type: String,
+  },
+  stripeEmail:{
+    type:String
+  },
+  subId:{
+    type:String
+  },
+  priceId:{
+    type:String
+  },
+  createTime:{
+    type:String
+  },
+  isoDate:{
+    type:String
+  },
+  longestStreak:{
+    type:String
+  },
+  currentStreak:{
+    type:String
+  },
+  amount:{
+    type:Number
+  }
 });
 
-
-const Subscription = mongoose.model("subscription",subscriptionSchema)
-
-module.exports(Subscription)
+const Subscription = mongoose.model("subscription", subscriptionSchema);
+module.exports = Subscription;
