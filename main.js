@@ -1,5 +1,6 @@
 require("dotenv").config();
 require("./mongo");
+require("../src/cronj_job/cron");
 const express = require("express");
 // User
 
@@ -16,7 +17,6 @@ const assetsRouter = require ("./routes/asset/assets")
 const liabilitiesRouter = require ("./routes/liabilities/liabilities.route")
 
 // const getLiabilities = require ("./routes/liabilities/getLiabilities")
-
 // Trust
 
 const trustRouter = require ("./routes/trust/trust.route")
@@ -44,7 +44,7 @@ const path = require ('path')
 const PORT = process.env.PORT || 3000;
 // Body Parser
 
-
+  
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
@@ -84,7 +84,7 @@ app.use('/will',willRouter)
 
 // Subscription
 
-app.use("/subscription",subscriptionRouters)
+app.use("/subscription",subscriptionRouters);
 
 app.listen(PORT, () => {
   console.log(`YOUR SERVER IS WORKING AT PORT ${PORT}`);

@@ -8,6 +8,11 @@ const subscriptionController = require("../../controllers/subscription/subscript
 //   return response.json(result);
 // }));
 
+// router.post("/upgradeSub",authenticateToken, async (req, res) => {
+//   const result = await subscriptionController.u(req);
+//   return res.send(result);
+// });
+
 router.delete("/deletePlan", ( async (request, response) => {
   const result = await subscriptionController.deletePlan(request);
   return response.json(result);
@@ -21,12 +26,18 @@ router.post("/payment", authenticateToken,async (req, res) => {
 router.post("/product", async (req, res) => {
     const result = await subscriptionController.createProduct(req);
     return res.json(result);
-  });
-
-router.post("/cancleSub", async (req, res) => {
-  const result = await subscriptionController.cancleSubscription(req);
-  return res.send(result);
 });
+
+router.get("/getSubDetails",authenticateToken , async (req,res)=>{
+  const result = await subscriptionController.getSubsDetails(req);
+  return res.send(result);
+})
+
+// router.post("/cancleSub",authenticateToken, async (req, res) => {
+//   const result = await subscriptionController.cancleSubscription(req);
+//   return res.send(result);
+// });
+
 
 // router.get("/getLastYear", async (request, response) => {
 //   const result = await subscriptionController.getReportYear(request);

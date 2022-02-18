@@ -31,13 +31,15 @@ const storeAssets = async (req, res) => {
         specifyOwnershipType: req.body.specifyOwnershipType,
         type : req.body.type,
         isoDate: `${creatTime}`,
+        GiftBenificiary : req.body.GiftBenificiary,
+        ifBenificiaryNotSurvive : req.body.ifBenificiaryNotSurvive,
+
         bankAccount:
        {
             bankname: req.body.bankAccount?.bankname,
             accountNumber: req.body.bankAccount?.accountNumber,
             estimateValue: req.body.bankAccount?.estimateValue,
         },
-        
         business: {
             UEN_no: req.body.business?.UEN_no,
             businessName: req.body.business?.businessName
@@ -73,25 +75,31 @@ const storeAssets = async (req, res) => {
             safe_Box_Location : req.body.safeDepositBox?.safe_Box_Location,
             safe_No: req.body.safeDepositBox?.safe_No
         }
-    })
 
-    const savedAsset = await Asset.save()
+    })
+  if (Asset.type === "bankAccount" || "investmentAccount" || "insurancePolicy" || "business" || "intellectualProperty" ){
+      Asset.assetType = "liquid"
+    }
+  if (Asset.type === "personalPossession" || Asset.type ==="realEsate" || Asset.type ==="motorVehicle" || Asset.type ==="safeDepositBox") {
+      Asset.assetType = "iliquid"
+    }
+
+  const savedAsset = await Asset.save()
     res.json({
         success : true,
+        status : 200,
         message : "Asset saved",
-        data : savedAsset
-        
+        data : savedAsset    
     })
     }
     catch (err) {
         res.json({
             success : true ,
             message :err.message,
-            error : err
+            error : err.message
         })
         console.log(err)
     }
-
 }
 
 const getAssets = async (req,res)=> {
@@ -121,23 +129,26 @@ const updateAssets = async (req, res) => {
       toUpdate: {
         country: req.body.country,
         specifyOwnershipType: req.body.specifyOwnershipType,
+        GiftBenificiary : req.body.GiftBenificiary,
+        ifBenificiaryNotSurvive : req.body.ifBenificiaryNotSurvive,
+
         bankAccount:
        {
-            bankname: req.body.bankAccount?.bankname,
-            accountNumber: req.body.bankAccount?.accountNumber,
-            estimateValue: req.body.bankAccount?.estimateValue
+          bankname: req.body.bankAccount?.bankname,
+          accountNumber: req.body.bankAccount?.accountNumber,
+          estimateValue: req.body.bankAccount?.estimateValue
         },
         business: {
-            businessName: req.body.business?.businessName,
-            UEN_no: req.body.business?.UEN_no
+          businessName: req.body.business?.businessName,
+          UEN_no: req.body.business?.UEN_no
         },
         insurancePolicy: {
-            policyName: req.body.insurancePolicy?.policyName,
-            policyNumber: req.body.insurancePolicy?.policyNumber
+          policyName: req.body.insurancePolicy?.policyName,
+          policyNumber: req.body.insurancePolicy?.policyNumber
         },
         intellectualProperty: {
-            ip_Name: req.body.intellectualProperty?.ip_Name,
-            ip_No: req.body.intellectualProperty?.ip_No
+          ip_Name: req.body.intellectualProperty?.ip_Name,
+          ip_No: req.body.intellectualProperty?.ip_No
         },
         investmentAccount: {
             accountName: req.body.investmentAccount?.accountName,
@@ -159,15 +170,15 @@ const updateAssets = async (req, res) => {
             address: req.body.realEstate?.address,
             safeDepositBox : {
         },
-
             safe_Box_Location : req.body.safeDepositBox?.safe_Box_Location,
             safe_No : req.body.safeDepositBox?.safe_No
 
         }
       },
     };
+
   try {
-  const update = await AssetsDataAccess.updateAsset(updateData);
+const update = await AssetsDataAccess.updateAsset(updateData);
   if (update){
     res.send( {
       error: false,
@@ -190,7 +201,7 @@ const updateAssets = async (req, res) => {
     message : err.message
   })
 }
-  };
+};
 
   
 const totalAssetsAmount = async(req,res)=>{
@@ -215,6 +226,7 @@ console.log(item.total)
 res.json(item.total)   
 });
 }
+
 
 const totalNetWorth = async(req,res)=>{
     const aggCursor1 = await asset.aggregate([
@@ -356,5 +368,24 @@ const deleteAssets = async (req,res)=>{
 
 }
 
+const countLiquidAndiliquid = async (req,res)=>{
+  var liquid = 0;
+  var iliquid = 0;
+  const _id = req.token_data._id ;
+  const data = await asset.find({user_id : _id})
+  data.forEach(function (item, index) {
+    const data= item.assetType;
+    if (data=="liquid"){
+      liquid+=1
+    }
+    if (data=="iliquid"){
+      iliquid+=1
+    }
+  })
+  res.json({
+    liquidCount : liquid,
+    iliquidCount : iliquid
+  })  
+}
 
-module.exports = {storeAssets,getAssetsMonthly,updateAssets,totalAssetsAmount,totalNetWorth,getAssets,filterAssets,deleteAssets}
+module.exports = {storeAssets,getAssetsMonthly,updateAssets,totalAssetsAmount,totalNetWorth,getAssets,filterAssets,deleteAssets,countLiquidAndiliquid}
