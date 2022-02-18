@@ -1,6 +1,6 @@
 require("dotenv").config();
 require("./mongo");
-require("../src/cronj_job/cron");
+require("./cronj_job/cron");
 const express = require("express");
 // User
 
