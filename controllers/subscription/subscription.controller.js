@@ -21,7 +21,7 @@ exports.payment = async (req) => {
   subData.userId=_id
   subData.subscription=true
 
-    let months=parseInt(moment().tz("Asia/Kolkata").format("MM"));
+    let months=parseInt(moment().tz(" Asia/Kolkata").format("MM"));
     months=months+1
     if (months < 10){
       months= "0" + months

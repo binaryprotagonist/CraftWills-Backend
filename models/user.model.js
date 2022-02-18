@@ -46,7 +46,6 @@ const UserSchema = new mongoose.Schema({
   id_country : {
     type : String,
     required : true,
-    default : "Singapore"
   },
   dob : {
     type : String,
@@ -54,7 +53,6 @@ const UserSchema = new mongoose.Schema({
   },
   Citizenship : {
     type : String,
-    default : "Singapore"
   },
   profileImage : {
     type : String,

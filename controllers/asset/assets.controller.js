@@ -132,7 +132,7 @@ const updateAssets = async (req, res) => {
         GiftBenificiary : req.body.GiftBenificiary,
         ifBenificiaryNotSurvive : req.body.ifBenificiaryNotSurvive,
 
-        bankAccount:
+        bankAccount:  
        {
           bankname: req.body.bankAccount?.bankname,
           accountNumber: req.body.bankAccount?.accountNumber,

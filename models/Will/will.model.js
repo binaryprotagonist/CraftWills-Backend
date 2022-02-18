@@ -1,4 +1,4 @@
-const { number } = require("joi");
+const { number, string } = require("joi");
 const mongoose = require("mongoose");
 const WillSchema = new mongoose.Schema({
     user_id: {
@@ -229,19 +229,8 @@ const WillSchema = new mongoose.Schema({
           type : Number
       }
     }],
-    trustFallback : {
-        trustType : {
-            type : String
-        },
-        membersData : [{
-            members : {
-                type : mongoose.Schema.Types.ObjectId,
-                ref : "Members"
-            },
-            specifyShares : {
-                type : Number
-            }
-        }]
+    trustFallback : { 
+        type : mongoose.Schema.Types.Mixed,
     },
 
     clauses : {
