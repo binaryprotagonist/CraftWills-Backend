@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 const AssetsSchema = new mongoose.Schema({
 
     user_id: {
-        type: String,
-    },
-    assetType : {
-        type : String    // liquid or iliquid
+        type: String
     },
     type : {
+        type : String
+    },
+    assetType : {
         type : String
     },
     country: {
@@ -16,7 +16,6 @@ const AssetsSchema = new mongoose.Schema({
     },
     specifyOwnershipType: {
         type: String,
-        
     },
     specifyShares : {
         type : String
@@ -24,7 +23,22 @@ const AssetsSchema = new mongoose.Schema({
     isoDate:{
         type:String
     },
+    GiftBenificiary : [{
+        member :{
+            type : mongoose.Schema.Types.ObjectId,
+            ref : "Members"
+        },
+        specifyShares : {
+            type : Number
+        }
+      }],
+
+    ifBenificiaryNotSurvive : {
+        type : String
+    },
+
     bankAccount: {
+     
         bankname: {
             type: String,     
         },
@@ -38,7 +52,7 @@ const AssetsSchema = new mongoose.Schema({
         },
     },
     business : {
-        businessName :{
+          businessName :{
             type : String
           },
           UEN_no : {
@@ -47,7 +61,8 @@ const AssetsSchema = new mongoose.Schema({
      
     },
     insurancePolicy : {
-        policyName : {
+    
+         policyName : {
             type : String
           },
           policyNumber: {
@@ -57,6 +72,7 @@ const AssetsSchema = new mongoose.Schema({
           },
     },
     intellectualProperty : {
+ 
         ip_Name : {
             type : String,
         },
@@ -65,6 +81,7 @@ const AssetsSchema = new mongoose.Schema({
         },
     },
     investmentAccount : {
+
         accountName : {
             type : String,
           },
@@ -76,6 +93,7 @@ const AssetsSchema = new mongoose.Schema({
  
     },
     motorVehicle : {
+   
         CarModel : {
             type : String,
         },
@@ -85,6 +103,7 @@ const AssetsSchema = new mongoose.Schema({
     
     },
     otherAssets : {
+  
         asset_name: {
             type: String,
         },
@@ -97,6 +116,7 @@ const AssetsSchema = new mongoose.Schema({
 
     },
     personalPossession : {
+
         Name : {
             type : String,
         },
@@ -105,11 +125,13 @@ const AssetsSchema = new mongoose.Schema({
         }, 
     } ,
     realEstate : {
+   
         address: {
             type: String,
         },
     },
     safeDepositBox : {
+  
         safe_Box_Location: {
             type: String,
         },

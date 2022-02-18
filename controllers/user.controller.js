@@ -5,7 +5,7 @@ require("dotenv").config();
 const { generateAccessToken } = require("../JsonWebToken/jwt");
 const usersDataAccess= require("../dal/user.dal")
 const {myFunction} = require ("../nodemailer/nodemailer")
-
+const emailExixtance =require ("email-existence");
 
 /// Signup
 
@@ -16,7 +16,9 @@ exports.createUser = async (req) => {
     // throw new ExpressError(401, "Bad request");
     console.log('err')
   }
+
   const passwordHash = bcrypt.hashSync(req.body.password, 10);
+
   const data = {
     fullName : req.body.fullName,
     email: req.body.email,
@@ -32,7 +34,7 @@ exports.createUser = async (req) => {
     dob : req.body.dob,
     profileImage : null
    };
-  
+   
 
 
   //  if (data.gender==="male" || data.gender==="Male"){
@@ -95,7 +97,7 @@ exports.loginUser = async (req, res) => {
   if (!email || !password) {
     return ('bad request')
     // return new ExpressError(
-    //   401,
+    //   401, 
     //   "Either username or password is missing in the request."
     // );
   }
@@ -106,8 +108,7 @@ exports.loginUser = async (req, res) => {
     return {
       message : "Email not found in the database",
       success : false
-      
-    }
+      }
     // new ExpressError(404, "email not found in the database.");
   }
   const match = bcrypt.compareSync(req.body.password, userData.password);
@@ -152,9 +153,8 @@ exports.updateUser = async (req, res) => {
       dob : req.body.dob,
       Citizenship : req.body.Citizenship,
       // profileImage : req.file.filename
-    },
-
-  };
+    }, 
+};
   // console.log(body.gender)
   // const user = await usersDataAccess.findUser(_id)
   // if(user){
@@ -217,15 +217,7 @@ if (update){
 
 exports.uploadImage = async (req, res) => {
   const _id = req.token_data._id;
-  // const user = await usersDataAccess.findUser(_id)
-  // let profileImage = ""
-  // if (user.gender==="male" || user.gender==="Male"){
-  //   console.log('male');
-  //   profileImage = "/uploads/male.png"
-  // }
-  // if (user.gender==="female" || user.gender==="Female"){
-  //   console.log('female');
-  //   profileImage = "/uploads/female.png"
+
   let profileImage;
   if (!req.file) {
     profileImage = null;
@@ -233,21 +225,6 @@ exports.uploadImage = async (req, res) => {
     profileImage = "uploads/" + req.file.filename;
   }
 
-  // // }
-  // var profileImage = ""
-  // if (req.body.profileImage===null){
-  //   profileImage = null;
-  // }
-  // else{
-  //   profileImage = req.body.profileImage;
-  // }
-
-  // let image;
-  // if (!req.file) {
-  //   image = "/uploads/defaultimage.png";
-  // } else {
-  //   image = "/uploads/" + req.file.filename;
-  // }
   const updateImage = {
     _id,
     toUpdate: {
@@ -263,22 +240,15 @@ exports.uploadImage = async (req, res) => {
   };
 };
 
-// exports.getAllusers = async (req, res) => {
-//   const users = await usersDataAccess.findAll();
-//   return {
-//     error: false,
-//     sucess: true,
-//     message: "Get all users Sucessfully",
-//     data: users,
-//   };
-// };
-
 
 exports.getUser = async (req, res) => {
   const users = await usersDataAccess.findUser(req.token_data._id);
-
+    
   console.log(users.profileImage)
-   
+  emailExixtance.check(users.email,function(err,res){
+    console.log("res :"+res)
+  })
+
   return {
     error: false,
     success: true,
@@ -311,9 +281,6 @@ exports.getProfilepic = async (req, res) => {
 }
   };
 
-// exports.getId = async (req, res) => {
-//   res.send(req.params._id);
-// };
 
 exports.forgotPassword = async (req, res) => {
   const { email } = req.body;
@@ -324,7 +291,7 @@ exports.forgotPassword = async (req, res) => {
     email: req.body.email,
   });
   if (!userData) {
-    res.json({success: false ,message : "email does not exists"})
+    res.json({success: false,message : "email does not exists"})
   }
   console.log(userData.email)
   const otpSend = {
@@ -335,6 +302,7 @@ exports.forgotPassword = async (req, res) => {
   };
   
   myFunction(otpSend);
+
 return {
     error: false,
     success: true,
@@ -343,26 +311,27 @@ return {
   };
 };
 
-// exports.verifyEmail = async (req, res) => {
-//   const { _id } = req.body;
-//   if (!_id) {
-//     throw new ExpressError(401, "plz enter the  _id");
-//   }
-//   const updateData = {
-//     _id,
-//     toUpdate: {
-//       isVerified: true,
-//     },
-//   };
-//   const update = await usersDataAccess.updateUser(updateData);
-//   return {
-//     error: false,
-//     sucess: true,
-//     message: "email is verified successfully",
-//     verify: update,
-//   };
-// };
+exports.verifyEmail = async(req,res)=>{
+  const {_id} = req.body;
+  if (!_id){
+    throw new ExpressError(401,"please enter the _id");
 
+  }
+  const updateData= {
+    _id,
+    toUpdate : {
+      isVerified : true,
+    }
+  }
+  const update  = await usersDataAccess.updateUser(updateData);
+  return {
+    error : false,
+    success : true,
+    message : "email is verified successfully",
+    verify : update
+  }
+}
+ 
 exports.resetPassword = async (req, res) => {
   const { _id, newPassword} = req.body;
   if (!_id || !newPassword ) {
@@ -375,6 +344,7 @@ exports.resetPassword = async (req, res) => {
     toUpdate: {
       password: password,
     },
+    
   }
   const updatePass = await usersDataAccess.updateUser(updateData);
 
@@ -421,6 +391,7 @@ exports.updatePassword = async (req, res) => {
     data: updatePass,
   };
 };
+
 // exports.reminderTime = async (req, res) => {
 //   const { dailyReminder, subject, text, timezone, reminderTime } = req.body;
 //   if (!dailyReminder || !subject || !text || !timezone || !reminderTime) {

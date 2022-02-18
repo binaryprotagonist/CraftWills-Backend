@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 // const momen = require("moment-timezone");
+
 require("dotenv").config();
 // const ExpressError = require("../Errorgenerator/errorGenerator");
 const { generateAccessToken } = require("../../JsonWebToken/jwt");
@@ -9,8 +10,10 @@ const usersDataAccess= require("../../dal/user.dal");
 const User = require("../../models/user.model");
 const {myFunction} = require ("../../nodemailer/nodemailer");
 const date = require ("date-and-time");
-
+var todayDate=(date.format(new Date(), 'MM-DD-YYYY'));
 var count = 0
+
+
 exports.storeWill = async (req,res) => {
   const _id = req.token_data._id
   const now = new Date()

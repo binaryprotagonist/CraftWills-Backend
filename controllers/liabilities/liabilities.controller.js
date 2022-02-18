@@ -31,7 +31,6 @@ const storeLiabilities = async (req,res) => {
             loan_Number: req.body.unsecuredLoan?.loan_Number,
             loan_Id_Number: req.body.unsecuredLoan?.loan_Id_Number,
             description: req.body.unsecuredLoan?.description,
-    
         }
     })
     const savedData = await data.save();
@@ -108,9 +107,6 @@ catch(err) {
 };
 
 
-
-
-
 const getLiabilities = async (req,res) =>{
     const _id = req.token_data._id
     try {
@@ -132,7 +128,6 @@ const getLiabilities = async (req,res) =>{
 // var db = require('database-js');
 const liabilitystats = async (req,res)=>{
     // const pipeline;
-    
     const aggCursor = await liabilities.aggregate([
         {
           $match: {
@@ -147,12 +142,12 @@ const liabilitystats = async (req,res)=>{
           }
         }
       ]);
-      aggCursor.forEach(function (item, index) {
+
+  aggCursor.forEach(function (item, index) {
         console.log(item.total)
         res.json(item.total)   
     });
-      
-}
+};
 
 const liabilitiesFilter = async(req,res)=>{
   const _id = req.token_data._id

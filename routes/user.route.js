@@ -4,6 +4,7 @@ const upload = require("../middleware/multer");
 const { authenticateToken } = require("../JsonWebToken/jwt");
 const router = express.Router();
 const userController = require("../controllers/user.controller");
+// const sub=require('../../src/dal/subscription/subscription.dal')
 // const session = require ("express-session")
 
 router.post("/signup", async (req, res) => {
@@ -16,7 +17,7 @@ router.post("/signup", async (req, res) => {
 //   return res.send(result);
 // });
 
-router.get("/getUser",authenticateToken ,async (request, response) => {
+router.get("/getUser",authenticateToken,async (request, response) => {
   const result = await userController.getUser(request);
   return response.json(result);
 });

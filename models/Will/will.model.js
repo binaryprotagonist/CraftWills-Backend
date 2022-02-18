@@ -12,8 +12,8 @@ const WillSchema = new mongoose.Schema({
         type : String
     },
 
-
 /// Personal Information
+
     id_Number: {
         type: Number
     },
@@ -81,7 +81,7 @@ const WillSchema = new mongoose.Schema({
     },
     addGuardianExecutor: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Members"
+        ref : "Members"
     }],
 
     /// Appoint Replacement Guardian

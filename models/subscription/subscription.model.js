@@ -5,7 +5,6 @@ const subscriptionSchema = new mongoose.Schema({
 //   },
    userId: {
         type: mongoose.Schema.Types.ObjectId,
-        required:true,
         ref: 'UserData'
     },
   address: {
@@ -14,6 +13,22 @@ const subscriptionSchema = new mongoose.Schema({
   name: {
     type: String,
   },
+  stripeData : {
+    productId : {
+      type : String,
+      default : ''
+    },
+    priceId : {
+      type : String,
+      default : ''
+    },
+    planId : {
+      type : String,
+      default : ''
+    }
+
+  },
+
   stripeEmail:{
     type:String
   },
@@ -46,7 +61,12 @@ const subscriptionSchema = new mongoose.Schema({
   },
   amount:{
     type:Number
+  },
+  features : {
+    type : Array
   }
+},{
+  timestamps : true
 });
 
 const Subscription = mongoose.model("subscription", subscriptionSchema);
