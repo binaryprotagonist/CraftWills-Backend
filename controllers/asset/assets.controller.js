@@ -31,9 +31,7 @@ const storeAssets = async (req, res) => {
         specifyOwnershipType: req.body.specifyOwnershipType,
         type : req.body.type,
         isoDate: `${creatTime}`,
-        GiftBenificiary : req.body.GiftBenificiary,
-        ifBenificiaryNotSurvive : req.body.ifBenificiaryNotSurvive,
-
+      
         bankAccount:
        {
             bankname: req.body.bankAccount?.bankname,
@@ -129,9 +127,7 @@ const updateAssets = async (req, res) => {
       toUpdate: {
         country: req.body.country,
         specifyOwnershipType: req.body.specifyOwnershipType,
-        GiftBenificiary : req.body.GiftBenificiary,
-        ifBenificiaryNotSurvive : req.body.ifBenificiaryNotSurvive,
-
+    
         bankAccount:  
        {
           bankname: req.body.bankAccount?.bankname,
@@ -205,7 +201,6 @@ const update = await AssetsDataAccess.updateAsset(updateData);
 
   
 const totalAssetsAmount = async(req,res)=>{
-     
     const aggCursor = await asset.aggregate([
         {
           $match: {

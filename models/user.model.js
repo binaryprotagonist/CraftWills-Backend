@@ -4,48 +4,45 @@ const UserSchema = new mongoose.Schema({
   
   fullName : {
     type : String,
-    required : true
+
   },
   email: {
     type: String,
-    required: true,
     unique: true,
   },
   password: {
     type: String,
-    required: true,
+
   },
   id_type: {
     type : String,
-    required : true
   },
   id_number : {
     type : String,
-    required : true
+
   },
   gender : {
     type : String,
-    required : true
+
   },
   floorNumber : {
     type : String,
-    required : true
+
   },
   unitNumber : {
     type : String,
-    required : true
+
   },
   streetName :{
     type : String,
-    required : true
+
   },
   postalCode : {
     type : Number,
-    required : true
   },
   id_country : {
     type : String,
-    required : true,
+
   },
   dob : {
     type : String,
@@ -61,7 +58,16 @@ const UserSchema = new mongoose.Schema({
   memberPersonDetails : {
    type: mongoose.Schema.Types.ObjectId,
    ref: 'MemberData'
-  }
+  },
+  subscription:{
+    subscriptionId: { type: mongoose.Schema.Types.ObjectId , default:null},  
+    subId: {type: String},
+    // tempSubId: {type: String},
+    priceId:{type:String, default:null},
+    date: { type: Date },
+    expiryDate: { type: Date },
+    isActive: {type:Boolean},
+  },
 });
 
 const User = mongoose.model("UserData", UserSchema);

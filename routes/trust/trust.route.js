@@ -22,4 +22,5 @@ router.get("/getTrustDetails",authenticateToken ,async (request, response) => {
 
 router.post("/filterTrust",authenticateToken,TrustController.filterTrust);
 router.delete ("/deleteTrusts",authenticateToken,TrustController.deleteTrusts);
+
 module.exports  = router

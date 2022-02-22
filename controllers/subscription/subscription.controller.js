@@ -38,7 +38,6 @@ exports.payment = async (req) => {
   return await subscriptionDataAccess.storeData(subData)};
 };
 
-
 exports.cancleSubscription = async (req) => {
   return await subscriptionDataAccess.canclesub(req);
 };
@@ -48,6 +47,11 @@ exports.createProduct = async (req) => {
   const data2 = await subscriptionDataAccess.price(data1, req);
   return await subscriptionDataAccess.creatp(data2, data1, req);
 };
+
+
+exports.upgradeSub = async(req) =>{
+  return await subscriptionDataAccess.Upgrade(req)
+}
 
 // exports.getTotalAmountToday = async (req) => {
 //   const createTime = moment().tz("Asia/Kolkata").format("YYYY-MM-DD");//req.body.createTime;//"2021-10-23"
@@ -76,8 +80,3 @@ exports.getSubsDetails = async (req,res)=>{
   return data ;
 }
 
-exports.getSubsDetails = async (req,res)=>{
-  const _id = req.token_data._id
-  const data = await Sub.find({userId : _id});
-  return data;
-}
