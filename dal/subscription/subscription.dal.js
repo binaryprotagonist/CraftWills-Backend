@@ -108,8 +108,8 @@ const subId = async (sub) => {
 const createPlan = async (data) => {
   const plan = await stripe.plans.create({
     amount: data.planPrice,
-    currency: data.currency,
-    interval: data.duration,
+    currency: "usd",
+    interval: "month",
     // interval_count: data.stripeDuration,
     product: data.productId,
   });
@@ -119,8 +119,8 @@ const createPlan = async (data) => {
 
 const createProduct = async (req) => {
   const resp = await stripe.products.create({
-    name: req.body.planName,
-    description: req.body.description,
+    name: "month",
+    description: "subscription monthly"
   });
   return resp;
 };
@@ -128,8 +128,8 @@ const createProduct = async (req) => {
 const price = async (resp, req) => {
   const res = await stripe.prices.create({
     unit_amount: req.body.planPrice,
-    currency: req.body.currency,
-    recurring: { interval: req.body.duration },
+    currency: "usd",
+    recurring: { interval: "month" },
     product: resp.id,
   });
   return res;
@@ -163,19 +163,19 @@ const Upgrade = async (req)=>{
   let planData = req.body;
   planData.userId = req.userId;
 try {
-  const subscription = await stripe.subscriptions.retrieve('sub_1KRYyhJrEVeMChFEc5WAeQM2');
-  return stripe.subscriptions.update('sub_1KRYyhJrEVeMChFEc5WAeQM2', {
+  const subscription = await stripe.subscriptions.retrieve(req.body.subId);
+  return stripe.subscriptions.update(req.body.subId, {
     items: [{
       id : subscription.items.data[0].id,
-      price : 'price_1KVYbEJrEVeMChFEp7OFka9D'
+      price : req.body.priceId
     }],
     proration_behavior: 'always_invoice'
   }).then(async (result) =>{
     let user = await userModel.findOne({_id : req.token_data._id})
     user.subscription = {
-      subscriptionId : "621490d9d102d24a5f7d0391",
-      subId : "sub_1KVsmwJrEVeMChFEdS9eHAkX",
-      priceId : "price_1KVYbEJrEVeMChFEp7OFka9D",
+      subscriptionId : "",
+      subId : req.body.subId,
+      priceId : req.body.priceId,
       date : new Date(result.current_period_start*1000),
       expiryDate: new Date(result.current_period_end * 1000),
       isActive: true,

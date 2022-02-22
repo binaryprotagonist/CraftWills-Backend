@@ -10,6 +10,11 @@ const subscriptionSchema = new mongoose.Schema({
   address: {
     type: String,
   },
+  pricePlan : {
+    type: String,
+  },
+
+
   upgrade: {
     type: Boolean,
     default:false
