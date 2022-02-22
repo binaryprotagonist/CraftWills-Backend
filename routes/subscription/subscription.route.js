@@ -20,7 +20,7 @@ router.delete("/deletePlan", ( async (request, response) => {
 
 router.post("/payment", authenticateToken,async (req, res) => {
   const result = await subscriptionController.payment(req);
-  return res.json(result);
+  return res.json(rxesult);
 });
 
 router.post("/product", async (req, res) => {
