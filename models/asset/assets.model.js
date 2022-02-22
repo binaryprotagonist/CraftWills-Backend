@@ -23,20 +23,7 @@ const AssetsSchema = new mongoose.Schema({
     isoDate:{
         type:String
     },
-    GiftBenificiary : [{
-        member :{
-            type : mongoose.Schema.Types.ObjectId,
-            ref : "Members"
-        },
-        specifyShares : {
-            type : Number
-        }
-      }],
-
-    ifBenificiaryNotSurvive : {
-        type : String
-    },
-
+ 
     bankAccount: {
      
         bankname: {

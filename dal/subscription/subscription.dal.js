@@ -2,8 +2,18 @@ const Subscription = require("../../models/subscription/subscription.model");
 require("dotenv").config();
 const stripe = require("stripe")(process.env.skTestKey);
 const moment = require("moment-timezone");
+const userModel = require("../../models/user.model");
+const mongoose= require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
+const {myFunction} = require ("../../nodemailer/nodemailer")
 
-
+const findb = async (data) => {
+const subscription = await stripe.subscriptions.retrieve(
+  'sub_1KVZCpJrEVeMChFEtF1Ye8V8'
+);
+console.log(subscription)
+}
+findb
 const subscription = async (req, res, next) => {
   const reports = await Subscription.find({
     $and: [{ userId: req.token_data._id }, { subscription: true }]
@@ -83,6 +93,9 @@ const subscriptionData = async (subscription, req) => {
 };
 
 const subId = async (sub) => {
+  console.log(sub.current_period_start)
+  console.log(sub.current_period_end)
+  console.log(sub.latest_invoice)
   var data = {};
   data.priceId = sub.plan.id;
   data.subId = sub.id;
@@ -145,7 +158,80 @@ const canclesub = async (req) => {
     return subscribe
   }}
 
-//////////////////////////////////
+
+const Upgrade = async (req)=>{
+  let planData = req.body;
+  planData.userId = req.userId;
+try {
+  const subscription = await stripe.subscriptions.retrieve('sub_1KRYyhJrEVeMChFEc5WAeQM2');
+  return stripe.subscriptions.update('sub_1KRYyhJrEVeMChFEc5WAeQM2', {
+    items: [{
+      id : subscription.items.data[0].id,
+      price : 'price_1KVYbEJrEVeMChFEp7OFka9D'
+    }],
+    proration_behavior: 'always_invoice'
+  }).then(async (result) =>{
+    let user = await userModel.findOne({_id : req.token_data._id})
+    user.subscription = {
+      subscriptionId : "621490d9d102d24a5f7d0391",
+      subId : "sub_1KVsmwJrEVeMChFEdS9eHAkX",
+      priceId : "price_1KVYbEJrEVeMChFEp7OFka9D",
+      date : new Date(result.current_period_start*1000),
+      expiryDate: new Date(result.current_period_end * 1000),
+      isActive: true,
+    }
+    console.log(user)
+    return user.save().then(async(resp)=>{
+      if (resp){
+        const otpSend = {
+          from: "as797007@gmail.com",
+          to: user.email,
+          subject: "Mail from craftwills"
+        };
+
+        myFunction(otpSend);
+
+      return {
+        status :200,
+        message : "subscribe successfully",
+        success : true,
+        data : resp
+      }
+    }
+    }).catch ((err)=>{
+      return err;
+    })
+
+    })
+  
+}
+catch(err){
+  console.log(err.message)
+}
+}
+
+  /////////////////////////////////////////
+
+//     const subscription = await stripe.subscriptions.retrieve('sub_1KRYyhJrEVeMChFEc5WAeQM2');
+//     stripe.subscriptions.update('sub_1KRYyhJrEVeMChFEc5WAeQM2', {
+//       cancel_at_period_end: false,
+//       proration_behavior: 'create_prorations',
+//       items: [{
+//         id: subscription.items.data[0].id,
+//         price: 'price_1KVYbEJrEVeMChFEp7OFka9D',
+//       }]
+//     });
+//     // return subscription}
+
+//     ////////
+//    const user =  await Subscription.find({userId : req.token_data._id})
+//    user.forEach(function (item, index) {
+//     console.log(item)
+// });
+
+
+  // end  date m one month + krna h 
+/////////////////////////////////////////////////////////////
 
 // const canclesub = async (req) => {
 //   const reports = await Subscription.find({ subscriptionEndDate: todayDate})
@@ -159,7 +245,7 @@ const canclesub = async (req) => {
 //     );
 //     return subscribe
 //   }}
-
+  
 
 
 
@@ -172,5 +258,5 @@ const delPlan = async (req) => {
 
 module.exports = {
   storeData, findSub, customers, subscriptionData,
-  toke, card, subId, creatp, price, createProduct, canclesub, delPlan,subscription 
+  toke, card, subId, creatp, price, createProduct, canclesub, delPlan,subscription, Upgrade
 }

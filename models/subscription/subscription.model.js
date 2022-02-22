@@ -3,12 +3,19 @@ const subscriptionSchema = new mongoose.Schema({
 //   userId: {
 //     type: String,
 //   },
-   userId: {
+  userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'UserData'
     },
   address: {
     type: String,
+  },
+  upgrade: {
+    type: Boolean,
+    default:false
+  },
+  month: {
+    type:String,
   },
   name: {
     type: String,
@@ -26,9 +33,7 @@ const subscriptionSchema = new mongoose.Schema({
       type : String,
       default : ''
     }
-
   },
-
   stripeEmail:{
     type:String
   },

@@ -108,17 +108,17 @@ const WillSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "AssetsData"
         },
-        // membersData: [{
-        //     member: {
-        //         type: mongoose.Schema.Types.ObjectId,
-        //         ref: "Members",
-        //     },
-        //     specify_Shares: {
-        //         type: Number
-        //     }
-        //     //// What is to happen if the benificiary does not survive the testator?
-        // },
-        // ],
+        membersData: [{
+            member: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Members",
+            },
+            specify_Shares: {
+                type: Number
+            }
+            //// What is to happen if the benificiary does not survive the testator?
+        },
+        ],
     }],
 
     //Trust 
@@ -257,8 +257,6 @@ const WillSchema = new mongoose.Schema({
                         type : String
                     }
             }
-          
-
             },
             finalWords : {
                 type : String

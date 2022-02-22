@@ -33,7 +33,6 @@ const createMember = async (req, res) => {
                 postalCode: req.body.memberAsOrganisation?.postalCode,
             }
     })
-
         const savedData = await data.save()
         res.json({
             message: "Member data has been saved successfully",
@@ -49,6 +48,7 @@ const createMember = async (req, res) => {
         })
     }
 }
+
 
 const getMembers = async(req,res)=>{
     const _id = req.token_data._id
@@ -80,7 +80,7 @@ const membersFilter = async(req,res)=>{
       filters.isoDate = req.body.isoDate;
     }
     if (req.body.country){
-        filters.country = req.body.country;
+      filters.country = req.body.country;
     }
     const filteredUsers = data.filter(user => {
       let isValid = true;
@@ -112,7 +112,6 @@ const updateMember = async (req, res) => {
             postalCode: req.body.memberAsPerson?.postalCode,
             citizenship: req.body.memberAsPerson?.citizenship,
             dob: req.body.memberAsPerson?.dob
-            
         },
         memberAsOrganisation: {
             organisationName: req.body.memberAsOrganisation?.organisationName,
@@ -149,7 +148,6 @@ try {
 }
   };
 
-
 const deleteMembers = async (req,res)=>{
     try {
         const data = members.remove({})
@@ -170,8 +168,8 @@ const deleteMembers = async (req,res)=>{
 
 module.exports = {
     createMember,
-    getMembers,
     membersFilter,
+    getMembers,
     updateMember,
     deleteMembers
 }

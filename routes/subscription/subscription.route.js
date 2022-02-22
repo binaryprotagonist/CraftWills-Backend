@@ -8,10 +8,10 @@ const subscriptionController = require("../../controllers/subscription/subscript
 //   return response.json(result);
 // }));
 
-// router.post("/upgradeSub",authenticateToken, async (req, res) => {
-//   const result = await subscriptionController.u(req);
-//   return res.send(result);
-// });
+router.post("/upgradeSub",authenticateToken, async (req, res) => {
+  const result = await subscriptionController.upgradeSub(req);
+  return res.send(result);
+});
 
 router.delete("/deletePlan", ( async (request, response) => {
   const result = await subscriptionController.deletePlan(request);
