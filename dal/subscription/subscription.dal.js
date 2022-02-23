@@ -32,7 +32,6 @@ const storeData = async (subscriptionToStore) => {
   return data;
 };
 
-
 const findSub = async (data) => {
     
 const reports = await Subscription.find();  
@@ -117,6 +116,16 @@ const createPlan = async (data) => {
   return data;
 };
 
+const freePlan = async (req, res, next) => {
+    console.log(req.token_data._id)
+    if(req.body.pricePlan=="free"){
+      const data=await Subscription.create({pricePlan:req.body.pricePlan})
+    res.send (data)}
+      else{
+        next()
+      }
+  }
+
 const createProduct = async (req) => {
   const resp = await stripe.products.create({
     name: "month",
@@ -142,7 +151,6 @@ const creatp = async (res, resp, req) => {
   return result;
 };
 
-
 const canclesub = async (req) => {
   const reports = await Subscription.find({
     $and: [{ userId: req.token_data._id }, { subscriptionEndDate: todayDate }]
@@ -157,7 +165,6 @@ const canclesub = async (req) => {
     );
     return subscribe
   }}
-
 
 const Upgrade = async (req)=>{
   let planData = req.body;
@@ -256,7 +263,7 @@ const delPlan = async (req) => {
   return deleteData;
 };
 
-module.exports = {
+module.exports = {freePlan,
   storeData, findSub, customers, subscriptionData,
   toke, card, subId, creatp, price, createProduct, canclesub, delPlan,subscription, Upgrade
 }
