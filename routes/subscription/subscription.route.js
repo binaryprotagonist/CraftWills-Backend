@@ -2,6 +2,7 @@ const express = require("express");
 const { authenticateToken } = require("../../JsonWebToken/jwt");
 const router = express.Router();
 const subscriptionController = require("../../controllers/subscription/subscription.controller");
+const free=require('../../dal/subscription/subscription.dal')
 
 // router.get("/todayTotalAmount",(  async (request, response) => {
 //   const result = await subscriptionController.getTotalAmountToday(request);
@@ -20,10 +21,10 @@ router.delete("/deletePlan", ( async (request, response) => {
 
 router.post("/payment", authenticateToken,async (req, res) => {
   const result = await subscriptionController.payment(req);
-  return res.json(rxesult);
+  return res.json(result);
 });
 
-router.post("/product", async (req, res) => {
+router.post("/product", authenticateToken,free.freePlan,async (req, res) => {
     const result = await subscriptionController.createProduct(req);
     return res.json(result);
 });
@@ -32,6 +33,7 @@ router.get("/getSubDetails",authenticateToken , async (req,res)=>{
   const result = await subscriptionController.getSubsDetails(req);
   return res.send(result);
 })
+
 
 // router.post("/cancleSub",authenticateToken, async (req, res) => {
 //   const result = await subscriptionController.cancleSubscription(req);

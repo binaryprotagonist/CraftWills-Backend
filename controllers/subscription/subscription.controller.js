@@ -8,9 +8,8 @@ const Sub = require("../../models/subscription/subscription.model")
 // payment
 
 exports.payment = async (req) => {
-  if(req.body.pricePlan=="free"){
-  return await subscriptionDataAccess.storeData({pricePlan:req.body.pricePlan})};
-
+  // if(req.body.pricePlan=="free"){
+  // return await subscriptionDataAccess.storeData({pricePlan:req.body.pricePlan})};
 
   const _id = req.token_data._id;
   const customer = await subscriptionDataAccess.customers(req);
@@ -19,15 +18,14 @@ exports.payment = async (req) => {
   const sub = await subscriptionDataAccess.subscriptionData(subscription, req);
   const subData = await subscriptionDataAccess.subId(sub);
   
-  subData.createTime = moment().tz("Asia/Kolkata").format("YYYY-MM-DD");
-  subData.isoDate = moment().tz("Asia/Kolkata").format("YYYY-MM-DD") + "T00:00:00Z";
+  subData.createTime = moment().format("YYYY-MM-DD");
+  subData.isoDate = moment().format("YYYY-MM-DD") + "T00:00:00Z";
   subData.amount=sub.plan.amount;
   subData.userId=_id
   subData.subscription=true
   subData.pricePlan=req.body.pricePlan
-
-
-    let months=parseInt(moment().tz(" Asia/Kolkata").format("MM"));
+  
+    let months=parseInt(moment().format("MM"));
     months=months+1
     if (months < 10){
       months= "0" + months
@@ -40,8 +38,8 @@ exports.payment = async (req) => {
 //   return await subscriptionDataAccess.storeData(subData);
 // }else{
 
-  subData.subscriptionStartDate= moment().tz("Asia/Kolkata").format("YYYY-MM-DD");
-  subData.subscriptionEndDate= moment().tz("Asia/Kolkata").format(`YYYY-${months}-DD`);
+  subData.subscriptionStartDate= moment().format("YYYY-MM-DD");
+  subData.subscriptionEndDate= moment().format(`YYYY-${months}-DD`);
   return await subscriptionDataAccess.storeData(subData)};
 // };
   
@@ -53,8 +51,9 @@ exports.cancleSubscription = async (req) => {
 exports.createProduct = async (req) => {
   const data1 = await subscriptionDataAccess.createProduct(req);
   const data2 = await subscriptionDataAccess.price(data1, req);
-  return await subscriptionDataAccess.creatp(data2, data1, req);
-};
+  const data3 = await subscriptionDataAccess.creatp(data2, data1, req);
+  data3.userId=req.token_data._id
+  return await subscriptionDataAccess.storeData(data3)};
 
 exports.upgradeSub = async(req) =>{
   return await subscriptionDataAccess.Upgrade(req)
