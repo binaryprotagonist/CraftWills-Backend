@@ -16,6 +16,8 @@ const storeLoan = async (LoanToStore) => {
   }
 };
 
+
+
 const findLoanByUsername = async (username) => {
   const user = await unSecuredLoan.findOne(username);
   return user;

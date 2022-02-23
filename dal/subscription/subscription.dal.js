@@ -70,7 +70,6 @@ const card = async (customer, req) => {
   };
 };
 
-
 const toke = async (result, req) => {
   const token = result["token"]["id"];
   const id = result.customerId;
@@ -174,7 +173,7 @@ try {
   return stripe.subscriptions.update(req.body.subId, {
     items: [{
       id : subscription.items.data[0].id,
-      price : req.body.priceId
+      price : req.body.priceId  
     }],
     proration_behavior: 'always_invoice'
   }).then(async (result) =>{
