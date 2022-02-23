@@ -128,7 +128,7 @@ const freePlan = async (req, res, next) => {
 
 const createProduct = async (req) => {
   const resp = await stripe.products.create({
-    name: "month",
+    name: "monthly",
     description: "subscription monthly"
   });
   return resp;
