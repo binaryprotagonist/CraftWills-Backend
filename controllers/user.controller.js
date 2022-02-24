@@ -315,7 +315,6 @@ exports.verifyEmail = async(req,res)=>{
   const {_id} = req.body;
   if (!_id){
     throw new ExpressError(401,"please enter the _id");
-
   }
   const updateData= {
     _id,
