@@ -51,7 +51,7 @@ const UserSchema = new mongoose.Schema({
   },
   Citizenship : {
     type : String,
-    default : " "
+    default : ""
   },
   profileImage : {
     type : String,
