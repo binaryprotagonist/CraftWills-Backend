@@ -281,7 +281,6 @@ exports.getProfilepic = async (req, res) => {
 }
   };
 
-
 exports.forgotPassword = async (req, res) => {
   const { email } = req.body;
   if (!email) {
@@ -291,7 +290,7 @@ exports.forgotPassword = async (req, res) => {
     email: req.body.email,
   });
   if (!userData) {
-    res.json({success: false,message : "email does not exists"})
+    retun({success: false, message : "email does not exists"})
   }
   console.log(userData.email)
   const otpSend = {
