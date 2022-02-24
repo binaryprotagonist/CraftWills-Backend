@@ -42,6 +42,7 @@ const UserSchema = new mongoose.Schema({
   },
   id_country : {
     type : String,
+    default : ""
 
   },
   dob : {
